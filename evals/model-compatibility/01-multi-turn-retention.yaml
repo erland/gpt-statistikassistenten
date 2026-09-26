@@ -1,0 +1,6 @@
+id: multi-turn-retention
+criticality: important
+scenario: Behåll vald statistikdefinition och geografi över flera följdfrågor utan att byta källa eller betydelse om användaren inte ändrar dem.
+pass_criteria:
+  - Tidigare verifierade sakval återanvänds korrekt.
+  - Ny metadata verifieras när frågan ändrar dimension eller period.

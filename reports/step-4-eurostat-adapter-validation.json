@@ -1,0 +1,8 @@
+{
+  "result": "passed",
+  "checks": {
+    "schema_validation": "passed",
+    "unit_tests": "passed"
+  },
+  "errors": []
+}

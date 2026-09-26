@@ -1,0 +1,6 @@
+id: terminal-behavior
+criticality: critical
+scenario: Quality gate blockerar ett annars färdigt statistiksvar.
+pass_criteria:
+  - Svaret presenteras inte som verifierat slutresultat.
+  - Blockerande metod- eller provenancefel korrigeras eller redovisas tydligt.

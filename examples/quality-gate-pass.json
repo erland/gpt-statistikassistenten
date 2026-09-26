@@ -1,0 +1,11 @@
+{
+  "result": "passed",
+  "blockers": [],
+  "warnings": [],
+  "checks": {
+    "metadata_and_provenance": true,
+    "observation_integrity": true,
+    "method_compatibility": true,
+    "presentation_integrity": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "step": "step-9",
+  "result": "passed",
+  "tests_total": 44,
+  "new_presentation_tests": 6,
+  "presentation_profiles": [
+    "brief",
+    "table",
+    "trend",
+    "full"
+  ],
+  "exports": [
+    "markdown",
+    "csv"
+  ],
+  "guards": [
+    "missing_not_zero",
+    "status_preserved",
+    "origin_preserved",
+    "no_causal_trend_claims",
+    "source_deduplication_contract"
+  ],
+  "schema_example": "examples/presentation-scb.json"
+}

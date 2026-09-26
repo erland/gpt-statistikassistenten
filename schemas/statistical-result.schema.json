@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://statistikassistenten.local/schemas/statistical-result.schema.json",
+  "title": "Normalized Statistical Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dataset", "dimensions", "measures", "observations", "provenance"],
+  "properties": {
+    "dataset": {"$ref": "#/$defs/dataset"},
+    "dimensions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/dimension"},
+      "minItems": 1
+    },
+    "measures": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/measure"},
+      "minItems": 1
+    },
+    "observations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/observation"}
+    },
+    "method": {"$ref": "#/$defs/method"},
+    "provenance": {"$ref": "provenance.schema.json"}
+  },
+  "$defs": {
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "publisher", "subject"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1},
+        "publisher": {"type": "string", "minLength": 1},
+        "subject": {"type": "string", "minLength": 1},
+        "description": {"type": "string"},
+        "frequency": {"enum": ["daily", "weekly", "monthly", "quarterly", "annual", "irregular", "unknown"]},
+        "updated_at": {"type": "string"}
+      }
+    },
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "label", "values"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "kind": {"enum": ["time", "geography", "classification", "population", "category", "measure_variant", "other"]},
+        "label": {"type": "string", "minLength": 1},
+        "classification_system": {"type": "string"},
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "label"],
+            "properties": {
+              "key": {"type": "string"},
+              "label": {"type": "string"},
+              "canonical_code": {"type": "string"},
+              "level": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "measure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "statistic_type", "unit"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "label": {"type": "string"},
+        "statistic_type": {"enum": ["count", "amount", "rate", "share", "index", "mean", "median", "other"]},
+        "unit": {"type": "string", "minLength": 1},
+        "currency": {"type": "string"},
+        "price_basis": {"type": "string"},
+        "scale_factor": {"type": "number"},
+        "denominator": {"type": "string"}
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dimensions", "measure", "value", "status"],
+      "properties": {
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": {"type": "string"},
+          "minProperties": 1
+        },
+        "measure": {"type": "string"},
+        "value": {"type": ["number", "null"]},
+        "status": {"enum": ["observed", "provisional", "estimated", "break_in_series", "confidential", "missing"]},
+        "note": {"type": "string"}
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "population": {"type": "string"},
+        "definitions": {"type": "array", "items": {"type": "string"}},
+        "comparability_notes": {"type": "array", "items": {"type": "string"}},
+        "breaks_in_series": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

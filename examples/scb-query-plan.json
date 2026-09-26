@@ -1,0 +1,34 @@
+{
+  "source": "scb_pxweb_v2",
+  "discovery": {
+    "query": "befolk*",
+    "language": "sv",
+    "candidate_table_ids": ["TAB638"]
+  },
+  "metadata_gate": {
+    "table_id": "TAB638",
+    "verified": true,
+    "variables": [
+      {"code": "Region", "semantic_kind": "geography", "selected_value_codes": ["2281"], "mandatory": true, "verified_from_metadata": true},
+      {"code": "Civilstand", "semantic_kind": "classification", "selected_value_codes": ["OG"], "mandatory": true, "verified_from_metadata": true},
+      {"code": "Alder", "semantic_kind": "population", "selected_value_codes": ["0"], "mandatory": true, "verified_from_metadata": true},
+      {"code": "Kon", "semantic_kind": "population", "selected_value_codes": ["1", "2"], "mandatory": true, "verified_from_metadata": true},
+      {"code": "ContentsCode", "semantic_kind": "measure", "selected_value_codes": ["BE0101N1"], "mandatory": true, "verified_from_metadata": true},
+      {"code": "Tid", "semantic_kind": "time", "selected_value_codes": ["2023", "2024"], "mandatory": true, "verified_from_metadata": true}
+    ]
+  },
+  "data_request": {
+    "method": "POST",
+    "table_id": "TAB638",
+    "selection": [
+      {"variableCode": "Region", "valueCodes": ["2281"]},
+      {"variableCode": "Civilstand", "valueCodes": ["OG"]},
+      {"variableCode": "Alder", "valueCodes": ["0"]},
+      {"variableCode": "Kon", "valueCodes": ["1", "2"]},
+      {"variableCode": "ContentsCode", "valueCodes": ["BE0101N1"]},
+      {"variableCode": "Tid", "valueCodes": ["2023", "2024"]}
+    ],
+    "output_format": "json-stat2",
+    "estimated_cells": 4
+  }
+}

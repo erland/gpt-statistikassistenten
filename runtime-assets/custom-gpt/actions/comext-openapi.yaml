@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Eurostat Comext SDMX 3.0
+  version: 1.0.0
+  description: Detaljerad varuhandel för DS-prefixerade Comext-dataset. Verifiera struktur och alla koder före data.
+servers:
+  - url: https://ec.europa.eu/eurostat/api/comext/dissemination
+paths:
+  /sdmx/3.0/structure/dataflow/ESTAT/{dataset}/1.0:
+    get:
+      operationId: getComextDataflow
+      summary: Hämta Comext-dataflow och strukturmetadata
+      parameters:
+        - name: dataset
+          in: path
+          required: true
+          schema: {type: string, pattern: '^DS-'}
+        - name: references
+          in: query
+          required: false
+          schema: {type: string, default: children}
+        - name: compress
+          in: query
+          required: false
+          schema: {type: boolean, default: false}
+      responses:
+        '200':
+          description: SDMX strukturmetadata
+          content:
+            application/xml:
+              schema: {type: string}
+  /sdmx/3.0/data/dataflow/ESTAT/{dataset}/1.0/{key}:
+    get:
+      operationId: getComextDataByKey
+      summary: Hämta explicit filtrerad Comext-data med verifierad SDMX series-key
+      parameters:
+        - name: dataset
+          in: path
+          required: true
+          schema: {type: string, pattern: '^DS-'}
+        - name: key
+          in: path
+          required: true
+          description: Verifierad series-key i DSD-dimensionsordning. Använd inte en helt öppen nyckel.
+          schema: {type: string}
+        - name: format
+          in: query
+          required: false
+          schema: {type: string, enum: [json, csvdata, tsv], default: json}
+        - name: compress
+          in: query
+          required: false
+          schema: {type: boolean, default: false}
+      responses:
+        '200':
+          description: Filtrerad Comext-data
+          content:
+            application/json:
+              schema: {type: object, additionalProperties: true}
+            text/csv:
+              schema: {type: string}
+            text/tab-separated-values:
+              schema: {type: string}

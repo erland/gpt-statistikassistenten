@@ -1,0 +1,23 @@
+{
+  "result": "passed",
+  "instruction_characters": 5605,
+  "knowledge_files": 2,
+  "actions": [
+    {
+      "file": "scb-openapi.yaml",
+      "auth": "none",
+      "operations": 3
+    },
+    {
+      "file": "eurostat-openapi.yaml",
+      "auth": "none",
+      "operations": 3
+    },
+    {
+      "file": "comext-openapi.yaml",
+      "auth": "none",
+      "operations": 2
+    }
+  ],
+  "bra_strategy": "official_web_or_file_fallback"
+}

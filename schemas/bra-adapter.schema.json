@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://statistikassistenten.local/schemas/bra-adapter.schema.json",
+  "title": "Brå reported-crimes metadata snapshot",
+  "type": "object",
+  "required": ["source", "product", "source_url", "periods", "areas", "crimes", "units"],
+  "properties": {
+    "source": {"const": "bra"},
+    "product": {"const": "reported_crimes"},
+    "source_url": {"type": "string", "format": "uri"},
+    "retrieval_mode": {"enum": ["official_web_service_or_published_file", "published_file"]},
+    "periods": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/catalogItem"}},
+    "areas": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/catalogItem"}},
+    "crimes": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/catalogItem"}},
+    "units": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/catalogItem"}},
+    "status_values": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "catalogItem": {
+      "type": "object",
+      "required": ["code", "label"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "level": {"type": "string"},
+        "granularity": {"type": "string"},
+        "detail_level": {"type": "string"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

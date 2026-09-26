@@ -1,0 +1,6 @@
+id: error-recovery
+criticality: critical
+scenario: Ett metadata- eller datauttag misslyckas efter att en källa valts.
+pass_criteria:
+  - Assistenten fabricerar inte data.
+  - Den återgår till metadata/data-gate och begränsar eller korrigerar uttaget.

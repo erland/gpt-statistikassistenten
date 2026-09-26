@@ -1,0 +1,17 @@
+{
+  "dataset": {"title":"International trade in goods","publisher":"Eurostat","subject":"Utrikeshandel med varor","frequency":"monthly"},
+  "dimensions": [
+    {"id":"reporter","kind":"geography","label":"Rapportör","values":[{"key":"se","label":"Sverige","canonical_code":"SE","level":"country"}]},
+    {"id":"partner","kind":"geography","label":"Partner","values":[{"key":"br","label":"Brasilien","canonical_code":"BR","level":"country"}]},
+    {"id":"product","kind":"classification","label":"Produkt","classification_system":"CN","values":[{"key":"coffee","label":"Kaffe","canonical_code":"0901"}]},
+    {"id":"time","kind":"time","label":"Månad","values":[{"key":"2025-01","label":"2025-01"}]}
+  ],
+  "measures": [{"id":"trade_value","label":"Handelsvärde","statistic_type":"amount","unit":"EUR","currency":"EUR"}],
+  "observations": [{"dimensions":{"reporter":"se","partner":"br","product":"coffee","time":"2025-01"},"measure":"trade_value","value":123456,"status":"observed"}],
+  "method": {"population":"Rapporterad varuhandel enligt datasetets definition","definitions":[],"comparability_notes":[],"breaks_in_series":[]},
+  "provenance": {
+    "source":{"organization":"Eurostat","dataset_title":"International trade in goods","source_identifiers":{"dataset_code":"EXAMPLE_COMEXT_DATASET"}},
+    "retrieval":{"retrieved_at":"2026-09-26","access_method":"api","metadata_verified":true,"query_summary":"Exempelfixture för modellvalidering"},
+    "transformations":[{"operation":"none","description":"Ingen transformation"}]
+  }
+}

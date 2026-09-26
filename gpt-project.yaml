@@ -1,0 +1,378 @@
+project:
+  id: statistikassistenten
+  name: Statistikassistenten
+  description: Assistent för verifierbara frågor mot officiell svensk och europeisk
+    statistik.
+  language: sv
+  profile: workflow_research_heavy
+  lifecycle: development
+analysis:
+  model_robustness: guided
+  runtime:
+    strategy: peer_candidates
+    candidates:
+    - runtime_id: chatgpt_chat
+      suitability: equivalent
+      activate_by_default: true
+      reason: Webbsökning, dataanalys och filhantering stödjer kärnflödet.
+    - runtime_id: chatgpt_custom
+      suitability: equivalent
+      activate_by_default: true
+      reason: Byggd och validerad Custom GPT-distribution med nyckelfria Actions för
+        SCB, Eurostat och Comext.
+    - runtime_id: claude_projects
+      suitability: reduced
+      activate_by_default: false
+      reason: Instruktioner kan porteras men extern verktygsparitet kan inte förutsättas.
+    - runtime_id: opencode
+      suitability: equivalent
+      activate_by_default: true
+      reason: Byggd OpenCode-workspace med AGENTS.md, canonical Knowledge och genererade
+        custom tools för de deterministiska statistikskripten.
+    - runtime_id: openai_plugin
+      suitability: reduced
+      activate_by_default: false
+      reason: Skills är relevanta men full HTTP- och dataanalysparitet antas inte
+        i version 1.
+instructions:
+  canonical: assistant/instructions.md
+  core_contract:
+    enabled: true
+    required_markers:
+    - METADATA-GATE
+    - DATA-GATE
+    - METHOD-GATE
+    - PROVENANCE-GATE
+    required_runtime_dependencies: []
+    max_required_file_hops: 1
+    knowledge_may_not_be_required_for_core_behavior: true
+capabilities:
+  contract_version: 1
+  schema: schemas/capability-contract.schema.json
+  recommendation_mode: inferred_from_use_case
+  ask_user_only_when_business_choice_is_ambiguous: true
+  requirements:
+    web:
+      level: required
+      reason: Aktuell metadata och officiell statistik måste kunna verifieras vid
+        frågetillfället.
+    filesystem:
+      read: recommended
+      write: recommended
+    shell:
+      level: optional
+    code_execution:
+      level: recommended
+      reason: Behövs för säkra beräkningar, normalisering och export.
+    structured_data:
+      level: required
+    persistent_state:
+      level: optional
+      reason: Enskilda statistikfrågor kräver normalt inte långtidsstate.
+    external_tools:
+      level: recommended
+      preferred_protocols:
+      - api
+    image_generation:
+      level: not_required
+artifacts:
+  contract_version: 1
+  schema: schemas/artifact-contract.schema.json
+  outputs:
+    development_plan:
+      kind: document
+      format: markdown
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+      description: Stegvis utvecklingsplan.
+    project_package:
+      kind: package
+      format: zip
+      requirement: required
+      persistence: persistent
+      multiplicity: one
+      filename_pattern: statistikassistenten-project-<version>.zip
+      description: Komplett canonical utvecklingsprojekt.
+    runtime_package:
+      kind: distribution
+      format: zip
+      requirement: conditional
+      condition: runtime_build_step
+      persistence: persistent
+      multiplicity: many
+      description: Runtime-specifika distributioner.
+    statistical_export:
+      kind: data
+      format: markdown-or-csv
+      requirement: optional
+      persistence: ephemeral
+      multiplicity: many
+      description: Data- eller analysuttag som användaren uttryckligen ber om.
+workspace_state:
+  contract_version: 1
+  schema: schemas/workspace-state-contract.schema.json
+  workspace:
+    requirement: required
+    persistence: required
+    portable: true
+    separate_from_assistant: true
+    artifact: project_package
+    description: Projekt-ZIP:en är den portabla sanningskällan för fortsatt utveckling.
+  state:
+    requirement: required
+    persistence: required
+    authority: workspace_file
+    format: yaml
+    path: project-status.yaml
+    conversation_fallback: false
+    description: Strukturerad projektstatus styr återupptagning och nästa steg.
+  runtime_preferences:
+    chat: conversation_or_file
+    agent: workspace_file
+runtime:
+  chat_zip:
+    enabled: true
+    start_here_template: templates/START-HERE.chat.md.tpl
+  custom_gpt:
+    enabled: true
+    instruction:
+      mode: compiled
+      max_characters: 8000
+    knowledge:
+      strategy: prioritize
+      max_files: 20
+    templates:
+      capabilities: templates/CAPABILITIES.custom-gpt.md.tpl
+      readme: templates/README.custom-gpt.md.tpl
+      compatibility: templates/COMPATIBILITY.custom-gpt.md.tpl
+    builder:
+      runtime_contract: builder/runtime-contract.json
+    actions:
+      directory: runtime-assets/custom-gpt/actions
+      authentication: none
+  claude:
+    enabled: false
+  opencode:
+    enabled: true
+    role: peer_distribution
+    mode: opencode_workspace
+    layout:
+      instructions: AGENTS.md
+      runtime_contract: .opencode/runtime-contract.json
+      knowledge: knowledge
+      config: opencode.json
+      tools: .opencode/tools
+      runtime_scripts: .opencode/runtime-scripts
+    validation:
+      require_agents_md: true
+      require_runtime_contract: true
+    skills:
+      enabled: false
+      directory: .opencode/skills
+      definitions: []
+    templates:
+      readme: templates/README.opencode.md.tpl
+  plugin:
+    enabled: false
+build:
+  build_chat_zip: true
+  build_custom_gpt_zip: true
+  build_claude_zip: false
+  build_opencode_zip: true
+  build_plugin_zip: false
+build_system:
+  targets:
+  - project
+  - chat
+  - custom-gpt
+  - opencode
+  runtime_targets:
+    chat:
+      runtime_id: chatgpt_chat
+      runtime_key: chat_zip
+      builder: chat
+      artifact_type: chat_zip
+      filename_pattern: <project-id>-chat-<version>.zip
+    custom-gpt:
+      runtime_id: chatgpt_custom
+      runtime_key: custom_gpt
+      builder: custom_gpt
+      artifact_type: custom_gpt_zip
+      filename_pattern: <project-id>-custom-gpt-<version>.zip
+    opencode:
+      runtime_id: opencode
+      runtime_key: opencode
+      builder: opencode
+      artifact_type: opencode_zip
+      filename_pattern: <project-id>-opencode-<version>.zip
+runtime_parity:
+  registered_runtimes:
+  - chatgpt_chat
+  - chatgpt_custom
+  - claude_projects
+  - opencode
+  - openai_plugin
+knowledge_architecture:
+  canonical_root: knowledge
+  principle: domain_reference_only
+  custom_gpt:
+    priority:
+    - knowledge/source-and-method-reference.md
+    - knowledge/custom-gpt-actions.md
+workflow:
+  robustness: guided
+  mode: explicit_state_machine
+  policy: assistant/policies/development-workflow.md
+  states:
+    idea_analysis:
+      next:
+      - architecture
+    architecture:
+      next:
+      - planning
+    planning:
+      next:
+      - implementation
+    implementation:
+      next:
+      - validation
+    validation:
+      next:
+      - implementation
+      - packaging
+    packaging:
+      next:
+      - release
+    release:
+      next:
+      - maintenance
+    maintenance:
+      next:
+      - implementation
+      - validation
+    blocked:
+      next:
+      - implementation
+      - validation
+    paused:
+      next:
+      - implementation
+  operational_core:
+  - read_project_contract
+  - read_project_status
+  - select_one_state_or_bounded_goal
+  - load_only_relevant_policy
+  - execute_change
+  - validate_deterministically
+  - correct_before_completion_on_failure
+  - update_structured_status_after_pass
+  - rebuild_project_zip_when_required
+  - recommend_next_step_from_actual_state
+  core_flow:
+  - tolka_fraga
+  - valj_kalla
+  - verifiera_metadata
+  - hamta_data
+  - normalisera
+  - berakna_och_analysera
+  - validera_metod
+  - presentera_med_provenance
+ci:
+  github:
+    enabled: true
+    workflow: .github/workflows/ci.yml
+release:
+  github:
+    enabled: true
+    workflow: .github/workflows/release.yml
+    version_source: release_tag
+structure:
+  conversation_starters:
+    path: assistant/conversation-starters
+  runtime_policy:
+    path: assistant/policies
+  schemas:
+    path: schemas
+  templates:
+    path: templates
+tools:
+  contract_version: 1
+  schema: schemas/tool-contract.schema.json
+  tools:
+  - id: source-planner
+    type: script
+    requirement: recommended
+    purpose: Välj källor och skapa konservativ frågeplan.
+    script: scripts/source_planner.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: scb-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade SCB/PxWeb-uttag från metadata.
+    script: scripts/scb_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: eurostat-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade Eurostat SDMX-uttag.
+    script: scripts/eurostat_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: comext-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade Comext-uttag för detaljerad varuhandel.
+    script: scripts/comext_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: bra-adapter
+    type: script
+    requirement: recommended
+    purpose: Planera verifierade Brå-uttag från officiell metadata eller fil.
+    script: scripts/bra_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: calculation-engine
+    type: script
+    requirement: recommended
+    purpose: Utför deterministiska statistikberäkningar och metodkontroller.
+    script: scripts/calculation_engine.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: presentation-export
+    type: script
+    requirement: recommended
+    purpose: Skapa standardpresentation samt Markdown/CSV-export.
+    script: scripts/presentation_export.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: quality-gate
+    type: script
+    requirement: recommended
+    purpose: Validera provenance, metod och presentation före färdigt svar.
+    script: scripts/quality_gate.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+model_robustness:
+  separate_model_instructions: false
+  prefer_deterministic_validation: true
+  max_core_policy_hops: 1

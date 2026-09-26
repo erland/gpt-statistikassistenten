@@ -1,0 +1,21 @@
+{
+  "source": "bra",
+  "product": "reported_crimes",
+  "source_url": "https://statistik.bra.se/solwebb/action/start",
+  "retrieval_mode": "official_web_service_or_published_file",
+  "periods": [
+    {"code": "2023", "label": "2023", "granularity": "year"},
+    {"code": "2024", "label": "2024", "granularity": "year"}
+  ],
+  "areas": [
+    {"code": "SUNDSVALL", "label": "Sundsvalls kommun", "level": "municipality"}
+  ],
+  "crimes": [
+    {"code": "ALL_REPORTED", "label": "Samtliga anmälda brott", "detail_level": "broad"}
+  ],
+  "units": [
+    {"code": "count", "label": "Antal anmälda brott"},
+    {"code": "per_100k", "label": "Antal per 100 000 invånare"}
+  ],
+  "status_values": ["preliminary", "final"]
+}

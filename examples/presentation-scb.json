@@ -1,0 +1,12 @@
+{
+  "title": "Befolkning efter region och år",
+  "answer": "Sundsvalls kommun hade 100 000 invånare 2025 i exempeldatat.",
+  "rows": [
+    {"dimensions":{"geography":"sundsvall","time":"2025"},"value":100000,"unit":"persons","status":"observed","origin":"source"}
+  ],
+  "analysis": [],
+  "method_notes": [],
+  "sources": [
+    {"organization":"SCB","dataset":"Befolkning efter region och år","period":"2025","geography":"sundsvall","measure":"Folkmängd"}
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "step": "step-8",
+  "result": "passed",
+  "tests_total": 38,
+  "new_calculation_tests": 11,
+  "operations": [
+    "absolute_change",
+    "percent_change",
+    "share",
+    "index",
+    "per_capita"
+  ],
+  "guards": [
+    "period_match",
+    "geography_match",
+    "frequency_match",
+    "unit_match_for_share",
+    "positive_denominator",
+    "nonzero_base",
+    "missing_confidential_rejected",
+    "status_propagation"
+  ],
+  "schema_example": "examples/calculation-per-capita.json"
+}

@@ -1,0 +1,13 @@
+{
+  "result": "passed",
+  "tests": 52,
+  "schema_validated": true,
+  "negative_cases": [
+    "metadata_not_verified",
+    "masked_value_has_number",
+    "bra_reported_crime_definition_missing",
+    "per_capita_checks_missing",
+    "unsupported_causal_claim",
+    "provisional_note_missing"
+  ]
+}

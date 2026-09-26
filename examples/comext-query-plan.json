@@ -1,0 +1,10 @@
+{
+  "dataset_id": "DS-045409",
+  "reporter": ["SE"],
+  "partner": ["US"],
+  "flow": ["1"],
+  "product": ["0901"],
+  "period": ["ge:2024", "le:2025"],
+  "indicator": ["VALUE_IN_EUROS"],
+  "frequency": ["A"]
+}

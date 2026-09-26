@@ -1,0 +1,10 @@
+{
+  "result": "passed",
+  "checks": [
+    {"id": "discovery-url", "result": "passed", "detail": "Server-side /tables search is generated dynamically."},
+    {"id": "metadata-gate", "result": "passed", "detail": "Unknown variables/value codes and missing mandatory selections are rejected."},
+    {"id": "data-plan", "result": "passed", "detail": "POST /tables/{id}/data plan is generated only from verified metadata selections."},
+    {"id": "cell-limit", "result": "passed", "detail": "Static selections are checked against the 150000-cell ceiling."},
+    {"id": "schema-example", "result": "passed", "detail": "Representative SCB query plan validates against scb-adapter.schema.json."}
+  ]
+}

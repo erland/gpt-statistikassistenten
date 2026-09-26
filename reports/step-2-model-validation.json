@@ -1,0 +1,15 @@
+{
+  "result": "pass",
+  "schemas": [
+    "schemas/statistical-query.schema.json",
+    "schemas/statistical-result.schema.json",
+    "schemas/provenance.schema.json",
+    "schemas/statistical-answer.schema.json"
+  ],
+  "fixtures": [
+    {"file": "examples/normalized-scb.json", "result": "pass"},
+    {"file": "examples/normalized-eurostat.json", "result": "pass"},
+    {"file": "examples/normalized-bra.json", "result": "pass"}
+  ],
+  "assertion": "SCB-, Eurostat/Comext- och Brå-exempel kan representeras i samma normaliserade analysmodell; källspecifika identifierare ligger endast i provenance."
+}

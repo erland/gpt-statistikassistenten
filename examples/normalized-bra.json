@@ -1,0 +1,16 @@
+{
+  "dataset": {"title":"Anmälda brott","publisher":"Brå","subject":"Kriminalstatistik","frequency":"annual"},
+  "dimensions": [
+    {"id":"geography","kind":"geography","label":"Region","values":[{"key":"sundsvall","label":"Sundsvalls kommun","canonical_code":"2281","level":"municipality"}]},
+    {"id":"offence","kind":"classification","label":"Brottstyp","classification_system":"Brå brottsklassificering","values":[{"key":"example_offence","label":"Exempelbrott","canonical_code":"EXAMPLE"}]},
+    {"id":"time","kind":"time","label":"År","values":[{"key":"2025","label":"2025"}]}
+  ],
+  "measures": [{"id":"reported_offences","label":"Anmälda brott","statistic_type":"count","unit":"offences"}],
+  "observations": [{"dimensions":{"geography":"sundsvall","offence":"example_offence","time":"2025"},"measure":"reported_offences","value":100,"status":"observed"}],
+  "method": {"population":"Anmälda brott enligt statistikproduktens definition","definitions":["Anmälda brott är inte samma sak som faktisk brottslighet."],"comparability_notes":[],"breaks_in_series":[]},
+  "provenance": {
+    "source":{"organization":"Brå","dataset_title":"Anmälda brott","source_identifiers":{"statistical_product":"EXAMPLE_BRA_PRODUCT"}},
+    "retrieval":{"retrieved_at":"2026-09-26","access_method":"file","metadata_verified":true,"query_summary":"Exempelfixture för modellvalidering"},
+    "transformations":[{"operation":"none","description":"Ingen transformation"}]
+  }
+}

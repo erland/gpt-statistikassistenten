@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Eurostat SDMX 3.0
+  version: 1.0.0
+  description: Officiell Eurostat metadata och filtrerad data. Verifiera struktur före data.
+servers:
+  - url: https://ec.europa.eu/eurostat/api/dissemination
+paths:
+  /catalogue/toc/xml:
+    get:
+      operationId: getEurostatCatalogue
+      summary: Hämta Eurostats datasetkatalog
+      responses:
+        '200':
+          description: Eurostat TOC XML
+          content:
+            application/xml:
+              schema: {type: string}
+  /sdmx/3.0/structure/dataflow/ESTAT/{dataset}/1.0:
+    get:
+      operationId: getEurostatDataflow
+      summary: Hämta dataflow och strukturmetadata för dataset
+      parameters:
+        - name: dataset
+          in: path
+          required: true
+          schema: {type: string}
+        - name: references
+          in: query
+          required: false
+          schema: {type: string, default: children}
+        - name: compress
+          in: query
+          required: false
+          schema: {type: boolean, default: false}
+      responses:
+        '200':
+          description: SDMX strukturmetadata
+          content:
+            application/xml:
+              schema: {type: string}
+  /sdmx/3.0/data/dataflow/ESTAT/{dataset}/1.0/{key}:
+    get:
+      operationId: getEurostatDataByKey
+      summary: Hämta filtrerad Eurostat-data med verifierad SDMX series-key
+      parameters:
+        - name: dataset
+          in: path
+          required: true
+          schema: {type: string}
+        - name: key
+          in: path
+          required: true
+          description: Series-key i DSD-dimensionsordning; använd * som wildcard.
+          schema: {type: string}
+        - name: format
+          in: query
+          required: false
+          schema: {type: string, enum: [json, csvdata, tsv], default: json}
+        - name: compress
+          in: query
+          required: false
+          schema: {type: boolean, default: false}
+      responses:
+        '200':
+          description: Filtrerad Eurostat-data
+          content:
+            application/json:
+              schema: {type: object, additionalProperties: true}
+            text/csv:
+              schema: {type: string}
+            text/tab-separated-values:
+              schema: {type: string}
