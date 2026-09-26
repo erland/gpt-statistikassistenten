@@ -1,8 +1,8 @@
 project:
   id: statistikassistenten
   name: Statistikassistenten
-  description: Assistent för verifierbara frågor mot officiell svensk och europeisk
-    statistik.
+  description: Assistent för verifierbara frågor mot officiell svensk, europeisk
+    och global statistik.
   language: sv
   profile: workflow_research_heavy
   lifecycle: development
