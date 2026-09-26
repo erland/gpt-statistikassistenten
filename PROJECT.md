@@ -6,7 +6,7 @@ Statistikassistenten ska göra officiell statistik tillgänglig genom naturliga 
 
 ## Version 1
 
-Version 1 fokuserar på SCB, Eurostat/Comext och Brå. Grundflödet ska inte kräva användarkonto eller personlig API-nyckel.
+Kärnan började med SCB, Eurostat/Comext och Brå men omfattar nu även svenska sektorskällor och internationella källor som World Bank, OECD, WHO, BIS och ECB. Grundflödet ska fortsatt inte kräva användarkonto eller personlig API-nyckel.
 
 ## Arkitekturprincip
 
