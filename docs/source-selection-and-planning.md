@@ -28,3 +28,13 @@ Planen följer `schemas/source-query-plan.schema.json` och innehåller:
 - beroenden när flera källor ska kombineras.
 
 `scripts/source_planner.py` är en deterministisk referensimplementation och får användas som guardrail. Semantisk modellförståelse kan ge bättre tolkning, men får inte kringgå metadata- eller metodgates.
+
+## Utökade svenska källor
+
+- **Kolada** prioriteras när frågan gäller jämförbara kommun-/regionnyckeltal, kommunal ekonomi, kvalitet eller verksamhetsmått. Kontrollera alltid ursprunglig datakälla i KPI-metadata eftersom Kolada även återpublicerar andra producenters statistik.
+- **Socialstyrelsen** prioriteras för vård, läkemedel, dödsorsaker, patient-/socialtjänstnära statistik och ekonomiskt bistånd när motsvarande detalj finns i deras statistikdatabas.
+- **Folkhälsodata** prioriteras för folkhälsoindikatorer, levnadsvanor, vaccinationer, smittsamma sjukdomar och andra FHM-specifika indikatorer.
+- **Arbetsförmedlingen** prioriteras för frågor om aktuella/historiska platsannonser och annonserad kompetens- eller yrkesefterfrågan. SCB används fortsatt för arbetslöshet och sysselsättning.
+- **Riksbanken** prioriteras för styrränta, andra ränte-/marknadsserier och växelkurser.
+
+När flera källor överlappar ska den mest primära/statistikansvariga källan väljas för själva måttet, medan Kolada kan vara lämplig för jämförbara färdigdefinierade kommunnyckeltal. Dubbletter får inte räknas som separata observationer.
