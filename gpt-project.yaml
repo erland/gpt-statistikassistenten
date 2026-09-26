@@ -18,8 +18,7 @@ analysis:
     - runtime_id: chatgpt_custom
       suitability: equivalent
       activate_by_default: true
-      reason: Byggd och validerad Custom GPT-distribution med nyckelfria Actions för
-        SCB, Eurostat och Comext.
+      reason: Byggd och validerad Custom GPT-distribution med nyckelfria Actions och verifierade officiella fallback-vägar för stödda källor.
     - runtime_id: claude_projects
       suitability: reduced
       activate_by_default: false
