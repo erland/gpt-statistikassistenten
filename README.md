@@ -1,6 +1,6 @@
 # Statistikassistenten
 
-Statistikassistenten är ett GPT-projekt för verifierbara frågor mot officiell svensk och europeisk statistik.
+Statistikassistenten är ett GPT-projekt för verifierbara frågor mot officiell svensk, europeisk och global statistik.
 
 ## Första datakällor
 
@@ -18,6 +18,11 @@ Statistikassistenten är ett GPT-projekt för verifierbara frågor mot officiell
 - Jordbruksverkets statistikdatabas
 - Skolverkets öppna API:er
 - SMHI Open Data MetObs
+- World Bank Indicators
+- OECD Data Explorer
+- WHO World Health Data Hub
+- BIS Data Portal
+- ECB Data Portal
 
 ## Viktig princip
 
@@ -52,6 +57,11 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 - Jordbruksverket: jordbruks- och livsmedelsstatistik via PxWeb.
 - Skolverket: skolenheter, utbildningar och utbildningsstatistik via öppna API:er.
 - SMHI: meteorologiska observationer via MetObs.
+- World Bank: globala utvecklings- och makroindikatorer.
+- OECD: harmoniserad statistik för OECD-länder.
+- WHO: global hälsostatistik via World Health Data Hub.
+- BIS: internationell bank-, kredit-, bostadspris- och finansstatistik.
+- ECB: euroområdets monetära och finansiella statistik.
 - Källval/frågeplanering för enkla och kombinerade statistikfrågor.
 - Deterministiska beräkningar för förändring, andel, index och per-capita.
 - Säkerhets- och kvalitetsgates som blockerar ofullständig provenance, felaktiga maskerade värden, otillräckligt verifierade beräkningar och obelagda kausala slutsatser.
@@ -59,7 +69,7 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 
 ## CI och release
 
-- `.github/workflows/ci.yml` kör lint, robusthetskontroll, 70 regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
+- `.github/workflows/ci.yml` kör lint, robusthetskontroll, 76 regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
 - `.github/workflows/release.yml` triggas när en GitHub Release publiceras. Taggar som `v1.0.0` eller `v1.0.0-rc1` styr versionsnumret i artefakterna.
 - Release-workflow bifogar alla ZIP-filer, `SHA256SUMS.txt` och `DELIVERY-MANIFEST.json` till releasen.
 - Custom GPT:s OpenAPI Actions ligger canonical i `runtime-assets/custom-gpt/actions/` och följer därför med deterministiskt i varje releasebygge.
