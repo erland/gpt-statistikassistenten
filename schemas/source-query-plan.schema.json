@@ -4,13 +4,40 @@
   "title": "Source Query Plan",
   "type": "object",
   "additionalProperties": false,
-  "required": ["question", "status", "sources", "steps", "decision"],
+  "required": [
+    "question",
+    "status",
+    "sources",
+    "steps",
+    "decision"
+  ],
   "properties": {
-    "question": {"type": "string", "minLength": 1},
-    "status": {"enum": ["ready", "needs_clarification", "blocked"]},
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "needs_clarification",
+        "blocked"
+      ]
+    },
     "sources": {
       "type": "array",
-      "items": {"enum": ["scb", "eurostat", "comext", "bra"]},
+      "items": {
+        "enum": [
+          "scb",
+          "eurostat",
+          "comext",
+          "bra",
+          "kolada",
+          "socialstyrelsen",
+          "folkhalsodata",
+          "arbetsformedlingen",
+          "riksbank"
+        ]
+      },
       "uniqueItems": true,
       "minItems": 1
     },
@@ -20,15 +47,43 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "source", "purpose", "adapter"],
+        "required": [
+          "id",
+          "source",
+          "purpose",
+          "adapter"
+        ],
         "properties": {
-          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
-          "source": {"enum": ["scb", "eurostat", "comext", "bra"]},
-          "purpose": {"type": "string", "minLength": 1},
-          "adapter": {"type": "string", "minLength": 1},
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "source": {
+            "enum": [
+              "scb",
+              "eurostat",
+              "comext",
+              "bra",
+              "kolada",
+              "socialstyrelsen",
+              "folkhalsodata",
+              "arbetsformedlingen",
+              "riksbank"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "adapter": {
+            "type": "string",
+            "minLength": 1
+          },
           "depends_on": {
             "type": "array",
-            "items": {"type": "string"},
+            "items": {
+              "type": "string"
+            },
             "uniqueItems": true
           }
         }
@@ -37,28 +92,57 @@
     "decision": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["reason", "confidence"],
+      "required": [
+        "reason",
+        "confidence"
+      ],
       "properties": {
-        "reason": {"type": "string", "minLength": 1},
-        "confidence": {"enum": ["high", "medium", "low"]},
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
         "ambiguities": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "uniqueItems": true
         },
         "conflicts": {
           "type": "array",
-          "items": {"type": "string"},
+          "items": {
+            "type": "string"
+          },
           "uniqueItems": true
         }
       }
     },
-    "clarification_question": {"type": "string", "minLength": 1}
+    "clarification_question": {
+      "type": "string",
+      "minLength": 1
+    }
   },
   "allOf": [
     {
-      "if": {"properties": {"status": {"const": "needs_clarification"}}},
-      "then": {"required": ["clarification_question"]}
+      "if": {
+        "properties": {
+          "status": {
+            "const": "needs_clarification"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "clarification_question"
+        ]
+      }
     }
   ]
 }
