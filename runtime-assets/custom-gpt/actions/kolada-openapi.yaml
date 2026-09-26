@@ -1,0 +1,19 @@
+openapi: 3.1.0
+info: {title: Kolada API v3, version: 1.0.0, description: Publik åtkomst till kommun- och regionnyckeltal.}
+servers: [{url: https://api.kolada.se/v3}]
+paths:
+  /kpi/{id}:
+    get:
+      operationId: getKoladaKpiMetadata
+      summary: Hämta metadata för ett Kolada-nyckeltal
+      parameters: [{name: id, in: path, required: true, schema: {type: string, pattern: '^[NU][0-9]{5}$'}}]
+      responses: {'200': {description: KPI metadata}}
+  /data/municipality/{municipality}/kpi/{kpi}:
+    get:
+      operationId: getKoladaMunicipalityKpi
+      summary: Hämta ett verifierat nyckeltal för en kommun
+      parameters:
+        - {name: municipality, in: path, required: true, schema: {type: string, pattern: '^[0-9]{4}$'}}
+        - {name: kpi, in: path, required: true, schema: {type: string, pattern: '^[NU][0-9]{5}$'}}
+        - {name: from_date, in: query, required: false, schema: {type: string}}
+      responses: {'200': {description: KPI data}}
