@@ -18,7 +18,7 @@ class InternationalSourceTests(unittest.TestCase):
             oecd.dataflow_url("OECD.SDD.NAD","DSD_NASEC10@DF_TABLE12","1.1"),
             "https://sdmx.oecd.org/public/rest/dataflow/OECD.SDD.NAD/DSD_NASEC10@DF_TABLE12/1.1?references=all"
         )
-        self.assertIn("/data/OECD.SDD.NAD,DSD_NASEC10%40DF_TABLE12,1.1/all", 
+        self.assertIn("/data/OECD.SDD.NAD,DSD_NASEC10@DF_TABLE12,1.1/all", 
                       oecd.data_url("OECD.SDD.NAD,DSD_NASEC10@DF_TABLE12,1.1"))
 
     def test_who_fallback(self):
