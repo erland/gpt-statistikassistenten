@@ -38,3 +38,14 @@ Planen följer `schemas/source-query-plan.schema.json` och innehåller:
 - **Riksbanken** prioriteras för styrränta, andra ränte-/marknadsserier och växelkurser.
 
 När flera källor överlappar ska den mest primära/statistikansvariga källan väljas för själva måttet, medan Kolada kan vara lämplig för jämförbara färdigdefinierade kommunnyckeltal. Dubbletter får inte räknas som separata observationer.
+
+
+## Ytterligare domänkällor
+
+- **Energimyndigheten** prioriteras för energibalanser, energianvändning, elproduktion, kraftslag, biogas och energiprognoser.
+- **Försäkringskassan** prioriteras för sjukpenning, sjukfall, sjuk-/aktivitetsersättning, föräldraförsäkring och andra socialförsäkringsförmåner.
+- **Jordbruksverket** prioriteras för jordbruk, skörd, arealer, lantbruksdjur, ekologisk produktion, jordbrukspriser och livsmedelskonsumtion.
+- **Skolverket** prioriteras för skolenheter, utbildningar och Skolverkets utbildningsstatistik. Kolada används fortsatt när frågan gäller färdigdefinierade kommunala skolnyckeltal som kostnad per elev.
+- **SMHI** prioriteras för meteorologiska observationer och klimatserier. SCB används fortsatt för samhällsstatistik där väder/klimat endast är en förklarande variabel.
+
+Generiska geografiord som Sverige, kommun eller län ska inte dra en fråga från en tydlig domänkälla till SCB.
