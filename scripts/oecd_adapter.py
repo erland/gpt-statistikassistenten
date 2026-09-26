@@ -12,7 +12,7 @@ class OecdAdapterError(ValueError): pass
 def dataflow_url(agency: str, flow_id: str, version: str = "latest") -> str:
     for value in (agency,flow_id,version):
         if not SAFE.fullmatch(value): raise OecdAdapterError("invalid SDMX identifier")
-    return f"{BASE_URL}/dataflow/{quote(agency)}/{quote(flow_id)}/{quote(version)}?references=all"
+    return f"{BASE_URL}/dataflow/{quote(agency, safe='._-')}/{quote(flow_id, safe='.@_-')}/{quote(version, safe='._-')}?references=all"
 
 def data_url(flow_ref: str, key: str = "all", *, start_period: str | None = None, end_period: str | None = None) -> str:
     if not flow_ref or "/" in flow_ref or " " in flow_ref:
