@@ -1,0 +1,47 @@
+openapi: 3.1.0
+info:
+  title: World Bank Indicators API v2
+  version: 1.0.0
+servers:
+  - url: https://api.worldbank.org/v2
+paths:
+  /indicator/{indicatorId}:
+    get:
+      operationId: getWorldBankIndicatorMetadata
+      parameters:
+        - name: indicatorId
+          in: path
+          required: true
+          schema: {type: string}
+        - name: format
+          in: query
+          required: false
+          schema: {type: string, enum: [json], default: json}
+      responses:
+        '200': {description: Indicator metadata}
+  /country/{countries}/indicator/{indicatorId}:
+    get:
+      operationId: getWorldBankIndicatorData
+      parameters:
+        - name: countries
+          in: path
+          required: true
+          schema: {type: string}
+        - name: indicatorId
+          in: path
+          required: true
+          schema: {type: string}
+        - name: date
+          in: query
+          required: false
+          schema: {type: string}
+        - name: format
+          in: query
+          required: false
+          schema: {type: string, enum: [json], default: json}
+        - name: per_page
+          in: query
+          required: false
+          schema: {type: integer, minimum: 1, maximum: 1000, default: 1000}
+      responses:
+        '200': {description: Indicator observations}

@@ -1,8 +1,8 @@
 project:
   id: statistikassistenten
   name: Statistikassistenten
-  description: Assistent för verifierbara frågor mot officiell svensk och europeisk
-    statistik.
+  description: Assistent för verifierbara frågor mot officiell svensk, europeisk
+    och global statistik.
   language: sv
   profile: workflow_research_heavy
   lifecycle: development
@@ -430,6 +430,51 @@ tools:
     requirement: recommended
     purpose: Bygg verifierade anrop mot SMHI Open Data MetObs.
     script: scripts/smhi_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: worldbank-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade globala indikatoruttag via World Bank Indicators API v2.
+    script: scripts/worldbank_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: oecd-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade OECD-uttag via Data Explorer SDMX.
+    script: scripts/oecd_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: who-adapter
+    type: script
+    requirement: recommended
+    purpose: Verifiera WHO World Health Data Hub och aktuella officiella exportvägar.
+    script: scripts/who_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: bis-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade BIS-uttag via SDMX REST API v2.
+    script: scripts/bis_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: ecb-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade ECB-uttag via Data Portal SDMX API.
+    script: scripts/ecb_adapter.py
     deterministic: true
     mutates_workspace: false
     working_directory: workspace

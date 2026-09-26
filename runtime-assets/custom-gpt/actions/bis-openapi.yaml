@@ -1,0 +1,28 @@
+openapi: 3.1.0
+info:
+  title: BIS SDMX REST API v2
+  version: 1.0.0
+servers:
+  - url: https://stats.bis.org/api/v2
+paths:
+  /structure/{structureType}/{agencyId}/{resourceId}/{version}:
+    get:
+      operationId: getBisStructure
+      parameters:
+        - {name: structureType, in: path, required: true, schema: {type: string}}
+        - {name: agencyId, in: path, required: true, schema: {type: string}}
+        - {name: resourceId, in: path, required: true, schema: {type: string}}
+        - {name: version, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: BIS SDMX structure metadata}
+  /data/{context}/{agencyId}/{resourceId}/{version}/{key}:
+    get:
+      operationId: getBisData
+      parameters:
+        - {name: context, in: path, required: true, schema: {type: string}}
+        - {name: agencyId, in: path, required: true, schema: {type: string}}
+        - {name: resourceId, in: path, required: true, schema: {type: string}}
+        - {name: version, in: path, required: true, schema: {type: string}}
+        - {name: key, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: BIS SDMX data}

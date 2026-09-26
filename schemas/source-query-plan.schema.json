@@ -40,7 +40,12 @@
           "forsakringskassan",
           "jordbruksverket",
           "skolverket",
-          "smhi"
+          "smhi",
+          "worldbank",
+          "oecd",
+          "who",
+          "bis",
+          "ecb"
         ]
       },
       "uniqueItems": true,
@@ -78,7 +83,12 @@
               "forsakringskassan",
               "jordbruksverket",
               "skolverket",
-              "smhi"
+              "smhi",
+              "worldbank",
+              "oecd",
+              "who",
+              "bis",
+              "ecb"
             ]
           },
           "purpose": {

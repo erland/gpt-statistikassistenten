@@ -49,3 +49,19 @@ När flera källor överlappar ska den mest primära/statistikansvariga källan 
 - **SMHI** prioriteras för meteorologiska observationer och klimatserier. SCB används fortsatt för samhällsstatistik där väder/klimat endast är en förklarande variabel.
 
 Generiska geografiord som Sverige, kommun eller län ska inte dra en fråga från en tydlig domänkälla till SCB.
+
+
+## Internationella källor
+
+- **World Bank** är bred förstakälla för globala och utomeuropeiska jämförelser, särskilt utveckling, fattigdom, befolkning och makroindikatorer.
+- **OECD** prioriteras när frågan uttryckligen gäller OECD-länder eller harmoniserade OECD-indikatorer.
+- **WHO** prioriteras för global hälsostatistik. Eftersom den äldre GHO OData-tjänsten är utfasad ska runtime verifiera aktuell Data Hub-export/API vid frågetillfället.
+- **BIS** prioriteras för internationell bank-, kredit-, bostadspris- och finansiell statistik.
+- **ECB** prioriteras för euroområdets monetära, bank- och finansstatistik.
+
+### Konfliktregler
+- EU-samhällsstatistik: Eurostat före World Bank/OECD när EU-harmonisering är frågans kärna.
+- Euroområdets penning-/bankstatistik: ECB före Eurostat.
+- Internationell bank/kredit/bostadsprisstatistik: BIS före World Bank.
+- Global hälsa: WHO före World Bank när WHO har ett direkt hälsomått.
+- OECD-specifik jämförelse: OECD före World Bank.

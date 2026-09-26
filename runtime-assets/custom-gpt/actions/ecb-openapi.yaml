@@ -1,0 +1,23 @@
+openapi: 3.1.0
+info:
+  title: ECB Data Portal SDMX API
+  version: 1.0.0
+servers:
+  - url: https://data-api.ecb.europa.eu/service
+paths:
+  /dataflow:
+    get:
+      operationId: getEcbDataflows
+      responses:
+        '200': {description: ECB dataflows}
+  /data/{flowRef}/{key}:
+    get:
+      operationId: getEcbData
+      parameters:
+        - {name: flowRef, in: path, required: true, schema: {type: string}}
+        - {name: key, in: path, required: true, schema: {type: string}}
+        - {name: startPeriod, in: query, required: false, schema: {type: string}}
+        - {name: endPeriod, in: query, required: false, schema: {type: string}}
+        - {name: detail, in: query, required: false, schema: {type: string, default: dataonly}}
+      responses:
+        '200': {description: ECB SDMX observations}

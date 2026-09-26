@@ -38,6 +38,11 @@ SOURCE_ADAPTER = {
     "jordbruksverket": "scripts/jordbruksverket_adapter.py",
     "skolverket": "scripts/skolverket_adapter.py",
     "smhi": "scripts/smhi_adapter.py",
+    "worldbank": "scripts/worldbank_adapter.py",
+    "oecd": "scripts/oecd_adapter.py",
+    "who": "scripts/who_adapter.py",
+    "bis": "scripts/bis_adapter.py",
+    "ecb": "scripts/ecb_adapter.py",
 }
 
 # Deliberately narrow, high-signal concepts. Broader language is handled by
@@ -103,6 +108,33 @@ SMHI_TERMS = {
     "smhi", "meteorolog", "väderstation", "väderobservation", "nederbörd",
     "lufttemperatur", "vindhastighet", "molnmängd", "klimatobservation"
 }
+WORLDBANK_TERMS = {
+    "världsbanken", "world bank", "extrem fattigdom", "global fattigdom",
+    "utvecklingsindikator", "world development indicators", "globalt bnp",
+    "global befolkning", "länder i världen"
+}
+GLOBAL_GEOGRAPHY_TERMS = {
+    "kina", "indien", "brasilien", "sydafrika", "latinamerika", "latinamerika",
+    "afrika söder om sahara", "subsahariska afrika", "världen", "globalt"
+}
+OECD_TERMS = {
+    "oecd", "oecd-länder", "oecd-länderna", "oecd-genomsnitt",
+    "produktivitet i oecd", "skattetryck i oecd"
+}
+WHO_TERMS = {
+    "who", "världshälsoorganisationen", "global hälsa", "global hälsostatistik",
+    "global barnadödlighet", "barnadödlighet i världen", "global mödradödlighet",
+    "förväntad livslängd globalt"
+}
+BIS_TERMS = {
+    "bis", "bank for international settlements", "internationella regleringsbanken",
+    "hushållens skuldsättning internationellt", "reala bostadspriser internationellt",
+    "effektiv växelkurs", "internationell bankstatistik"
+}
+ECB_TERMS = {
+    "ecb", "europeiska centralbanken", "euroområdet", "euro area",
+    "ecb ränta", "ecb-ränta", "monetära aggregat euro"
+}
 
 PER_CAPITA_TERMS = {
     "per 100 000", "per 100000", "per capita", "per invånare", "per tusen"
@@ -146,6 +178,18 @@ def _signals(question: str) -> list[Signal]:
         out.append(Signal("skolverket", 7, "Frågan gäller skolenheter, utbildningar eller Skolverkets statistik."))
     if _contains_any(q, SMHI_TERMS):
         out.append(Signal("smhi", 7, "Frågan gäller meteorologiska observationer eller klimatdata från SMHI."))
+    if _contains_any(q, WORLDBANK_TERMS):
+        out.append(Signal("worldbank", 7, "Frågan gäller globala utvecklingsindikatorer eller World Bank-data."))
+    elif _contains_any(q, GLOBAL_GEOGRAPHY_TERMS):
+        out.append(Signal("worldbank", 5, "Frågan har tydlig global eller utomeuropeisk geografi där World Bank är en bred förstakälla."))
+    if _contains_any(q, OECD_TERMS):
+        out.append(Signal("oecd", 7, "Frågan gäller harmoniserad statistik för OECD-länder."))
+    if _contains_any(q, WHO_TERMS):
+        out.append(Signal("who", 7, "Frågan gäller global hälsostatistik från WHO."))
+    if _contains_any(q, BIS_TERMS):
+        out.append(Signal("bis", 7, "Frågan gäller internationell bank-, kredit-, bostadspris- eller finansstatistik från BIS."))
+    if _contains_any(q, ECB_TERMS):
+        out.append(Signal("ecb", 7, "Frågan gäller euroområdets monetära eller finansiella statistik från ECB."))
     if _contains_any(q, SCB_TERMS):
         out.append(Signal("scb", 3, "Frågan innehåller svensk samhällsstatistik eller svensk geografi."))
     return out
@@ -243,7 +287,7 @@ def plan_sources(question: str) -> dict:
     if has_eu and has_scb and not explicit_sweden and not explicit_eu:
         ambiguities.append("Både svensk och europeisk statistik kan vara relevant, men geografin är inte tydlig.")
 
-    order = ("bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "energimyndigheten", "forsakringskassan", "jordbruksverket", "skolverket", "smhi", "comext", "scb", "eurostat")
+    order = ("bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "energimyndigheten", "forsakringskassan", "jordbruksverket", "skolverket", "smhi", "worldbank", "oecd", "who", "bis", "ecb", "comext", "scb", "eurostat")
     selected = sorted(set(selected), key=lambda s: order.index(s))
     steps = []
     for idx, source in enumerate(selected, start=1):
@@ -262,6 +306,11 @@ def plan_sources(question: str) -> dict:
             "jordbruksverket": "Sök och verifiera jordbruks- och livsmedelsstatistik via Jordbruksverkets PxWeb-statistikdatabas.",
             "skolverket": "Sök och verifiera skolenheter, utbildningar och statistik via Skolverkets öppna API:er.",
             "smhi": "Sök och verifiera meteorologiska observationer via SMHI:s öppna MetObs API.",
+            "worldbank": "Sök och verifiera globala indikatorer via World Bank Indicators API v2.",
+            "oecd": "Sök och verifiera harmoniserade OECD-data via OECD Data Explorer SDMX.",
+            "who": "Sök och verifiera global hälsostatistik via WHO World Health Data Hub och aktuell officiell export.",
+            "bis": "Sök och verifiera internationell finans- och bankstatistik via BIS SDMX API.",
+            "ecb": "Sök och verifiera euroområdets monetära och finansiella statistik via ECB Data Portal SDMX.",
         }[source]
         step = {
             "id": f"source-{idx}-{source}",

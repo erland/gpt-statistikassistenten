@@ -1,0 +1,27 @@
+openapi: 3.1.0
+info:
+  title: OECD SDMX API
+  version: 1.0.0
+servers:
+  - url: https://sdmx.oecd.org/public/rest
+paths:
+  /dataflow/{agency}/{flowId}/{version}:
+    get:
+      operationId: getOecdDataflow
+      parameters:
+        - {name: agency, in: path, required: true, schema: {type: string}}
+        - {name: flowId, in: path, required: true, schema: {type: string}}
+        - {name: version, in: path, required: true, schema: {type: string}}
+        - {name: references, in: query, required: false, schema: {type: string, default: all}}
+      responses:
+        '200': {description: OECD dataflow and related metadata}
+  /data/{flowRef}/{key}:
+    get:
+      operationId: getOecdData
+      parameters:
+        - {name: flowRef, in: path, required: true, schema: {type: string}}
+        - {name: key, in: path, required: true, schema: {type: string}}
+        - {name: startPeriod, in: query, required: false, schema: {type: string}}
+        - {name: endPeriod, in: query, required: false, schema: {type: string}}
+      responses:
+        '200': {description: OECD SDMX data}

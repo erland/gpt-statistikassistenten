@@ -59,6 +59,10 @@ jobs:
           unzip -l "$ZIP" | grep 'builder/actions/riksbank-openapi.yaml'
           unzip -l "$ZIP" | grep 'builder/actions/forsakringskassan-openapi.yaml'
           unzip -l "$ZIP" | grep 'builder/actions/smhi-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/worldbank-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/oecd-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/bis-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/ecb-openapi.yaml'
       - name: Upload release artifacts
         env:
           GH_TOKEN: ${{ github.token }}

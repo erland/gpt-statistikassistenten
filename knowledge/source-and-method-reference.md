@@ -5,6 +5,11 @@
 - **Eurostat**: harmoniserad EU-statistik.
 - **Comext**: detaljerad internationell varuhandel, särskilt reporter × partner × produkt × flöde × tid.
 - **Brå**: svensk kriminalstatistik.
+- **World Bank**: bred global utvecklings- och makrostatistik.
+- **OECD**: harmoniserade jämförelser mellan OECD-länder.
+- **WHO**: global hälsostatistik.
+- **BIS**: internationell bank-, kredit-, bostadspris- och finansstatistik.
+- **ECB**: euroområdets monetära och finansiella statistik.
 
 ## SCB PxWebApi v2
 Bas-URL: `https://statistikdatabasen.scb.se/api/v2`.
@@ -62,3 +67,19 @@ Använd öppna REST-API:er för skolenheter, utbildningar och statistik. Planned
 
 ## SMHI Open Data MetObs
 Bas för meteorologiska observationer: `https://opendata-download-metobs.smhi.se/api/version/latest`. Verifiera parameter-ID, station-ID, period, enhet och kvalitetsinformation innan data används. Historiska corrected-archive-uttag kan vara stora och ska hämtas sparsamt.
+
+
+## World Bank Indicators API v2
+Bas-URL: `https://api.worldbank.org/v2`. API:t kräver ingen nyckel. Identifiera indikator via `/indicator` eller `/indicator/{id}` och bevara källa, source note och source organization. Hämta sedan uttryckliga landkoder och perioder. För globala jämförelser ska definition och täckning verifieras före analys.
+
+## OECD Data Explorer
+Bas-URL: `https://sdmx.oecd.org/public/rest`. Använd SDMX-dataflow och strukturmetadata före data. OECD:s API är avgiftsfritt men har rate limiting; gör därför filtrerade uttag och återanvänd metadata när möjligt.
+
+## WHO World Health Data Hub
+Primär ingång: `https://data.who.int`. WHO:s äldre GHO OData-gränssnitt är deprecated/utfasat och ska inte vara canonical endpoint. Identifiera indikator i aktuella WHO-källor och använd aktuell officiell export/API. Bevara osäkerhetsintervall och modellerad/rapporterad status när de finns.
+
+## BIS Data Portal
+BIS publicerar statistik och metadata via SDMX REST API v2. Verifiera struktur, agency, resource och key innan datauttag. Relevanta områden är bland annat kredit, internationell bankstatistik, bostadspriser och effektiva växelkurser.
+
+## ECB Data Portal
+Bas-URL: `https://data-api.ecb.europa.eu/service`. ECB använder SDMX 2.1 med metadata discovery och data retrieval. Verifiera dataflow/flowRef, key, frekvens och enhet. ECB används för euroområdets monetära och finansiella statistik; Eurostat används fortsatt för bredare samhällsstatistik.
