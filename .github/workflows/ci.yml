@@ -48,3 +48,7 @@ jobs:
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/riksbank-openapi.yaml'
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/forsakringskassan-openapi.yaml'
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/smhi-openapi.yaml'
+          unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/worldbank-openapi.yaml'
+          unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/oecd-openapi.yaml'
+          unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/bis-openapi.yaml'
+          unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/ecb-openapi.yaml'
