@@ -1,6 +1,6 @@
 # Custom GPT Actions
 
-Distributionen innehåller sju OpenAPI-underlag i `builder/actions/`:
+Distributionen innehåller nio OpenAPI-underlag i `builder/actions/`:
 
 1. `scb-openapi.yaml` – SCB PxWebApi v2.
 2. `eurostat-openapi.yaml` – generell Eurostat SDMX.
@@ -9,8 +9,10 @@ Distributionen innehåller sju OpenAPI-underlag i `builder/actions/`:
 5. `socialstyrelsen-openapi.yaml` – metadata/ämnen i Socialstyrelsens Statistikdatabas API.
 6. `arbetsformedlingen-openapi.yaml` – publik JobSearch för platsannonser.
 7. `riksbank-openapi.yaml` – Riksbankens SWEA för serier, räntor och växelkurser.
+8. `forsakringskassan-openapi.yaml` – metadata för Försäkringskassans öppna statistik.
+9. `smhi-openapi.yaml` – SMHI MetObs för parameter-/stationsmetadata och observationer.
 
-Dessa grundanrop kräver ingen personlig API-nyckel eller inloggning. Lägg dem som separata Actions i GPT Builder. Folkhälsodata använder ett hierarkiskt PxWeb API där tabellvägen varierar; använd därför officiell webb/PxWeb-åtkomst när runtime inte kan uttrycka den dynamiska sökvägen säkert som Action. Brå hanteras fortsatt via officiell statistiktjänst eller publicerade filer/webbsidor.
+Dessa grundanrop kräver ingen personlig API-nyckel eller inloggning. Lägg dem som separata Actions i GPT Builder. Folkhälsodata, Energimyndigheten och Jordbruksverket använder hierarkiska PxWeb-vägar, och Skolverkets statistik-API har versionsstyrda/dynamiska resurser; använd därför verifierad officiell webb/API-åtkomst när en säker generell Action inte kan uttryckas. Brå hanteras fortsatt via officiell statistiktjänst eller publicerade filer/webbsidor.
 
 ### Säker användning
 - Använd Action först efter källval.

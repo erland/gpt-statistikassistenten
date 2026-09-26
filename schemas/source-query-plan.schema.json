@@ -35,7 +35,12 @@
           "socialstyrelsen",
           "folkhalsodata",
           "arbetsformedlingen",
-          "riksbank"
+          "riksbank",
+          "energimyndigheten",
+          "forsakringskassan",
+          "jordbruksverket",
+          "skolverket",
+          "smhi"
         ]
       },
       "uniqueItems": true,
@@ -68,7 +73,12 @@
               "socialstyrelsen",
               "folkhalsodata",
               "arbetsformedlingen",
-              "riksbank"
+              "riksbank",
+              "energimyndigheten",
+              "forsakringskassan",
+              "jordbruksverket",
+              "skolverket",
+              "smhi"
             ]
           },
           "purpose": {

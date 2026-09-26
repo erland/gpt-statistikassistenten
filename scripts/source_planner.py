@@ -33,6 +33,11 @@ SOURCE_ADAPTER = {
     "folkhalsodata": "scripts/folkhalsodata_adapter.py",
     "arbetsformedlingen": "scripts/arbetsformedlingen_adapter.py",
     "riksbank": "scripts/riksbank_adapter.py",
+    "energimyndigheten": "scripts/energimyndigheten_adapter.py",
+    "forsakringskassan": "scripts/forsakringskassan_adapter.py",
+    "jordbruksverket": "scripts/jordbruksverket_adapter.py",
+    "skolverket": "scripts/skolverket_adapter.py",
+    "smhi": "scripts/smhi_adapter.py",
 }
 
 # Deliberately narrow, high-signal concepts. Broader language is handled by
@@ -76,6 +81,28 @@ RIKSBANK_TERMS = {
     "riksbanken", "styrränta", "referensränta", "växelkurs", "valutakurs", "swea",
     "swestr", "kronkurs", "sek mot", "ränta och valut"
 }
+ENERGI_TERMS = {
+    "energimyndigheten", "energistatistik", "energianvändning", "energibalans",
+    "elproduktion", "fjärrvärme", "biogas", "solcellsanlägg", "kraftslag"
+}
+FORSakringskassan_TERMS = {
+    "försäkringskassan", "sjukpenning", "sjukfall", "sjukersättning",
+    "aktivitetsersättning", "föräldrapenning", "vab", "assistansersättning",
+    "omvårdnadsbidrag", "graviditetspenning"
+}
+JORDBRUK_TERMS = {
+    "jordbruksverket", "jordbruksstatistik", "skörd", "gröda", "jordbruksmark",
+    "lantbruksdjur", "animalieproduktion", "trädgårdsodling", "vattenbruk",
+    "livsmedelskonsumtion"
+}
+SKOLVERKET_TERMS = {
+    "skolverket", "skolenhet", "skolenheter", "skolregister", "gymnasieprogram",
+    "komvux", "planerade utbildningar", "utbildningstillfällen", "skolstatistik"
+}
+SMHI_TERMS = {
+    "smhi", "meteorolog", "väderstation", "väderobservation", "nederbörd",
+    "lufttemperatur", "vindhastighet", "molnmängd", "klimatobservation"
+}
 
 PER_CAPITA_TERMS = {
     "per 100 000", "per 100000", "per capita", "per invånare", "per tusen"
@@ -109,6 +136,16 @@ def _signals(question: str) -> list[Signal]:
         out.append(Signal("arbetsformedlingen", 7, "Frågan gäller platsannonser eller aktuell efterfrågan på yrken/kompetenser."))
     if _contains_any(q, RIKSBANK_TERMS):
         out.append(Signal("riksbank", 7, "Frågan gäller Riksbankens räntor, växelkurser eller finansiella tidsserier."))
+    if _contains_any(q, ENERGI_TERMS):
+        out.append(Signal("energimyndigheten", 7, "Frågan gäller energistatistik som Energimyndigheten publicerar."))
+    if _contains_any(q, FORSakringskassan_TERMS):
+        out.append(Signal("forsakringskassan", 7, "Frågan gäller socialförsäkringsstatistik från Försäkringskassan."))
+    if _contains_any(q, JORDBRUK_TERMS):
+        out.append(Signal("jordbruksverket", 7, "Frågan gäller jordbruk, skörd, djur eller livsmedelsstatistik från Jordbruksverket."))
+    if _contains_any(q, SKOLVERKET_TERMS):
+        out.append(Signal("skolverket", 7, "Frågan gäller skolenheter, utbildningar eller Skolverkets statistik."))
+    if _contains_any(q, SMHI_TERMS):
+        out.append(Signal("smhi", 7, "Frågan gäller meteorologiska observationer eller klimatdata från SMHI."))
     if _contains_any(q, SCB_TERMS):
         out.append(Signal("scb", 3, "Frågan innehåller svensk samhällsstatistik eller svensk geografi."))
     return out
@@ -206,7 +243,7 @@ def plan_sources(question: str) -> dict:
     if has_eu and has_scb and not explicit_sweden and not explicit_eu:
         ambiguities.append("Både svensk och europeisk statistik kan vara relevant, men geografin är inte tydlig.")
 
-    order = ("bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "comext", "scb", "eurostat")
+    order = ("bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "energimyndigheten", "forsakringskassan", "jordbruksverket", "skolverket", "smhi", "comext", "scb", "eurostat")
     selected = sorted(set(selected), key=lambda s: order.index(s))
     steps = []
     for idx, source in enumerate(selected, start=1):
@@ -220,6 +257,11 @@ def plan_sources(question: str) -> dict:
             "folkhalsodata": "Sök och verifiera folkhälsoindikatorer via Folkhälsodata/PxWeb API.",
             "arbetsformedlingen": "Sök verifierade platsannonser via Arbetsförmedlingens publika JobSearch API och skilj efterfrågedata från arbetslöshetsstatistik.",
             "riksbank": "Sök och verifiera räntor, växelkurser och andra Riksbanksserier via SWEA API.",
+            "energimyndigheten": "Sök och verifiera energistatistik via Energimyndighetens PxWeb-statistikdatabas.",
+            "forsakringskassan": "Sök och verifiera socialförsäkringsstatistik via Försäkringskassans öppna metadata och distributioner.",
+            "jordbruksverket": "Sök och verifiera jordbruks- och livsmedelsstatistik via Jordbruksverkets PxWeb-statistikdatabas.",
+            "skolverket": "Sök och verifiera skolenheter, utbildningar och statistik via Skolverkets öppna API:er.",
+            "smhi": "Sök och verifiera meteorologiska observationer via SMHI:s öppna MetObs API.",
         }[source]
         step = {
             "id": f"source-{idx}-{source}",

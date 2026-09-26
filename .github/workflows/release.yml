@@ -57,6 +57,8 @@ jobs:
           unzip -l "$ZIP" | grep 'builder/actions/socialstyrelsen-openapi.yaml'
           unzip -l "$ZIP" | grep 'builder/actions/arbetsformedlingen-openapi.yaml'
           unzip -l "$ZIP" | grep 'builder/actions/riksbank-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/forsakringskassan-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/smhi-openapi.yaml'
       - name: Upload release artifacts
         env:
           GH_TOKEN: ${{ github.token }}

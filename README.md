@@ -13,6 +13,11 @@ Statistikassistenten är ett GPT-projekt för verifierbara frågor mot officiell
 - Folkhälsomyndighetens Folkhälsodata
 - Arbetsförmedlingen JobSearch
 - Sveriges Riksbank SWEA
+- Energimyndighetens statistikdatabas
+- Försäkringskassans öppna statistik
+- Jordbruksverkets statistikdatabas
+- Skolverkets öppna API:er
+- SMHI Open Data MetObs
 
 ## Viktig princip
 
@@ -42,6 +47,11 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 - Folkhälsodata: PxWeb-baserade folkhälsoindikatorer.
 - Arbetsförmedlingen: platsannonsbaserad efterfrågan via JobSearch.
 - Riksbanken: räntor och växelkurser via SWEA.
+- Energimyndigheten: energistatistik via PxWeb.
+- Försäkringskassan: socialförsäkringsstatistik via metadata och öppna distributioner.
+- Jordbruksverket: jordbruks- och livsmedelsstatistik via PxWeb.
+- Skolverket: skolenheter, utbildningar och utbildningsstatistik via öppna API:er.
+- SMHI: meteorologiska observationer via MetObs.
 - Källval/frågeplanering för enkla och kombinerade statistikfrågor.
 - Deterministiska beräkningar för förändring, andel, index och per-capita.
 - Säkerhets- och kvalitetsgates som blockerar ofullständig provenance, felaktiga maskerade värden, otillräckligt verifierade beräkningar och obelagda kausala slutsatser.
@@ -49,8 +59,8 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 
 ## CI och release
 
-- `.github/workflows/ci.yml` kör lint, robusthetskontroll, 64 regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
+- `.github/workflows/ci.yml` kör lint, robusthetskontroll, 70 regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
 - `.github/workflows/release.yml` triggas när en GitHub Release publiceras. Taggar som `v1.0.0` eller `v1.0.0-rc1` styr versionsnumret i artefakterna.
 - Release-workflow bifogar alla ZIP-filer, `SHA256SUMS.txt` och `DELIVERY-MANIFEST.json` till releasen.
-- Custom GPT:s tre OpenAPI Actions ligger canonical i `runtime-assets/custom-gpt/actions/` och följer därför med deterministiskt i varje releasebygge.
+- Custom GPT:s OpenAPI Actions ligger canonical i `runtime-assets/custom-gpt/actions/` och följer därför med deterministiskt i varje releasebygge.
 - Build-toolchainen från GPT Byggaren 1.5.0 är vendorerad under `tools/gpt_builder/` så CI inte är beroende av en separat lokal GPT Byggaren-installation.

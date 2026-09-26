@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: SMHI Open Data MetObs
+  version: 1.0.0
+  description: Nyckelfri åtkomst till metadata och observationer i SMHI:s MetObs API.
+servers:
+  - url: https://opendata-download-metobs.smhi.se/api/version/latest
+paths:
+  /parameter/{parameterId}.json:
+    get:
+      operationId: getSmhiParameterMetadata
+      summary: Hämta metadata och stationer för en meteorologisk parameter
+      parameters:
+        - name: parameterId
+          in: path
+          required: true
+          schema: {type: integer, minimum: 1}
+      responses:
+        '200': {description: Parametermetadata}
+  /parameter/{parameterId}/station/{stationId}.json:
+    get:
+      operationId: getSmhiStationPeriods
+      summary: Hämta metadata och tillgängliga perioder för parameter och station
+      parameters:
+        - name: parameterId
+          in: path
+          required: true
+          schema: {type: integer, minimum: 1}
+        - name: stationId
+          in: path
+          required: true
+          schema: {type: integer, minimum: 1}
+      responses:
+        '200': {description: Stationsmetadata och perioder}
+  /parameter/{parameterId}/station/{stationId}/period/{period}/data.json:
+    get:
+      operationId: getSmhiObservationData
+      summary: Hämta observationer för verifierad parameter, station och period
+      parameters:
+        - name: parameterId
+          in: path
+          required: true
+          schema: {type: integer, minimum: 1}
+        - name: stationId
+          in: path
+          required: true
+          schema: {type: integer, minimum: 1}
+        - name: period
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [latest-hour, latest-day, latest-months, corrected-archive]
+      responses:
+        '200': {description: Observationer}

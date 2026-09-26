@@ -46,3 +46,5 @@ jobs:
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/socialstyrelsen-openapi.yaml'
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/arbetsformedlingen-openapi.yaml'
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/riksbank-openapi.yaml'
+          unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/forsakringskassan-openapi.yaml'
+          unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/smhi-openapi.yaml'

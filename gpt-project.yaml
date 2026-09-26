@@ -18,8 +18,7 @@ analysis:
     - runtime_id: chatgpt_custom
       suitability: equivalent
       activate_by_default: true
-      reason: Byggd och validerad Custom GPT-distribution med nyckelfria Actions för
-        SCB, Eurostat och Comext.
+      reason: Byggd och validerad Custom GPT-distribution med nyckelfria Actions och verifierade officiella fallback-vägar för stödda källor.
     - runtime_id: claude_projects
       suitability: reduced
       activate_by_default: false
@@ -386,6 +385,51 @@ tools:
     requirement: recommended
     purpose: Bygg verifierade uttag från Riksbankens SWEA API.
     script: scripts/riksbank_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: energimyndigheten-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade uttag från Energimyndighetens PxWeb-statistikdatabas.
+    script: scripts/energimyndigheten_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: forsakringskassan-adapter
+    type: script
+    requirement: recommended
+    purpose: Verifiera metadata och distributioner för Försäkringskassans öppna statistik.
+    script: scripts/forsakringskassan_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: jordbruksverket-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade uttag från Jordbruksverkets PxWeb-statistikdatabas.
+    script: scripts/jordbruksverket_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: skolverket-adapter
+    type: script
+    requirement: recommended
+    purpose: Planera verifierade anrop mot Skolverkets öppna API:er.
+    script: scripts/skolverket_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: smhi-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade anrop mot SMHI Open Data MetObs.
+    script: scripts/smhi_adapter.py
     deterministic: true
     mutates_workspace: false
     working_directory: workspace
