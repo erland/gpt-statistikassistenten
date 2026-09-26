@@ -1,0 +1,4 @@
+- Hur har Sveriges befolkning utvecklats de senaste tio åren?
+- Jämför arbetslösheten i Sverige med EU-genomsnittet.
+- Hur har Sveriges varuexport till USA utvecklats de senaste fem åren?
+- Hur har antalet anmälda bostadsinbrott per 100 000 invånare utvecklats?

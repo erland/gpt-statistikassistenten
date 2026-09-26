@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/statistikassistenten/eurostat-adapter.schema.json",
+  "title": "Eurostat adapter request plan",
+  "type": "object",
+  "required": ["method", "url", "headers", "dataset_id", "filters"],
+  "properties": {
+    "method": {"const": "GET"},
+    "url": {"type": "string", "pattern": "^https://ec\\.europa\\.eu/eurostat/api/dissemination/sdmx/3\\.0/data/"},
+    "headers": {
+      "type": "object",
+      "required": ["Accept"],
+      "properties": {"Accept": {"type": "string"}},
+      "additionalProperties": false
+    },
+    "dataset_id": {"type": "string", "minLength": 1},
+    "filters": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "additionalProperties": false
+}

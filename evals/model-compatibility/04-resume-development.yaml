@@ -1,0 +1,6 @@
+id: resume-development
+criticality: important
+scenario: Utvecklingsarbetet återupptas från projekt-ZIP utan tidigare chatthistorik.
+pass_criteria:
+  - project-status.yaml används som auktoritativ status.
+  - Nästa steg härleds från faktisk status och redan passerade steg görs inte om utan skäl.

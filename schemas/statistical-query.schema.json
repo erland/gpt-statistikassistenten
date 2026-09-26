@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://statistikassistenten.local/schemas/statistical-query.schema.json",
+  "title": "Statistical Query",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["question", "measure", "dimensions"],
+  "properties": {
+    "question": {"type": "string", "minLength": 1},
+    "measure": {"$ref": "#/$defs/measure"},
+    "dimensions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/dimensionSelection"},
+      "minItems": 1
+    },
+    "comparison": {"$ref": "#/$defs/comparison"},
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preferred_formats": {
+          "type": "array",
+          "items": {"enum": ["text", "table", "chart", "markdown", "csv"]},
+          "uniqueItems": true
+        },
+        "sort": {"enum": ["source", "ascending", "descending", "chronological"]}
+      }
+    }
+  },
+  "$defs": {
+    "measure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["concept"],
+      "properties": {
+        "concept": {"type": "string", "minLength": 1},
+        "statistic_type": {"enum": ["count", "amount", "rate", "share", "index", "mean", "median", "other"]},
+        "unit_preference": {"type": "string"},
+        "flow": {"enum": ["import", "export", "inflow", "outflow", "not_applicable"]}
+      }
+    },
+    "dimensionSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "values"],
+      "properties": {
+        "kind": {"enum": ["time", "geography", "classification", "population", "category", "measure_variant", "other"]},
+        "concept": {"type": "string"},
+        "values": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+        "selection_mode": {"enum": ["explicit", "range", "latest", "all_matching"]}
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {"enum": ["none", "difference", "percent_change", "share", "per_capita", "index", "rank", "trend"]},
+        "baseline": {"type": "string"},
+        "denominator_concept": {"type": "string"}
+      }
+    }
+  }
+}

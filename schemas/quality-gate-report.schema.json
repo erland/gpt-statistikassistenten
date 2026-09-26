@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://statistikassistenten.local/schemas/quality-gate-report.schema.json",
+  "title": "Statistics Quality Gate Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["result", "blockers", "warnings", "checks"],
+  "properties": {
+    "result": {"enum": ["passed", "blocked"]},
+    "blockers": {"type": "array", "items": {"$ref": "#/$defs/issue"}},
+    "warnings": {"type": "array", "items": {"$ref": "#/$defs/issue"}},
+    "checks": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"}
+    }
+  },
+  "$defs": {
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1},
+        "severity": {"enum": ["blocker", "warning"]},
+        "message": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

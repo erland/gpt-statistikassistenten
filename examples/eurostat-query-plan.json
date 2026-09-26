@@ -1,0 +1,14 @@
+{
+  "method": "GET",
+  "url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/3.0/data/dataflow/ESTAT/DEMO_GIND/1.0/*?c%5BFREQ%5D=A&c%5BINDIC_DE%5D=POP&c%5BGEO%5D=SE&c%5BTIME_PERIOD%5D=ge:2020+le:2025&attributes=none&measures=all",
+  "headers": {
+    "Accept": "application/vnd.sdmx.data+csv;version=2.0.0;labels=both"
+  },
+  "dataset_id": "DEMO_GIND",
+  "filters": {
+    "FREQ": ["A"],
+    "INDIC_DE": ["POP"],
+    "GEO": ["SE"],
+    "TIME_PERIOD": ["ge:2020", "le:2025"]
+  }
+}

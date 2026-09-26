@@ -1,0 +1,26 @@
+{
+  "result": "pass",
+  "step": "step-15",
+  "release_automation": {
+    "ci_workflow": ".github/workflows/ci.yml",
+    "release_workflow": ".github/workflows/release.yml",
+    "version_source": "github.event.release.tag_name",
+    "targets": [
+      "project",
+      "chat",
+      "custom-gpt",
+      "opencode"
+    ],
+    "toolchain": "vendored GPT Byggaren 1.5.0 subset",
+    "custom_gpt_actions": "runtime-assets/custom-gpt/actions"
+  },
+  "validation": {
+    "tests_passed": 58,
+    "lint": "pass",
+    "model_robustness": "pass",
+    "prebuild_final_hygiene": "pass",
+    "distribution_validation": "pass",
+    "simulated_release_version": "1.0.0-rc1"
+  },
+  "blocking_issues": []
+}

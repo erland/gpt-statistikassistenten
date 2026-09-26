@@ -1,0 +1,32 @@
+{
+  "question": "Hur har anmälda bilstölder per 100 000 invånare utvecklats i Sundsvall?",
+  "status": "ready",
+  "sources": ["bra", "scb"],
+  "steps": [
+    {
+      "id": "source-1-bra",
+      "source": "bra",
+      "purpose": "Sök och verifiera Brå-statistik över anmälda brott via officiell tjänst eller fil.",
+      "adapter": "scripts/bra_adapter.py"
+    },
+    {
+      "id": "source-2-scb",
+      "source": "scb",
+      "purpose": "Sök och verifiera svensk officiell statistik via SCB innan datauttag.",
+      "adapter": "scripts/scb_adapter.py"
+    },
+    {
+      "id": "combine-results",
+      "source": "bra",
+      "purpose": "Kombinera först efter att METHOD-GATE verifierat förenliga definitioner, geografi, period och enheter.",
+      "adapter": "schemas/statistical-result.schema.json",
+      "depends_on": ["source-1-bra", "source-2-scb"]
+    }
+  ],
+  "decision": {
+    "reason": "Frågan innehåller ett tydligt brottsstatistiskt begrepp. SCB behövs som befolkningsnämnare för ett per-capita-mått.",
+    "confidence": "high",
+    "ambiguities": [],
+    "conflicts": []
+  }
+}

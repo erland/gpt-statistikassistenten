@@ -1,0 +1,22 @@
+{
+  "calculation": {
+    "type": "per_capita",
+    "unit": "per 100000",
+    "formula": "(numerator / denominator) * 100000"
+  },
+  "observations": [
+    {
+      "dimensions": {"time": "2025", "geo": "Sundsvall"},
+      "value": 500.0,
+      "status": "observed",
+      "inputs": [
+        {"role": "numerator", "value": 505, "unit": "cases", "status": "observed"},
+        {"role": "denominator", "value": 101000, "unit": "persons", "status": "observed"}
+      ]
+    }
+  ],
+  "method": {
+    "checks": ["numeric_values", "explicit_dimensions", "unit_verified", "same_period", "same_geography", "positive_denominator"],
+    "notes": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "dataset": {"title":"Befolkning efter region och år","publisher":"SCB","subject":"Befolkning","frequency":"annual"},
+  "dimensions": [
+    {"id":"geography","kind":"geography","label":"Region","values":[{"key":"sundsvall","label":"Sundsvalls kommun","canonical_code":"2281","level":"municipality"}]},
+    {"id":"time","kind":"time","label":"År","values":[{"key":"2025","label":"2025"}]}
+  ],
+  "measures": [{"id":"population","label":"Folkmängd","statistic_type":"count","unit":"persons"}],
+  "observations": [{"dimensions":{"geography":"sundsvall","time":"2025"},"measure":"population","value":100000,"status":"observed"}],
+  "method": {"population":"Folkbokförd befolkning enligt datasetets definition","definitions":[],"comparability_notes":[],"breaks_in_series":[]},
+  "provenance": {
+    "source":{"organization":"SCB","dataset_title":"Befolkning efter region och år","source_identifiers":{"table_id":"EXAMPLE_SCB_TABLE"}},
+    "retrieval":{"retrieved_at":"2026-09-26","access_method":"api","metadata_verified":true,"query_summary":"Exempelfixture för modellvalidering"},
+    "transformations":[{"operation":"none","description":"Ingen transformation"}]
+  }
+}

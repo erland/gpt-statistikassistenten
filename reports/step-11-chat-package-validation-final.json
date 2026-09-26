@@ -1,0 +1,25 @@
+{
+  "result": "passed",
+  "artifact": "statistikassistenten-chat-0.11.0-dev.zip",
+  "file_count": 33,
+  "required_files": {
+    "START-HERE.md": true,
+    "VERSION": true,
+    "MANIFEST.json": true,
+    "assistant/instructions.md": true,
+    "assistant/runtime-contract.json": true
+  },
+  "declared_scripts": [
+    "scripts/bra_adapter.py",
+    "scripts/calculation_engine.py",
+    "scripts/comext_adapter.py",
+    "scripts/eurostat_adapter.py",
+    "scripts/presentation_export.py",
+    "scripts/quality_gate.py",
+    "scripts/scb_adapter.py",
+    "scripts/source_planner.py"
+  ],
+  "forbidden_dev_paths": [],
+  "manifest_runtime_id": "statistikassistenten-chat",
+  "manifest_version": "0.11.0-dev"
+}

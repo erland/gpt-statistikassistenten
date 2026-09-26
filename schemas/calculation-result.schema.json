@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://statistikassistenten.local/schemas/calculation-result.schema.json",
+  "title": "Deterministic Calculation Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["calculation", "observations", "method"],
+  "properties": {
+    "calculation": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["type", "unit", "formula"],
+      "properties": {
+        "type": {"enum": ["absolute_change", "percent_change", "share", "index", "per_capita", "comparison"]},
+        "unit": {"type": "string", "minLength": 1},
+        "formula": {"type": "string", "minLength": 1}
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["dimensions", "value", "status", "inputs"],
+        "properties": {
+          "dimensions": {"type": "object", "additionalProperties": {"type": "string"}, "minProperties": 1},
+          "value": {"type": "number"},
+          "status": {"enum": ["observed", "provisional", "estimated", "break_in_series", "confidential", "missing"]},
+          "inputs": {"type": "array", "items": {"type": "object"}, "minItems": 1}
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checks", "notes"],
+      "properties": {
+        "checks": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

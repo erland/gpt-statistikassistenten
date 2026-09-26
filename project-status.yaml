@@ -1,0 +1,77 @@
+project_id: statistikassistenten
+status_version: 1
+phase: release
+current_state: release
+completed_steps:
+- id: step-1
+  title: Canonical projektgrund
+  result: passed
+- id: step-2
+  title: Gemensam statistikmodell och svarskontrakt
+  result: passed
+- id: step-3
+  title: SCB-adapter
+  result: passed
+- id: step-4
+  title: Eurostat-adapter
+  result: passed
+- id: step-5
+  title: Comext-handelsadapter
+  result: passed
+- id: step-6
+  title: Brå-adapter och fallbackstrategi
+  result: passed
+- id: step-7
+  title: Källval och frågeplanerare
+  result: passed
+- id: step-8
+  title: Beräkningar och kombinerade mått
+  result: passed
+- id: step-9
+  title: Presentation och export
+  result: passed
+- id: step-10
+  title: Säkerhets- och kvalitetsgates
+  result: passed
+- id: step-11
+  title: ChatGPT Chat-distribution
+  result: passed
+- id: step-12
+  title: ChatGPT Custom-distribution
+  result: passed
+- id: step-13
+  title: OpenCode-distribution
+  result: passed
+- id: step-14
+  title: Runtime parity, project hygiene och release readiness
+  result: passed
+- id: step-15
+  title: Releaseautomation
+  result: passed
+validation:
+  last_result: passed
+  checks:
+  - id: regression-tests
+    result: passed
+    report: reports/step-15-tests.txt
+  - id: project-lint
+    result: passed
+    report: reports/step-15-lint.json
+  - id: model-robustness
+    result: passed
+    report: reports/step-15-model-robustness.txt
+  - id: project-hygiene-prebuild
+    result: passed
+    report: reports/step-15-hygiene-prebuild.json
+  - id: distribution-validation
+    result: passed
+    report: reports/step-15-distribution-validation.txt
+project_hygiene:
+  last_result: passed
+  report: reports/step-15-hygiene-prebuild.json
+blocking_issues: []
+next_step:
+  recommended: release-candidate
+  title: Skapa första GitHub Release Candidate
+  reason: Alla 15 planerade utvecklingssteg är genomförda och releaseautomationen
+    är verifierad lokalt med v1.0.0-rc1.

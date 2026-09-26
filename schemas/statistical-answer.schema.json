@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://statistikassistenten.local/schemas/statistical-answer.schema.json",
+  "title": "Statistical Answer Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["answer", "evidence", "method_notes", "sources"],
+  "properties": {
+    "answer": {"type": "string", "minLength": 1},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "value"],
+        "properties": {
+          "label": {"type": "string"},
+          "value": {"type": ["string", "number", "null"]},
+          "unit": {"type": "string"},
+          "status": {"enum": ["source", "calculated"]}
+        }
+      }
+    },
+    "method_notes": {"type": "array", "items": {"type": "string"}},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["organization", "dataset"],
+        "properties": {
+          "organization": {"type": "string"},
+          "dataset": {"type": "string"},
+          "period": {"type": "string"},
+          "geography": {"type": "string"},
+          "measure": {"type": "string"},
+          "url": {"type": "string"}
+        }
+      },
+      "minItems": 1
+    }
+  }
+}

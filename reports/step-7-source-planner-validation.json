@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "checks": [
+    "source-plan-schema-example",
+    "27-adapter-and-planner-tests"
+  ],
+  "tests": 27
+}

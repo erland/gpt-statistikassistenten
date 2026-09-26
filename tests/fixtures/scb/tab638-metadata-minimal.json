@@ -1,0 +1,12 @@
+{
+  "id": "TAB638",
+  "label": "Folkmängd efter region, civilstånd, ålder, kön och år",
+  "variables": [
+    {"code": "Region", "label": "region", "mandatory": true, "values": [{"code": "00", "label": "Riket"}, {"code": "2281", "label": "Sundsvall"}]},
+    {"code": "Civilstand", "label": "civilstånd", "mandatory": true, "values": [{"code": "OG", "label": "ogifta"}]},
+    {"code": "Alder", "label": "ålder", "mandatory": true, "values": [{"code": "0", "label": "0 år"}]},
+    {"code": "Kon", "label": "kön", "mandatory": true, "values": [{"code": "1", "label": "män"}, {"code": "2", "label": "kvinnor"}]},
+    {"code": "ContentsCode", "label": "tabellinnehåll", "mandatory": true, "values": [{"code": "BE0101N1", "label": "Folkmängd"}]},
+    {"code": "Tid", "label": "år", "mandatory": true, "values": [{"code": "2023", "label": "2023"}, {"code": "2024", "label": "2024"}]}
+  ]
+}

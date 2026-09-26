@@ -1,0 +1,34 @@
+{
+  "result": "fail",
+  "summary": {
+    "errors": 2,
+    "warnings": 2,
+    "findings": 4
+  },
+  "findings": [
+    {
+      "code": "GP174",
+      "severity": "error",
+      "message": "Default-active runtime chatgpt_custom is omitted from build_system.targets",
+      "path": "gpt-project.yaml"
+    },
+    {
+      "code": "GP174",
+      "severity": "error",
+      "message": "Default-active runtime opencode is omitted from build_system.targets",
+      "path": "gpt-project.yaml"
+    },
+    {
+      "code": "GP202",
+      "severity": "warning",
+      "message": "Generated output exists in source tree",
+      "path": "dist"
+    },
+    {
+      "code": "GP202",
+      "severity": "warning",
+      "message": "Generated output exists in source tree",
+      "path": "build"
+    }
+  ]
+}

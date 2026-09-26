@@ -1,0 +1,32 @@
+{
+  "step": "step-5",
+  "component": "comext-adapter",
+  "result": "passed",
+  "checks": [
+    {
+      "id": "unit-tests",
+      "result": "passed",
+      "count": 6
+    },
+    {
+      "id": "schema-example-validation",
+      "result": "passed"
+    },
+    {
+      "id": "dedicated-endpoint",
+      "result": "passed"
+    },
+    {
+      "id": "ds-prefix-gate",
+      "result": "passed"
+    },
+    {
+      "id": "mandatory-filtering",
+      "result": "passed"
+    },
+    {
+      "id": "semantic-role-validation",
+      "result": "passed"
+    }
+  ]
+}

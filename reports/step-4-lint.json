@@ -1,0 +1,22 @@
+{
+  "result": "fail",
+  "summary": {
+    "errors": 2,
+    "warnings": 0,
+    "findings": 2
+  },
+  "findings": [
+    {
+      "code": "GP200",
+      "severity": "error",
+      "message": "Cache directory found in source tree",
+      "path": "scripts/__pycache__"
+    },
+    {
+      "code": "GP200",
+      "severity": "error",
+      "message": "Cache directory found in source tree",
+      "path": "tests/__pycache__"
+    }
+  ]
+}
