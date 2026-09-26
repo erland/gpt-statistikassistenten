@@ -31,3 +31,18 @@ Brå saknar i version 1 ett antaget generellt publikt API i assistenten. Använd
 
 ## Proveniens
 Ange organisation, dataset/tabell/statistikprodukt, geografi, tid, mått/enhet, metodreservationer och om siffran är direkt hämtad eller beräknad.
+
+## Kolada API v3
+Bas-URL: `https://api.kolada.se/v3`. Använd metadata för nyckeltalet före data. Kommunuttag följer mönstret `/data/municipality/{kommunkod}/kpi/{nyckeltal}`. Kolada kräver källangivelse och metadata kan ange en annan ursprunglig statistikproducent; bevara båda nivåerna i proveniensen.
+
+## Socialstyrelsens Statistikdatabas
+Bas-URL: `https://sdb.socialstyrelsen.se/api/v1`. Lista ämnen och fördelningsvariabler innan `/resultat` hämtas. Resultat pagineras vid större uttag; standardtaket i dokumentationen är 5 000 poster per sida. Ange Socialstyrelsen och statistikdatabasen som källa.
+
+## Folkhälsodata
+Folkhälsomyndighetens Folkhälsodata använder PxWeb API v1. Metadata måste verifiera tabell, dimensioner, geografi, år, mått och särskilda metodegenskaper som självrapportering eller flerårsmedelvärden.
+
+## Arbetsförmedlingen JobSearch
+Publikt JobSearch-API för platsannonser. Använd endast som indikator på annonserad efterfrågan efter yrken/kompetenser/geografi. Antal annonser får inte tolkas som arbetslöshet, sysselsättning eller antal unika lediga tjänster utan uttryckligt stöd.
+
+## Sveriges Riksbank SWEA
+Bas-URL: `https://api.riksbank.se/swea/v1`. Använd `/Series` eller `/Groups` för att verifiera serie-ID och metadata, därefter `/Observations/...`. Källan ska anges. Växelkurser är indikativa och avsedda för information, inte som garanterade transaktionskurser.
