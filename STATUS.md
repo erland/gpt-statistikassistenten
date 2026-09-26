@@ -2,26 +2,29 @@
 
 ## Lägesbild
 
-De ursprungliga 15 utvecklingsstegen är genomförda. Därefter har källstödet utökats med fem nya nyckelfria/offentliga källor: Kolada, Socialstyrelsen, Folkhälsodata, Arbetsförmedlingen JobSearch och Riksbanken SWEA. Ändringen är validerad som release-kandidat och ligger avsedd för PR-granskning.
+De ursprungliga 15 utvecklingsstegen och två efterföljande källutbyggnader är genomförda. Den aktuella PR:n lägger till Energimyndigheten, Försäkringskassan, Jordbruksverket, Skolverket och SMHI.
 
 ## Validering
 
-- 64 regressionstester passerar.
+- 70 regressionstester passerar i GitHub Actions.
 - Projektlint: 0 fel, 0 varningar.
 - Modellrobusthet: godkänd.
-- Final hygiene före build: godkänd utan findings.
+- Final hygiene: godkänd.
 - Distribution validation: PASS för projekt, ChatGPT Chat, ChatGPT Custom och OpenCode.
-- Custom GPT Actions verifieras för SCB, Eurostat, Comext, Kolada, Socialstyrelsen, Arbetsförmedlingen och Riksbanken.
-- Folkhälsodata använder verifierad PxWeb/webb-fallback i Custom GPT när dynamisk tabellväg inte kan uttryckas säkert som Action.
+- Custom GPT Actions verifieras för tidigare Actions samt Försäkringskassans metadata och SMHI MetObs.
 
-## Nya källor
+## Nya källor i denna utbyggnad
 
-- Kolada API v3 – kommun- och regionnyckeltal samt metadata om ursprunglig statistikproducent.
-- Socialstyrelsens Statistikdatabas API – vård, socialtjänst, läkemedel, dödsorsaker m.m.
-- Folkhälsodata/PxWeb – folkhälsoindikatorer, vaccinationer, smittsamma sjukdomar och levnadsvanor.
-- Arbetsförmedlingen JobSearch – platsannonser och annonserad efterfrågan på yrken/kompetenser.
-- Sveriges Riksbank SWEA – räntor, växelkurser och relaterade serier.
+- Energimyndigheten – energiindikatorer, officiell energistatistik och prognoser via PxWeb.
+- Försäkringskassan – socialförsäkringsstatistik via öppna metadata och officiella distributioner.
+- Jordbruksverket – jordbruk, skörd, djur, priser och livsmedelskonsumtion via PxWeb.
+- Skolverket – skolenheter, utbildningar och utbildningsstatistik via öppna API:er.
+- SMHI – meteorologiska observationer via Open Data MetObs.
+
+## Runtime-strategi
+
+Försäkringskassan och SMHI har stabila Custom GPT Actions. Energimyndigheten, Jordbruksverket och Skolverket använder verifierad officiell webb/PxWeb/Swagger-väg där dynamiska API-sökvägar gör en generell Action skörare än metadata-först-fallbacken.
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR:n. Skapa därefter en ny release candidate, lämpligen `v1.1.0-rc1`, och verifiera GitHub Actions före stabil `v1.1.0`.
+Granska och merge:a PR #3. Därefter kan nästa release candidate byggas från den mergade huvudgrenen.
