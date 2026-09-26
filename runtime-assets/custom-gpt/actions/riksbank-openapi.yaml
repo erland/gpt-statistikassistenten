@@ -1,0 +1,29 @@
+openapi: 3.1.0
+info: {title: Sveriges Riksbank SWEA API, version: 1.0.0}
+servers: [{url: https://api.riksbank.se/swea/v1}]
+paths:
+  /Series:
+    get:
+      operationId: listRiksbankSeries
+      summary: Lista Riksbankens serier
+      responses: {'200': {description: Series}}
+  /Groups:
+    get:
+      operationId: listRiksbankGroups
+      summary: Lista seriegrupper
+      responses: {'200': {description: Groups}}
+  /Observations/Latest/{seriesId}:
+    get:
+      operationId: getLatestRiksbankObservation
+      summary: Hämta senaste observation för verifierad serie
+      parameters: [{name: seriesId, in: path, required: true, schema: {type: string}}]
+      responses: {'200': {description: Latest observation}}
+  /Observations/{seriesId}/{fromDate}/{toDate}:
+    get:
+      operationId: getRiksbankObservations
+      summary: Hämta tidsserie för verifierad serie
+      parameters:
+        - {name: seriesId, in: path, required: true, schema: {type: string}}
+        - {name: fromDate, in: path, required: true, schema: {type: string, format: date}}
+        - {name: toDate, in: path, required: true, schema: {type: string, format: date}}
+      responses: {'200': {description: Observations}}

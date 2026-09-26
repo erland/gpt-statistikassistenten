@@ -53,6 +53,10 @@ jobs:
           unzip -l "$ZIP" | grep 'builder/actions/scb-openapi.yaml'
           unzip -l "$ZIP" | grep 'builder/actions/eurostat-openapi.yaml'
           unzip -l "$ZIP" | grep 'builder/actions/comext-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/kolada-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/socialstyrelsen-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/arbetsformedlingen-openapi.yaml'
+          unzip -l "$ZIP" | grep 'builder/actions/riksbank-openapi.yaml'
       - name: Upload release artifacts
         env:
           GH_TOKEN: ${{ github.token }}

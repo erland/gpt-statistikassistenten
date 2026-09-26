@@ -1,0 +1,17 @@
+openapi: 3.1.0
+info: {title: Socialstyrelsen Statistikdatabas API, version: 1.0.0}
+servers: [{url: https://sdb.socialstyrelsen.se/api/v1}]
+paths:
+  /sv:
+    get:
+      operationId: listSocialstyrelsenSubjects
+      summary: Lista ämnen i Statistikdatabasen
+      responses: {'200': {description: Ämnen}}
+  /sv/{subject}/{dimension}:
+    get:
+      operationId: listSocialstyrelsenDimensionValues
+      summary: Lista värden för en verifierad dimension
+      parameters:
+        - {name: subject, in: path, required: true, schema: {type: string}}
+        - {name: dimension, in: path, required: true, schema: {type: string}}
+      responses: {'200': {description: Dimension values}}

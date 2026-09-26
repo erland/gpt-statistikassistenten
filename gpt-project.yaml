@@ -345,6 +345,51 @@ tools:
     mutates_workspace: false
     working_directory: workspace
     runtime_fallback: degrade
+  - id: kolada-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade Kolada v3-uttag för kommun- och regionnyckeltal.
+    script: scripts/kolada_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: socialstyrelsen-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade uttag från Socialstyrelsens Statistikdatabas API.
+    script: scripts/socialstyrelsen_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: folkhalsodata-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade uttag från Folkhälsodata/PxWeb API.
+    script: scripts/folkhalsodata_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: arbetsformedlingen-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade sökningar i Arbetsförmedlingens publika JobSearch API.
+    script: scripts/arbetsformedlingen_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: riksbank-adapter
+    type: script
+    requirement: recommended
+    purpose: Bygg verifierade uttag från Riksbankens SWEA API.
+    script: scripts/riksbank_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
   - id: calculation-engine
     type: script
     requirement: recommended

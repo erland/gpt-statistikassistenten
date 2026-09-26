@@ -2,24 +2,26 @@
 
 ## Lägesbild
 
-Alla 15 planerade utvecklingssteg är genomförda. Projektet är redo för en första GitHub Release Candidate.
+De ursprungliga 15 utvecklingsstegen är genomförda. Därefter har källstödet utökats med fem nya nyckelfria/offentliga källor: Kolada, Socialstyrelsen, Folkhälsodata, Arbetsförmedlingen JobSearch och Riksbanken SWEA. Ändringen är validerad som release-kandidat och ligger avsedd för PR-granskning.
 
 ## Validering
 
-- 58 regressionstester passerar.
+- 64 regressionstester passerar.
 - Projektlint: 0 fel, 0 varningar.
 - Modellrobusthet: godkänd.
 - Final hygiene före build: godkänd utan findings.
 - Distribution validation: PASS för projekt, ChatGPT Chat, ChatGPT Custom och OpenCode.
-- Custom GPT Actions verifieras i byggt paket.
+- Custom GPT Actions verifieras för SCB, Eurostat, Comext, Kolada, Socialstyrelsen, Arbetsförmedlingen och Riksbanken.
+- Folkhälsodata använder verifierad PxWeb/webb-fallback i Custom GPT när dynamisk tabellväg inte kan uttryckas säkert som Action.
 
-## Releaseautomation
+## Nya källor
 
-- CI: `.github/workflows/ci.yml`.
-- Release: `.github/workflows/release.yml`.
-- Release-taggen styr versionsnumret.
-- Alla aktiva distributioner, checksummor och delivery manifest laddas upp till GitHub Release.
+- Kolada API v3 – kommun- och regionnyckeltal samt metadata om ursprunglig statistikproducent.
+- Socialstyrelsens Statistikdatabas API – vård, socialtjänst, läkemedel, dödsorsaker m.m.
+- Folkhälsodata/PxWeb – folkhälsoindikatorer, vaccinationer, smittsamma sjukdomar och levnadsvanor.
+- Arbetsförmedlingen JobSearch – platsannonser och annonserad efterfrågan på yrken/kompetenser.
+- Sveriges Riksbank SWEA – räntor, växelkurser och relaterade serier.
 
 ## Nästa rekommenderade steg
 
-Skapa en GitHub Release Candidate, exempelvis `v1.0.0-rc1`, och verifiera den första riktiga GitHub Actions-körningen innan stabil `v1.0.0`.
+Granska och merge:a PR:n. Skapa därefter en ny release candidate, lämpligen `v1.1.0-rc1`, och verifiera GitHub Actions före stabil `v1.1.0`.
