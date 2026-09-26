@@ -5,6 +5,11 @@
 - **Eurostat**: harmoniserad EU-statistik.
 - **Comext**: detaljerad internationell varuhandel, särskilt reporter × partner × produkt × flöde × tid.
 - **Brå**: svensk kriminalstatistik.
+- **World Bank**: bred global utvecklings- och makrostatistik.
+- **OECD**: harmoniserade jämförelser mellan OECD-länder.
+- **WHO**: global hälsostatistik.
+- **BIS**: internationell bank-, kredit-, bostadspris- och finansstatistik.
+- **ECB**: euroområdets monetära och finansiella statistik.
 
 ## SCB PxWebApi v2
 Bas-URL: `https://statistikdatabasen.scb.se/api/v2`.
