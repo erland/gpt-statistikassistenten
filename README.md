@@ -8,6 +8,11 @@ Statistikassistenten är ett GPT-projekt för verifierbara frågor mot officiell
 - Eurostat
 - Eurostat Comext
 - Brå, initialt statistik över anmälda brott
+- Kolada API v3
+- Socialstyrelsens Statistikdatabas
+- Folkhälsomyndighetens Folkhälsodata
+- Arbetsförmedlingen JobSearch
+- Sveriges Riksbank SWEA
 
 ## Viktig princip
 
@@ -32,6 +37,11 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 - Eurostat SDMX 3.0: dataflow-katalog, strukturmetadata och verifierade komponentfilter.
 - Eurostat Comext: verifierad handelsplan för rapportör, partner, flöde, produkt, period och indikator.
 - Brå: verifierad adapter/fallback för statistik över anmälda brott.
+- Kolada: kommun-/regionnyckeltal med metadata och källproveniens.
+- Socialstyrelsen: ämnes-/dimensionsstyrda uttag från Statistikdatabasen.
+- Folkhälsodata: PxWeb-baserade folkhälsoindikatorer.
+- Arbetsförmedlingen: platsannonsbaserad efterfrågan via JobSearch.
+- Riksbanken: räntor och växelkurser via SWEA.
 - Källval/frågeplanering för enkla och kombinerade statistikfrågor.
 - Deterministiska beräkningar för förändring, andel, index och per-capita.
 - Säkerhets- och kvalitetsgates som blockerar ofullständig provenance, felaktiga maskerade värden, otillräckligt verifierade beräkningar och obelagda kausala slutsatser.
@@ -39,7 +49,7 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 
 ## CI och release
 
-- `.github/workflows/ci.yml` kör lint, robusthetskontroll, 58 regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
+- `.github/workflows/ci.yml` kör lint, robusthetskontroll, 64 regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
 - `.github/workflows/release.yml` triggas när en GitHub Release publiceras. Taggar som `v1.0.0` eller `v1.0.0-rc1` styr versionsnumret i artefakterna.
 - Release-workflow bifogar alla ZIP-filer, `SHA256SUMS.txt` och `DELIVERY-MANIFEST.json` till releasen.
 - Custom GPT:s tre OpenAPI Actions ligger canonical i `runtime-assets/custom-gpt/actions/` och följer därför med deterministiskt i varje releasebygge.
