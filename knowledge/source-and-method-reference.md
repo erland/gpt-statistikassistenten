@@ -46,3 +46,19 @@ Publikt JobSearch-API för platsannonser. Använd endast som indikator på annon
 
 ## Sveriges Riksbank SWEA
 Bas-URL: `https://api.riksbank.se/swea/v1`. Använd `/Series` eller `/Groups` för att verifiera serie-ID och metadata, därefter `/Observations/...`. Källan ska anges. Växelkurser är indikativa och avsedda för information, inte som garanterade transaktionskurser.
+
+
+## Energimyndigheten
+Statistikdatabasen är PxWeb-baserad och nås via `https://pxexternal.energimyndigheten.se/api/v1/sv/Energimyndighetens_statistikdatabas`. Verifiera tabell, dimensioner och enhet innan POST-uttag. Energimyndigheten kräver källangivelse för publicerad statistik; bearbetade resultat ska beskrivas som bearbetad statistik från myndigheten.
+
+## Försäkringskassan
+Öppen officiell statistik publiceras som maskinläsbara distributioner med metadata under `https://www.forsakringskassan.se/api/sprstatistikrapportera/public/v1`. Börja med `/{dataset-id}/meta/json` och följ endast officiella distributionslänkar som metadata anger. Skilj ersättningsmottagare, belopp, nettodagar och sjukfall enligt datasetets definition.
+
+## Jordbruksverket
+Statistikdatabasen är PxWeb-baserad. Verifiera tabell, variabler, geografi, period och sekretessmarkeringar före analys. Databasen omfattar bland annat arealer, skörd, djur, ekologisk produktion, jordbruksekonomi, priser och livsmedelskonsumtion.
+
+## Skolverket
+Använd öppna REST-API:er för skolenheter, utbildningar och statistik. Planned educations version 3 använder headern `Accept: application/vnd.skolverket.plannededucations.api.v3.hal+json`. Kontrollera aktuell Swagger eftersom versioner kan ändras och skilj registerdata från statistiska mått.
+
+## SMHI Open Data MetObs
+Bas för meteorologiska observationer: `https://opendata-download-metobs.smhi.se/api/version/latest`. Verifiera parameter-ID, station-ID, period, enhet och kvalitetsinformation innan data används. Historiska corrected-archive-uttag kan vara stora och ska hämtas sparsamt.
