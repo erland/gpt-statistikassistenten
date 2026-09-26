@@ -1,0 +1,23 @@
+openapi: 3.1.0
+info:
+  title: Försäkringskassan öppna statistikmetadata
+  version: 1.0.0
+  description: Nyckelfri metadataåtkomst till Försäkringskassans publika statistik-API. Följ endast distributionslänkar som metadata anger.
+servers:
+  - url: https://www.forsakringskassan.se/api/sprstatistikrapportera/public/v1
+paths:
+  /{datasetId}/meta/json:
+    get:
+      operationId: getForsakringskassanDatasetMetadata
+      summary: Hämta metadata för ett verifierat dataset-ID
+      parameters:
+        - name: datasetId
+          in: path
+          required: true
+          schema: {type: string, pattern: '^[a-z0-9-]+$'}
+      responses:
+        '200':
+          description: Datasetmetadata och distributioner
+          content:
+            application/json:
+              schema: {type: object, additionalProperties: true}
