@@ -109,9 +109,13 @@ SMHI_TERMS = {
     "lufttemperatur", "vindhastighet", "molnmängd", "klimatobservation"
 }
 WORLDBANK_TERMS = {
-    "världsbanken", "world bank", "fattigdom", "extrem fattigdom",
+    "världsbanken", "world bank", "extrem fattigdom", "global fattigdom",
     "utvecklingsindikator", "world development indicators", "globalt bnp",
     "global befolkning", "länder i världen"
+}
+GLOBAL_GEOGRAPHY_TERMS = {
+    "kina", "indien", "brasilien", "sydafrika", "latinamerika", "latinamerika",
+    "afrika söder om sahara", "subsahariska afrika", "världen", "globalt"
 }
 OECD_TERMS = {
     "oecd", "oecd-länder", "oecd-länderna", "oecd-genomsnitt",
@@ -119,11 +123,12 @@ OECD_TERMS = {
 }
 WHO_TERMS = {
     "who", "världshälsoorganisationen", "global hälsa", "global hälsostatistik",
-    "barnadödlighet", "mödradödlighet", "förväntad livslängd globalt"
+    "global barnadödlighet", "barnadödlighet i världen", "global mödradödlighet",
+    "förväntad livslängd globalt"
 }
 BIS_TERMS = {
     "bis", "bank for international settlements", "internationella regleringsbanken",
-    "hushållens skuldsättning internationellt", "reala bostadspriser",
+    "hushållens skuldsättning internationellt", "reala bostadspriser internationellt",
     "effektiv växelkurs", "internationell bankstatistik"
 }
 ECB_TERMS = {
@@ -175,6 +180,8 @@ def _signals(question: str) -> list[Signal]:
         out.append(Signal("smhi", 7, "Frågan gäller meteorologiska observationer eller klimatdata från SMHI."))
     if _contains_any(q, WORLDBANK_TERMS):
         out.append(Signal("worldbank", 7, "Frågan gäller globala utvecklingsindikatorer eller World Bank-data."))
+    elif _contains_any(q, GLOBAL_GEOGRAPHY_TERMS):
+        out.append(Signal("worldbank", 5, "Frågan har tydlig global eller utomeuropeisk geografi där World Bank är en bred förstakälla."))
     if _contains_any(q, OECD_TERMS):
         out.append(Signal("oecd", 7, "Frågan gäller harmoniserad statistik för OECD-länder."))
     if _contains_any(q, WHO_TERMS):
