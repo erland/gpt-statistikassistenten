@@ -51,6 +51,9 @@ completed_steps:
 - id: step-16
   title: Utökat källstöd för svenska öppna data
   result: passed
+- id: step-17
+  title: Energi, socialförsäkring, jordbruk, utbildning och meteorologiska data
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -75,5 +78,5 @@ project_hygiene:
 blocking_issues: []
 next_step:
   recommended: review-and-merge
-  title: Granska och merge:a utökat källstöd
-  reason: Fem nya källor är implementerade och validerade med 64 regressionstester och distributionsvalidering.
+  title: Granska och merge:a ytterligare källstöd
+  reason: Fem nya källor är implementerade och GitHub Actions verifierar 70 passerade regressionstester, lint, modellrobusthet, hygiene och distributioner.
