@@ -28,6 +28,11 @@ SOURCE_ADAPTER = {
     "eurostat": "scripts/eurostat_adapter.py",
     "comext": "scripts/comext_adapter.py",
     "bra": "scripts/bra_adapter.py",
+    "kolada": "scripts/kolada_adapter.py",
+    "socialstyrelsen": "scripts/socialstyrelsen_adapter.py",
+    "folkhalsodata": "scripts/folkhalsodata_adapter.py",
+    "arbetsformedlingen": "scripts/arbetsformedlingen_adapter.py",
+    "riksbank": "scripts/riksbank_adapter.py",
 }
 
 # Deliberately narrow, high-signal concepts. Broader language is handled by
@@ -50,6 +55,28 @@ SCB_TERMS = {
     "bnp", "kpi", "inflation", "inkomst", "kommun", "län", "sverige",
     "företag", "födda", "döda"
 }
+
+KOLADA_TERMS = {
+    "kolada", "nyckeltal", "kommunens kostnad", "kostnad per elev", "äldreomsorg",
+    "hemtjänst", "lss", "kommunal verksamhet", "kommunjämförelse", "regionnyckeltal"
+}
+SOCIALSTYRELSEN_TERMS = {
+    "socialstyrelsen", "dödsorsak", "dödsorsaker", "läkemedel", "patientregistret",
+    "slutenvård", "öppenvård", "ekonomiskt bistånd", "socialtjänst", "cancer", "förlossning"
+}
+FOLKHALSODATA_TERMS = {
+    "folkhälsa", "folkhälsodata", "folkhälsomyndigheten", "vaccination", "vaccinationer",
+    "smittsam", "smittsamma", "antibiotika", "levnadsvanor", "riskkonsumtion", "psykiskt välbefinnande"
+}
+ARBETSMARKNAD_TERMS = {
+    "platsannonser", "platsannons", "lediga jobb", "jobbannonser", "efterfrågade kompetenser",
+    "efterfrågade yrken", "arbetsförmedlingen", "jobsearch"
+}
+RIKSBANK_TERMS = {
+    "riksbanken", "styrränta", "referensränta", "växelkurs", "valutakurs", "swea",
+    "swestr", "kronkurs", "sek mot", "ränta och valut"
+}
+
 PER_CAPITA_TERMS = {
     "per 100 000", "per 100000", "per capita", "per invånare", "per tusen"
 }
@@ -72,6 +99,16 @@ def _signals(question: str) -> list[Signal]:
         out.append(Signal("comext", 6, "Frågan gäller import/export eller detaljerad varuhandel."))
     if _contains_any(q, EUROSTAT_TERMS):
         out.append(Signal("eurostat", 4, "Frågan efterfrågar EU- eller landsjämförelse."))
+    if _contains_any(q, KOLADA_TERMS):
+        out.append(Signal("kolada", 7, "Frågan gäller kommun-/regionnyckeltal eller kommunal verksamhet som Kolada samlar."))
+    if _contains_any(q, SOCIALSTYRELSEN_TERMS) and not _contains_any(q, COMEXT_TERMS):
+        out.append(Signal("socialstyrelsen", 7, "Frågan gäller hälso-, vård- eller socialtjänststatistik från Socialstyrelsen."))
+    if _contains_any(q, FOLKHALSODATA_TERMS):
+        out.append(Signal("folkhalsodata", 7, "Frågan gäller folkhälsoindikatorer eller Folkhälsomyndighetens statistik."))
+    if _contains_any(q, ARBETSMARKNAD_TERMS):
+        out.append(Signal("arbetsformedlingen", 7, "Frågan gäller platsannonser eller aktuell efterfrågan på yrken/kompetenser."))
+    if _contains_any(q, RIKSBANK_TERMS):
+        out.append(Signal("riksbank", 7, "Frågan gäller Riksbankens räntor, växelkurser eller finansiella tidsserier."))
     if _contains_any(q, SCB_TERMS):
         out.append(Signal("scb", 3, "Frågan innehåller svensk samhällsstatistik eller svensk geografi."))
     return out
@@ -169,7 +206,8 @@ def plan_sources(question: str) -> dict:
     if has_eu and has_scb and not explicit_sweden and not explicit_eu:
         ambiguities.append("Både svensk och europeisk statistik kan vara relevant, men geografin är inte tydlig.")
 
-    selected = sorted(set(selected), key=lambda s: ("bra", "comext", "scb", "eurostat").index(s))
+    order = ("bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "comext", "scb", "eurostat")
+    selected = sorted(set(selected), key=lambda s: order.index(s))
     steps = []
     for idx, source in enumerate(selected, start=1):
         purpose = {
@@ -177,6 +215,11 @@ def plan_sources(question: str) -> dict:
             "eurostat": "Sök och verifiera generell EU-statistik via Eurostat SDMX.",
             "comext": "Sök och verifiera detaljerad varuhandel via Eurostat/Comext.",
             "bra": "Sök och verifiera Brå-statistik över anmälda brott via officiell tjänst eller fil.",
+            "kolada": "Sök och verifiera kommun-/regionnyckeltal via Kolada API v3, inklusive metadata och ursprunglig källa.",
+            "socialstyrelsen": "Sök och verifiera vård-/socialtjänststatistik via Socialstyrelsens Statistikdatabas API.",
+            "folkhalsodata": "Sök och verifiera folkhälsoindikatorer via Folkhälsodata/PxWeb API.",
+            "arbetsformedlingen": "Sök verifierade platsannonser via Arbetsförmedlingens publika JobSearch API och skilj efterfrågedata från arbetslöshetsstatistik.",
+            "riksbank": "Sök och verifiera räntor, växelkurser och andra Riksbanksserier via SWEA API.",
         }[source]
         step = {
             "id": f"source-{idx}-{source}",
