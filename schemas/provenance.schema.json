@@ -15,6 +15,18 @@
         "dataset_title": {"type": "string", "minLength": 1},
         "url": {"type": "string"},
         "license": {"type": "string"},
+        "quality_assurance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_tier", "integration_status", "registry_quality_assured", "verified_for_this_answer"],
+          "properties": {
+            "source_tier": {"enum": ["A", "B", "C", "D"]},
+            "integration_status": {"enum": ["integrated", "catalog_only", "external"]},
+            "registry_quality_assured": {"type": "boolean"},
+            "verified_for_this_answer": {"type": "boolean"},
+            "disclosure": {"type": "string"}
+          }
+        },
         "source_identifiers": {
           "description": "Opaque provider-specific identifiers. They may be used for retrieval/provenance, never as analysis dimensions.",
           "type": "object",

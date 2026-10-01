@@ -11,6 +11,7 @@ from pathlib import Path
 ALLOW = {
   'source_planner': {'plan_sources'},
   'adaptive_source_planner': {'registry_summary','source_capability','finalize_plan'},
+  'external_source_validator': {'assessment_requirements','assess_candidate','disclosure_text'},
   'scb_adapter': {'search_url','metadata_url','validate_selection','estimate_cells','post_request_plan'},
   'eurostat_adapter': {'dataflow_catalog_url','structure_url','validate_filters','data_request_plan'},
   'comext_adapter': {'dataflow_catalog_url','structure_url','validate_role_map','trade_request_plan'},

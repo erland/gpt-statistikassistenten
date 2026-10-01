@@ -317,6 +317,15 @@ tools:
     mutates_workspace: false
     working_directory: workspace
     runtime_fallback: degrade
+  - id: external-source-validator
+    type: script
+    requirement: recommended
+    purpose: Verifiera externa tier B/C-källor och skapa obligatorisk disclosure innan de används.
+    script: scripts/external_source_validator.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
   - id: scb-adapter
     type: script
     requirement: recommended
