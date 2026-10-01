@@ -246,6 +246,11 @@ def _trade_conflict(question: str, sources: list[str]) -> tuple[list[str], list[
         if not non_trade_eu:
             result.remove("eurostat")
             conflicts.append("Detaljerad varuhandel routas till Comext i stället för generella Eurostat-adaptern.")
+    if "comext" in result and "worldbank" in result:
+        non_trade_global = any(term in q for term in ("befolkning", "bnp", "fattigdom", "arbetslös", "inkomst"))
+        if not non_trade_global:
+            result.remove("worldbank")
+            conflicts.append("Global geografi kräver inte World Bank när frågan gäller detaljerad varuhandel via Comext.")
     return result, conflicts
 
 
