@@ -83,7 +83,7 @@ completed_steps:
   result: passed
 - id: step-25c
   title: Planner v2 och adaptivt planeringsläge
-  result: in_progress
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -107,6 +107,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: validate-source-query-planner-v2
-  title: Validera planner v2 och adaptivt planeringsläge
-  reason: V2-finalizer, source-registry-kontroller och direct/review-logik är implementerade; full regression och distribution måste passera innan steget markeras klart.
+  recommended: review-and-merge
+  title: Granska och merge:a adaptiv källplanering
+  reason: Source Query Plan v2 och adaptiv planner är implementerade och validerade med 136 tester, ren hygiene och distributionsvalidering.
