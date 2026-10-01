@@ -81,6 +81,9 @@ completed_steps:
 - id: step-25b
   title: Ny fråge- och källplanmodell
   result: passed
+- id: step-25c
+  title: Planner v2 och adaptivt planeringsläge
+  result: in_progress
 validation:
   last_result: passed
   checks:
@@ -104,6 +107,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: implement-source-query-planner-v2
-  title: Implementera planner v2 och adaptivt planeringsläge
-  reason: V2-kontraktet är validerat; nästa steg är att producera planerna från source registry och växla mellan direktläge och användargranskning utan att förlora befintliga guardrails.
+  recommended: validate-source-query-planner-v2
+  title: Validera planner v2 och adaptivt planeringsläge
+  reason: V2-finalizer, source-registry-kontroller och direct/review-logik är implementerade; full regression och distribution måste passera innan steget markeras klart.
