@@ -16,6 +16,15 @@ De ursprungliga utvecklingsstegen och tidigare källutbyggnader är genomförda.
 
 Avloppsmätningar, beslag, brottsstatistik och vårdutfall mäter olika fenomen. Avloppsdata får inte beskrivas som antal användare/prevalens och beslag får inte beskrivas som konsumtion eller marknadsstorlek.
 
+## Validering
+
+- 80 regressionstester passerar.
+- Projektlint: 0 fel, 0 varningar.
+- Modellrobusthet: PASS.
+- Final hygiene: PASS.
+- Distribution validation: PASS.
+- Custom GPT-paketet innehåller EUDA Action.
+
 ## Nästa rekommenderade steg
 
-Kör full CI/distributionsvalidering. Därefter görs en separat lämplighetsanalys av möjlig utökning av Brå och RMV innan någon sådan implementation påbörjas.
+Granska och merge:a PR #5. Därefter är nästa lämpliga implementation en avgränsad utökning av Brå för lagförda narkotikabrott och narkotikapreparat. RMV bör tills vidare vara en kompletterande toxikologisk källa och inte en full primär runtime-adapter.
