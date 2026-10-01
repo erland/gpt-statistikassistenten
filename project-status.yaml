@@ -66,6 +66,9 @@ completed_steps:
 - id: step-21
   title: Bredda Brå till flera rättsstatistikprodukter
   result: passed
+- id: step-22
+  title: Förbättra SCB-stöd för svensk handel och e-handel
+  result: in_progress
 validation:
   last_result: passed
   checks:
@@ -89,6 +92,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: review-and-merge
-  title: Granska och merge:a bred Brå-integration
-  reason: Fem officiella Brå-produktfamiljer stöds med produktbaserad metadata/urvalsplanering och full CI passerar med 92 tester.
+  recommended: validate-scb-trade
+  title: Validera SCB-routing för handel och e-handel
+  reason: Den generella SCB-adaptern återanvänds; förbättringen ligger i domänrouting, metodguardrails och tester.
