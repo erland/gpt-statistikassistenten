@@ -78,6 +78,9 @@ completed_steps:
 - id: step-25a
   title: Källinventering och source registry
   result: passed
+- id: step-25b
+  title: Ny fråge- och källplanmodell
+  result: in_progress
 validation:
   last_result: passed
   checks:
@@ -101,6 +104,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: design-source-query-plan-v2
-  title: Definiera ny fråge- och källplanmodell
-  reason: Source registry är validerat för samtliga 23 integrerade källor; nästa steg är att modellera informationsbehov, källroller, risker och planeringsläge innan runtime ändras.
+  recommended: validate-source-query-plan-v2
+  title: Validera ny fråge- och källplanmodell
+  reason: V2-schema, designregler och exempel finns för direktläge, flerkällsgranskning och extern fallback utan att runtime ändrats.
