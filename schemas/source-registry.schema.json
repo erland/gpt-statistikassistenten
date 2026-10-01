@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://statistikassistenten.local/schemas/source-registry.schema.json",
+  "title": "Source Capability Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["registry_version", "purpose", "source_tiers", "planning_principles", "sources", "external_fallback"],
+  "properties": {
+    "registry_version": {"type": "integer", "minimum": 1},
+    "purpose": {"type": "string", "minLength": 1},
+    "source_tiers": {
+      "type": "object",
+      "required": ["A", "B", "C", "D"],
+      "additionalProperties": {"type": "string"}
+    },
+    "planning_principles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "sources": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name", "producer_role", "tier", "catalog_scope", "integrated_scope",
+          "geographies", "frequencies", "primary_for", "secondary_for",
+          "limitations", "evidence"
+        ],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "producer_role": {"type": "string", "minLength": 1},
+          "tier": {"enum": ["A", "B", "C", "D"]},
+          "catalog_scope": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "integrated_scope": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "geographies": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "frequencies": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "primary_for": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "secondary_for": {"type": "array", "items": {"type": "string"}},
+          "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "format": "uri"}
+          }
+        }
+      }
+    },
+    "external_fallback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["trigger", "search_order", "requirements", "response_disclosure"],
+      "properties": {
+        "trigger": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "search_order": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "requirements": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "response_disclosure": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
