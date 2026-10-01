@@ -2,19 +2,27 @@
 
 ## Lägesbild
 
-Tidigare källutbyggnader är genomförda. Steg 20 generaliserar Tullverket från narkotikabeslag till hela den publika beslagsstatistiken för restriktionsvaror.
+Tidigare källutbyggnader är genomförda. Steg 21 breddar Brå från enbart anmälda brott till flera officiella produkter i rättskedjan.
 
-## Genomförd justering
+## Genomförd Brå-utbyggnad
 
-- Tullverket-adaptern har inte längre Narkotika som implicit standardvarutyp.
-- Källplaneraren routar tydliga frågor om alkohol-, tobaks-, läkemedels-/dopnings-, vapen- och sprängämnesbeslag till Tullverket.
-- Aktuell varutyp/varuslag verifieras fortsatt i källan före uttag.
-- Officiell CSV-export används fortsatt; inget odokumenterat internt API införs.
-- Metodregeln gäller alla beslagstyper: beslag är operativa utfall och inte direkta mått på bakomliggande konsumtion, prevalens, tillgång eller marknadsstorlek.
+- Anmälda brott.
+- Handlagda brott.
+- Misstänkta personer.
+- Handlagda brottsmisstankar.
+- Personer lagförda för brott.
+- Narkotikabrott/preparat hanteras som dimensioner i generella Brå-produkter när de publiceras, inte som separat specialintegration.
+- Ingen generell Brå-API-endpoint antas; officiell tjänst, tabell eller publicerad fil verifieras per produkt.
+- OpenCode-adaptern stöder produktupptäckt, produktmetadata och validerade urvalsplaner.
+- Befintlig adapter för anmälda brott är bakåtkompatibel.
+
+## Metodprincip
+
+Personer, brott, brottsmisstankar och lagföringsbeslut är olika observationsenheter. Statistikassistenten väljer rätt produkt före datauttag och blandar dem inte utan METHOD-GATE.
 
 ## Validering
 
-- 82 regressionstester passerar.
+- 92 regressionstester passerar.
 - Projektlint: 0 fel, 0 varningar.
 - Modellrobusthet: PASS.
 - Final hygiene: PASS.
@@ -22,4 +30,4 @@ Tidigare källutbyggnader är genomförda. Steg 20 generaliserar Tullverket frå
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #6. Därefter kan arbetet fortsätta med den tidigare analyserade, avgränsade Brå-utökningen för lagförda narkotikabrott och preparat.
+Granska och merge:a PR #7.

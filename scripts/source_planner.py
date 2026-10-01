@@ -51,8 +51,13 @@ SOURCE_ADAPTER = {
 # fallback rules or surfaced as ambiguity rather than overconfident routing.
 BRA_TERMS = {
     "anmälda brott", "anmälda brotten", "brottsanmälningar", "brottskod",
+    "handlagda brott", "personuppklaringsprocent", "lagföringsprocent",
+    "misstänkta personer", "misstänkt för", "misstänkta för",
+    "handlagda brottsmisstankar", "brottsmisstankar",
+    "lagförda personer", "lagförda för", "lagföringsbeslut", "påföljd",
+    "strafföreläggande", "åtalsunderlåtelse",
     "misshandel", "bilstöld", "bilstölder", "inbrott", "narkotikabrott",
-    "rån", "stöld", "stölder"
+    "rån", "stöld", "stölder", "trafikbrott", "bedrägeribrott", "skadegörelsebrott"
 }
 COMEXT_TERMS = {
     "import", "export", "utrikeshandel", "handelsvärde", "varukod",
@@ -167,7 +172,7 @@ def _signals(question: str) -> list[Signal]:
     q = _norm(question)
     out: list[Signal] = []
     if _contains_any(q, BRA_TERMS):
-        out.append(Signal("bra", 6, "Frågan innehåller ett tydligt brottsstatistiskt begrepp."))
+        out.append(Signal("bra", 7, "Frågan gäller Brås kriminal- eller rättsväsandestatistik."))
     if _contains_any(q, COMEXT_TERMS):
         out.append(Signal("comext", 6, "Frågan gäller import/export eller detaljerad varuhandel."))
     if _contains_any(q, EUROSTAT_TERMS):
@@ -313,7 +318,7 @@ def plan_sources(question: str) -> dict:
             "scb": "Sök och verifiera svensk officiell statistik via SCB innan datauttag.",
             "eurostat": "Sök och verifiera generell EU-statistik via Eurostat SDMX.",
             "comext": "Sök och verifiera detaljerad varuhandel via Eurostat/Comext.",
-            "bra": "Sök och verifiera Brå-statistik över anmälda brott via officiell tjänst eller fil.",
+            "bra": "Välj och verifiera rätt Brå-produkt: anmälda brott, handlagda brott, misstänkta personer, handlagda brottsmisstankar eller personer lagförda för brott.",
             "kolada": "Sök och verifiera kommun-/regionnyckeltal via Kolada API v3, inklusive metadata och ursprunglig källa.",
             "socialstyrelsen": "Sök och verifiera vård-/socialtjänststatistik via Socialstyrelsens Statistikdatabas API.",
             "folkhalsodata": "Sök och verifiera folkhälsoindikatorer via Folkhälsodata/PxWeb API.",

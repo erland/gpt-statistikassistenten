@@ -26,7 +26,16 @@ Bas-URL: `https://ec.europa.eu/eurostat/api/comext/dissemination/sdmx/3.0`.
 Verifiera alltid faktisk struktur. Semantiska roller måste kunna mappas till datasetets dimensioner: rapportör, partner, flöde, produkt, tid och indikator. Hämta aldrig ett helt stort Comext-dataset när frågan kan filtreras.
 
 ## Brå
-Brå saknar i version 1 ett antaget generellt publikt API i assistenten. Använd officiell statistiktjänst eller publicerade tabeller/filer och verifiera produkt, brottstyp, geografi, period, enhet och preliminär/slutlig status. Anmälda brott är inte samma sak som faktisk brottslighet.
+Brå är statistikansvarig myndighet för officiell statistik inom rättsväsendet. Statistikassistenten antar inget generellt publikt API utan använder officiell statistiktjänst, webbtabelldata eller publicerade filer per produkt.
+
+Stödda produktfamiljer:
+- **Anmälda brott** – registrerade brottsanmälningar.
+- **Handlagda brott** – avslutade brottsärenden, inklusive personuppklaring och lagföringsprocent.
+- **Misstänkta personer** – straffmyndiga personer registrerade som minst skäligen misstänkta.
+- **Handlagda brottsmisstankar** – avslutade brottsmisstankar; observationsenheten är misstanke.
+- **Personer lagförda för brott** – domslut, strafförelägganden och åtalsunderlåtelser; publicerade dimensioner kan omfatta brottstyp, påföljd och för narkotikabrott preparat.
+
+Verifiera alltid produkt, tabell, brottstyp, geografi, period, mått/enhet, relevanta persondimensioner och preliminär/slutlig status. Produkterna beskriver olika steg i rättskedjan och får inte jämställas eller summeras utan METHOD-GATE.
 
 ## Kombinerade mått
 - Per capita: samma geografi och period i täljare och nämnare.

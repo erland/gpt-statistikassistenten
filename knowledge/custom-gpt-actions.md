@@ -17,7 +17,7 @@ Distributionen innehåller fjorton OpenAPI-underlag i `builder/actions/`:
 13. `ecb-openapi.yaml` – ECB Data Portal SDMX.
 14. `euda-openapi.yaml` – EUDA/SCORE:s verifierade 2026-CSV för avloppsdata och platsmetadata.
 
-Dessa grundanrop kräver ingen personlig API-nyckel eller inloggning. Lägg dem som separata Actions i GPT Builder. Folkhälsodata, Energimyndigheten och Jordbruksverket använder hierarkiska PxWeb-vägar, och Skolverkets statistik-API har versionsstyrda/dynamiska resurser; använd därför verifierad officiell webb/API-åtkomst när en säker generell Action inte kan uttryckas. WHO använder aktuell World Health Data Hub-export/API i stället för det utfasade äldre GHO OData-kontraktet. Tullverket använder officiell webb/CSV-export eftersom ett stabilt generellt API inte är dokumenterat. Brå hanteras fortsatt via officiell statistiktjänst eller publicerade filer/webbsidor.
+Dessa grundanrop kräver ingen personlig API-nyckel eller inloggning. Lägg dem som separata Actions i GPT Builder. Folkhälsodata, Energimyndigheten och Jordbruksverket använder hierarkiska PxWeb-vägar, och Skolverkets statistik-API har versionsstyrda/dynamiska resurser; använd därför verifierad officiell webb/API-åtkomst när en säker generell Action inte kan uttryckas. WHO använder aktuell World Health Data Hub-export/API i stället för det utfasade äldre GHO OData-kontraktet. Tullverket använder officiell webb/CSV-export eftersom ett stabilt generellt API inte är dokumenterat. Brå hanteras fortsatt via officiell statistiktjänst eller publicerade tabeller/filer per produkt; ingen generell Brå-Action antas.
 
 ### Säker användning
 - Använd Action först efter källval.
