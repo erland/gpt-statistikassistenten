@@ -28,6 +28,7 @@ OPS = {
  'euda-adapter': ('euda_adapter',['wastewater_metadata_url','wastewater_source_url','validate_official_data_url','wastewater_plan']),
  'tullverket-adapter': ('tullverket_adapter',['statistics_url','seizure_plan']),
  'statskontoret-adapter': ('statskontoret_adapter',['available_products','discovery_url','validate_distribution_url','data_plan']),
+ 'svk-adapter': ('svk_adapter',['consumption_types_url','production_types_url','network_areas_url','statistics_url','query_plan']),
  'calculation-engine': ('calculation_engine',['absolute_change','percent_change','index_series','per_capita','share']),
  'presentation-export': ('presentation_export',['from_statistical_result','from_calculation_result','to_markdown','to_csv']),
  'quality-gate': ('quality_gate',['validate_statistical_result','validate_calculation_result','validate_presentation','run_quality_gate']),
