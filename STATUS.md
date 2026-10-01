@@ -23,6 +23,15 @@ Steg 25A och 25B är genomförda. Pågående steg 25C implementerar Source Query
 
 Nya runtime-tester täcker bland annat direktläge, metodrisk, säker flerkällskombination, catalog-only, extern fallback, confidence, clarification och felaktig extern tier A.
 
+## Validering
+
+- 136 regressionstester passerar.
+- Projektlint: 0 fel, 0 varningar.
+- Modellrobusthet: PASS.
+- Final hygiene: PASS.
+- Distribution validation: PASS.
+- OpenCode-build och verktygspaketering: PASS.
+
 ## Nästa rekommenderade steg
 
-Kör full CI. Efter grön validering kan 25C markeras klar på PR #12. Extern webbsökning/exekvering av fallback hålls separat från denna plannerimplementation.
+Granska och merge:a PR #12. Extern webbsökning/exekvering av fallback hålls som ett separat nästa steg efter merge.
