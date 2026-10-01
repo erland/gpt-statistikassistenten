@@ -187,17 +187,9 @@ def _review_reasons(plan: dict[str, Any]) -> list[str]:
     if combination.get("required") and combination.get("risks"):
         reasons.append("Källkombinationen har metodrisker som bör granskas.")
 
-    if combination.get("transformations"):
-        reasons.append("Data behöver transformeras eller aggregeras före kombination.")
-
-    primary_sources = {
-        role["source_id"]
-        for role in roles
-        if role["role"] == "primary"
-    }
-    if combination.get("required") and len(primary_sources) > 1:
-        reasons.append("Flera primärkällor måste kombineras.")
-
+    # Multiple sources or simple deterministic transformations are not by
+    # themselves review-worthy. METHOD-GATE still applies, and the semantic
+    # planner should record a risk when the combination affects interpretation.
     if plan.get("decision", {}).get("confidence") in {"medium", "low"}:
         reasons.append("Planens confidence är inte high.")
 
