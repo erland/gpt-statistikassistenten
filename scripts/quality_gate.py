@@ -33,6 +33,17 @@ def validate_statistical_result(result: Dict[str, Any]) -> List[Dict[str, str]]:
         issues.append(_issue("missing_dataset_title", "blocker", "Dataset/statistikprodukt saknas i provenance."))
     if retrieval.get("metadata_verified") is not True:
         issues.append(_issue("metadata_not_verified", "blocker", "Metadata måste vara verifierad före färdigt statistiksvar."))
+
+    assurance = source.get("quality_assurance")
+    if assurance and assurance.get("integration_status") == "external":
+        if assurance.get("source_tier") not in {"B", "C"}:
+            issues.append(_issue("external_source_tier_invalid", "blocker", "Extern källa måste vara verifierad tier B eller C."))
+        if assurance.get("verified_for_this_answer") is not True:
+            issues.append(_issue("external_source_not_verified", "blocker", "Extern källa måste vara verifierad för det aktuella svaret."))
+        if assurance.get("registry_quality_assured") is not False:
+            issues.append(_issue("external_source_registry_status_invalid", "blocker", "Extern källa får inte märkas som permanent kvalitetssäkrad."))
+        if not str(assurance.get("disclosure", "")).strip():
+            issues.append(_issue("external_source_disclosure_missing", "blocker", "Extern källa måste ha tydlig disclosure i provenance."))
     if not retrieval.get("retrieved_at"):
         issues.append(_issue("missing_retrieval_time", "blocker", "Tidpunkt för hämtning saknas."))
 
