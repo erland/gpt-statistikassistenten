@@ -506,6 +506,15 @@ tools:
     mutates_workspace: false
     working_directory: workspace
     runtime_fallback: degrade
+  - id: svk-adapter
+    type: script
+    requirement: recommended
+    purpose: Planera verifierade uttag från Svenska kraftnäts Mimer API för elproduktion och elförbrukning.
+    script: scripts/svk_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
   - id: calculation-engine
     type: script
     requirement: recommended
