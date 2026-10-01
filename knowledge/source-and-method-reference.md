@@ -75,6 +75,12 @@ Publikt JobSearch-API för platsannonser. Använd endast som indikator på annon
 Bas-URL: `https://api.riksbank.se/swea/v1`. Använd `/Series` eller `/Groups` för att verifiera serie-ID och metadata, därefter `/Observations/...`. Källan ska anges. Växelkurser är indikativa och avsedda för information, inte som garanterade transaktionskurser.
 
 
+## Elpris och fysisk elstatistik
+- **SCB** används för kundpris: elhandelspris efter avtalstyp/elområde/kundkategori, elnätspris, elavtal och publicerade totalpriser. Elhandelspris kan vara exklusive skatt, moms och nätavgift; verifiera alltid tabellens enhet/komponenter.
+- **Svenska kraftnät Mimer** används för fysisk elproduktion och elförbrukning efter verifierad produkt-/förbrukningstyp, period och elområde/nätområde. Bevara Actual och Planned separat när båda finns.
+- **Energimyndigheten** används fortsatt för bredare energi- och elanvändningsstatistik på aggregerad nivå.
+- Kundpris, Nord Pool spotpris och fysisk elförbrukning är olika mått. Nuvarande integration omfattar inte Nord Pool spotpris.
+
 ## Energimyndigheten
 Statistikdatabasen är PxWeb-baserad och nås via `https://pxexternal.energimyndigheten.se/api/v1/sv/Energimyndighetens_statistikdatabas`. Verifiera tabell, dimensioner och enhet innan POST-uttag. Energimyndigheten kräver källangivelse för publicerad statistik; bearbetade resultat ska beskrivas som bearbetad statistik från myndigheten.
 
