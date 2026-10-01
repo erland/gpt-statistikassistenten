@@ -84,6 +84,9 @@ completed_steps:
 - id: step-25c
   title: Planner v2 och adaptivt planeringsläge
   result: passed
+- id: step-25d
+  title: Extern källfallback
+  result: in_progress
 validation:
   last_result: passed
   checks:
@@ -107,6 +110,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: review-and-merge
-  title: Granska och merge:a adaptiv källplanering
-  reason: Source Query Plan v2 och adaptiv planner är implementerade och validerade med 136 tester, ren hygiene och distributionsvalidering.
+  recommended: validate-external-source-fallback
+  title: Validera extern källfallback
+  reason: Extern source assessment, tier B/C-regler, provenance-disclosure och quality-gate-kontroller är implementerade och behöver full regression/distributionsvalidering.
