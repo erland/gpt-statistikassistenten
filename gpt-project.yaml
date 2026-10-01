@@ -479,6 +479,24 @@ tools:
     mutates_workspace: false
     working_directory: workspace
     runtime_fallback: degrade
+  - id: euda-adapter
+    type: script
+    requirement: recommended
+    purpose: Planera verifierade EUDA/SCORE-uttag för öppna narkotikadata och avloppsmätningar.
+    script: scripts/euda_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: tullverket-adapter
+    type: script
+    requirement: recommended
+    purpose: Planera verifierade uttag från Tullverkets publika beslagsstatistik och CSV-export.
+    script: scripts/tullverket_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
   - id: calculation-engine
     type: script
     requirement: recommended

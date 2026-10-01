@@ -43,6 +43,8 @@ SOURCE_ADAPTER = {
     "who": "scripts/who_adapter.py",
     "bis": "scripts/bis_adapter.py",
     "ecb": "scripts/ecb_adapter.py",
+    "euda": "scripts/euda_adapter.py",
+    "tullverket": "scripts/tullverket_adapter.py",
 }
 
 # Deliberately narrow, high-signal concepts. Broader language is handled by
@@ -135,6 +137,15 @@ ECB_TERMS = {
     "ecb", "europeiska centralbanken", "euroområdet", "euro area",
     "ecb ränta", "ecb-ränta", "monetära aggregat euro"
 }
+EUDA_TERMS = {
+    "euda", "score", "avloppsvatten", "avloppsmätning", "avloppsmätningar",
+    "wastewater", "drogrest", "drogtester i avlopp", "kokain i avlopp",
+    "amfetamin i avlopp", "mdma i avlopp", "ketamin i avlopp"
+}
+TULLVERKET_TERMS = {
+    "tullverket", "tullens beslag", "tullbeslag", "beslagtagit", "beslagtaget",
+    "narkotikabeslag", "kokainbeslag", "cannabisbeslag", "amfetaminbeslag"
+}
 
 PER_CAPITA_TERMS = {
     "per 100 000", "per 100000", "per capita", "per invånare", "per tusen"
@@ -190,6 +201,10 @@ def _signals(question: str) -> list[Signal]:
         out.append(Signal("bis", 7, "Frågan gäller internationell bank-, kredit-, bostadspris- eller finansstatistik från BIS."))
     if _contains_any(q, ECB_TERMS):
         out.append(Signal("ecb", 7, "Frågan gäller euroområdets monetära eller finansiella statistik från ECB."))
+    if _contains_any(q, EUDA_TERMS):
+        out.append(Signal("euda", 8, "Frågan gäller EUDA/SCORE:s öppna narkotikadata, särskilt avloppsmätningar."))
+    if _contains_any(q, TULLVERKET_TERMS):
+        out.append(Signal("tullverket", 8, "Frågan gäller Tullverkets publika beslagsstatistik."))
     if _contains_any(q, SCB_TERMS):
         out.append(Signal("scb", 3, "Frågan innehåller svensk samhällsstatistik eller svensk geografi."))
     return out
@@ -287,7 +302,7 @@ def plan_sources(question: str) -> dict:
     if has_eu and has_scb and not explicit_sweden and not explicit_eu:
         ambiguities.append("Både svensk och europeisk statistik kan vara relevant, men geografin är inte tydlig.")
 
-    order = ("bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "energimyndigheten", "forsakringskassan", "jordbruksverket", "skolverket", "smhi", "worldbank", "oecd", "who", "bis", "ecb", "comext", "scb", "eurostat")
+    order = ("euda", "tullverket", "bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "energimyndigheten", "forsakringskassan", "jordbruksverket", "skolverket", "smhi", "worldbank", "oecd", "who", "bis", "ecb", "comext", "scb", "eurostat")
     selected = sorted(set(selected), key=lambda s: order.index(s))
     steps = []
     for idx, source in enumerate(selected, start=1):
@@ -311,6 +326,8 @@ def plan_sources(question: str) -> dict:
             "who": "Sök och verifiera global hälsostatistik via WHO World Health Data Hub och aktuell officiell export.",
             "bis": "Sök och verifiera internationell finans- och bankstatistik via BIS SDMX API.",
             "ecb": "Sök och verifiera euroområdets monetära och finansiella statistik via ECB Data Portal SDMX.",
+            "euda": "Sök och verifiera EUDA/SCORE:s öppna avloppsdata och platsmetadata före analys.",
+            "tullverket": "Sök och verifiera Tullverkets beslagsstatistik och använd officiell CSV-export utan antaget API.",
         }[source]
         step = {
             "id": f"source-{idx}-{source}",

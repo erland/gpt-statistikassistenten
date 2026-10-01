@@ -10,6 +10,8 @@
 - **WHO**: global hälsostatistik.
 - **BIS**: internationell bank-, kredit-, bostadspris- och finansstatistik.
 - **ECB**: euroområdets monetära och finansiella statistik.
+- **EUDA/SCORE**: narkotikarelaterade europeiska data; första stödda familjen är avloppsmätningar.
+- **Tullverket**: svensk beslagsstatistik, särskilt narkotika, via officiell sida och CSV-export.
 
 ## SCB PxWebApi v2
 Bas-URL: `https://statistikdatabasen.scb.se/api/v2`.
@@ -83,3 +85,10 @@ BIS publicerar statistik och metadata via SDMX REST API v2. Verifiera struktur, 
 
 ## ECB Data Portal
 Bas-URL: `https://data-api.ecb.europa.eu/service`. ECB använder SDMX 2.1 med metadata discovery och data retrieval. Verifiera dataflow/flowRef, key, frekvens och enhet. ECB används för euroområdets monetära och finansiella statistik; Eurostat används fortsatt för bredare samhällsstatistik.
+
+
+## EUDA/SCORE wastewater analysis
+Metadata/factsheet: `https://www.euda.europa.eu/publications/pods/waste-water-analysis_en`. EUDA publicerar återanvändbara CSV-filer och platsmetadata. Den verifierade 2026-distributionen täcker studier 2011–2025. Huvudenheten är populationsnormaliserad restmängd, `mg/1000 population/day`. Kokain mäts via benzoylecgonine och cannabis via THC-COOH. Värdena beskriver drogrestbelastning i avloppsvatten och får inte beskrivas som antal användare eller prevalens. Ange EUDA och SCORE som källa och koppla platsinformation via SiteID.
+
+## Tullverkets beslagsstatistik
+Officiell ingång: `https://www.tullverket.se/sv/omoss/beslagsstatistik.4.226de36015804b8cf353949.html`. Statistiken filtreras bland annat efter halvår, varutyp, varuslag, län och plats och kan exporteras till CSV. Ett stabilt generellt API är inte dokumenterat, så använd den officiella exportfunktionen i stället för antagna interna endpoints. Bevara enhet per rad (kilo/liter/styck), uppdateringsdatum och eventuella revideringar. Beslag är ett operativt utfall och inte ett direkt mått på konsumtion eller marknadsstorlek.

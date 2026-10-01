@@ -57,6 +57,9 @@ completed_steps:
 - id: step-18
   title: Internationella statistikskällor
   result: passed
+- id: step-19
+  title: EUDA och Tullverkets narkotikarelaterade öppna data
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -81,5 +84,5 @@ project_hygiene:
 blocking_issues: []
 next_step:
   recommended: review-and-merge
-  title: Granska och merge:a internationellt källstöd
-  reason: World Bank, OECD, WHO, BIS och ECB är implementerade och GitHub Actions verifierar 76 tester, lint, modellrobusthet, hygiene, distributioner och Custom GPT Actions.
+  title: Granska och merge:a EUDA/Tullverket-utbyggnaden
+  reason: EUDA/SCORE och Tullverket är implementerade och full CI har passerat med 80 tester. Brå/RMV har analyserats separat utan implementation.

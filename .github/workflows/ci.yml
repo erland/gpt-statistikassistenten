@@ -52,3 +52,4 @@ jobs:
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/oecd-openapi.yaml'
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/bis-openapi.yaml'
           unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/ecb-openapi.yaml'
+          unzip -l dist/statistikassistenten-custom-gpt-0.0.0-ci.zip | grep 'builder/actions/euda-openapi.yaml'

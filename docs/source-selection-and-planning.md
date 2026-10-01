@@ -50,6 +50,13 @@ När flera källor överlappar ska den mest primära/statistikansvariga källan 
 
 Generiska geografiord som Sverige, kommun eller län ska inte dra en fråga från en tydlig domänkälla till SCB.
 
+## Narkotika och drogrelaterade indikatorer
+
+- **EUDA/SCORE** prioriteras för avloppsmätningar av narkotikarester och europeiska stadsjämförelser. Avloppsdata är en samhällssignal och får inte omvandlas till antal användare eller prevalens utan separat metodstöd.
+- **Tullverket** prioriteras för Tullverkets narkotikabeslag och andra restriktionsvaror. Använd den officiella statistiksidans CSV-export; anta inte ett odokumenterat internt API.
+- Brå används fortsatt för kriminalstatistik och Socialstyrelsen/Folkhälsodata för vård-, dödsorsaks- och folkhälsoindikatorer. Dessa mått får kombineras först efter METHOD-GATE.
+- Beslag, avloppshalter, brottsanmälningar och vårdutfall mäter olika delar av narkotikasituationen och får inte behandlas som utbytbara mått.
+
 
 ## Internationella källor
 

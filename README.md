@@ -23,6 +23,8 @@ Statistikassistenten är ett GPT-projekt för verifierbara frågor mot officiell
 - WHO World Health Data Hub
 - BIS Data Portal
 - ECB Data Portal
+- EUDA/SCORE wastewater analysis
+- Tullverkets beslagsstatistik
 
 ## Viktig princip
 
@@ -62,6 +64,8 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 - WHO: global hälsostatistik via World Health Data Hub.
 - BIS: internationell bank-, kredit-, bostadspris- och finansstatistik.
 - ECB: euroområdets monetära och finansiella statistik.
+- EUDA/SCORE: öppna avloppsmätningar av narkotikarester per europeisk mätort.
+- Tullverket: narkotika- och andra beslagsdata via officiell statistik och CSV-export.
 - Källval/frågeplanering för enkla och kombinerade statistikfrågor.
 - Deterministiska beräkningar för förändring, andel, index och per-capita.
 - Säkerhets- och kvalitetsgates som blockerar ofullständig provenance, felaktiga maskerade värden, otillräckligt verifierade beräkningar och obelagda kausala slutsatser.
