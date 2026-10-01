@@ -2,29 +2,16 @@
 
 ## Lägesbild
 
-De ursprungliga utvecklingsstegen och tidigare källutbyggnader är genomförda. Pågående steg 19 lägger till två nyckelfria narkotikarelaterade källor: EUDA/SCORE och Tullverkets beslagsstatistik.
+Tidigare källutbyggnader är genomförda och PR #5 är mergad. Pågående steg 20 generaliserar Tullverket från narkotikabeslag till hela den publika beslagsstatistiken för restriktionsvaror.
 
-## Pågående utbyggnad
+## Pågående justering
 
-- EUDA/SCORE wastewater analysis: verifierad 2026-distribution med CSV för observationer och SiteID-baserad platsmetadata.
-- Tullverket: officiell beslagsstatistik med CSV-export, utan antagande om odokumenterat internt API.
-- Källplaneraren skiljer avloppsmätningar från tullbeslag och kan kombinera båda först efter METHOD-GATE.
-- ChatGPT Custom får EUDA Action; Tullverket använder officiell webb/CSV-fallback.
-- OpenCode får deterministiska wrappers för båda adaptrarna.
-
-## Metodprinciper
-
-Avloppsmätningar, beslag, brottsstatistik och vårdutfall mäter olika fenomen. Avloppsdata får inte beskrivas som antal användare/prevalens och beslag får inte beskrivas som konsumtion eller marknadsstorlek.
-
-## Validering
-
-- 80 regressionstester passerar.
-- Projektlint: 0 fel, 0 varningar.
-- Modellrobusthet: PASS.
-- Final hygiene: PASS.
-- Distribution validation: PASS.
-- Custom GPT-paketet innehåller EUDA Action.
+- Tullverket-adaptern har inte längre Narkotika som implicit standardvarutyp.
+- Källplaneraren routar tydliga frågor om alkohol-, tobaks-, läkemedels-/dopnings-, vapen- och sprängämnesbeslag till Tullverket.
+- Aktuell varutyp/varuslag ska fortfarande verifieras i källan före uttag.
+- Officiell CSV-export används fortsatt; inget odokumenterat internt API införs.
+- Metodregeln gäller alla beslagstyper: beslag är operativa utfall och inte direkta mått på bakomliggande konsumtion, prevalens, tillgång eller marknadsstorlek.
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #5. Därefter är nästa lämpliga implementation en avgränsad utökning av Brå för lagförda narkotikabrott och narkotikapreparat. RMV bör tills vidare vara en kompletterande toxikologisk källa och inte en full primär runtime-adapter.
+Kör full CI/distributionsvalidering. Efter grön PR kan arbetet fortsätta med den tidigare analyserade Brå-utökningen.
