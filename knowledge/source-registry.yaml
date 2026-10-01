@@ -1,0 +1,770 @@
+registry_version: 1
+purpose: >
+  Capability registry for source planning. catalog_scope describes what the
+  official source actually publishes; integrated_scope describes what the
+  current Statistikassistenten integration can retrieve or plan safely.
+source_tiers:
+  A: integrated_and_quality_assured
+  B: official_primary_not_integrated
+  C: credible_secondary_not_integrated
+  D: unverified_or_unsuitable
+planning_principles:
+  - Decompose the question into measures before selecting sources.
+  - Prefer the original producer for a measure when comparable access exists.
+  - Do not infer integrated capability from catalog_scope.
+  - Aggregators must preserve original producer metadata when available.
+  - Use supporting sources only for a distinct measure, denominator, join dimension, or context.
+  - Multi-source combinations require METHOD-GATE.
+  - If no tier-A source covers a required measure, discover tier-B sources before tier-C.
+  - External sources must be labelled as not quality-assured by Statistikassistenten.
+
+sources:
+  scb:
+    name: Statistikmyndigheten SCB / Statistikdatabasen
+    producer_role: mixed_producer_and_aggregator
+    tier: A
+    catalog_scope:
+      - labour_market
+      - population_and_living_conditions
+      - balance_of_payments_and_international_investment
+      - housing_buildings_and_land
+      - democracy
+      - energy
+      - financial_markets
+      - public_health
+      - research_innovation_and_digital_society
+      - household_finances
+      - health_and_medical_care
+      - agriculture_forestry_and_fisheries
+      - culture_and_leisure
+      - environment
+      - national_accounts
+      - business_and_external_trade
+      - public_finance
+      - prices_and_consumption
+      - social_services
+      - transport_and_communications
+      - education_and_research
+    integrated_scope:
+      - generic_pxweb_v2_table_search_and_metadata
+      - Swedish_population_and_society
+      - domestic_trade_retail_ecommerce_and_consumption
+      - central_government_employment_and_wages
+      - customer_electricity_prices_and_contracts
+    geographies: [sweden, national, region, county, municipality, other_table_specific]
+    frequencies: [annual, quarterly, monthly, other_table_specific]
+    primary_for:
+      - Swedish_population
+      - Swedish_labour_market_general
+      - Swedish_national_accounts
+      - Swedish_prices_general
+      - Swedish_customer_electricity_prices
+      - Swedish_central_government_employment_and_wages
+      - Swedish_domestic_trade_and_consumption
+    secondary_for:
+      - denominators_for_Swedish_per_capita_measures
+      - cross_domain_context
+    limitations:
+      - Statisticsdatabasen also republishes statistics from other responsible authorities; preserve original producer.
+      - Table-specific definitions, revisions, disclosure control and frequency must be verified in metadata.
+    evidence:
+      - https://www.scb.se/hitta-statistik/
+      - https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/
+
+  eurostat:
+    name: Eurostat
+    producer_role: harmonising_aggregator_and_statistical_authority
+    tier: A
+    catalog_scope:
+      - general_and_regional_statistics
+      - economy_and_finance
+      - population_and_social_conditions
+      - industry_trade_and_services
+      - agriculture_fisheries_and_forestry
+      - international_trade
+      - transport
+      - environment_and_energy
+      - science_technology_and_digital_society
+    integrated_scope:
+      - generic_SDMX_dataflow_structure_and_filtered_data
+    geographies: [eu, euro_area, member_states, candidate_and_partner_countries, regions]
+    frequencies: [annual, quarterly, monthly, other_dataset_specific]
+    primary_for:
+      - harmonised_EU_comparisons
+      - EU_policy_indicators
+      - eurostat_specific_harmonised_series
+    secondary_for:
+      - international_context_for_Swedish_statistics
+    limitations:
+      - Prefer specialised Comext for detailed goods trade.
+      - Dataset definitions and harmonisation may differ from national series.
+    evidence:
+      - https://ec.europa.eu/eurostat/data/statistical-themes
+      - https://ec.europa.eu/eurostat/data/database
+
+  comext:
+    name: Eurostat Comext
+    producer_role: specialised_trade_database
+    tier: A
+    catalog_scope:
+      - detailed_international_trade_in_goods
+      - imports_and_exports
+      - value_and_quantity
+      - product_classifications
+      - partner_countries
+      - trade_by_enterprise_characteristics
+      - prodcom_related_datasets
+    integrated_scope:
+      - filtered_goods_trade_by_reporter_partner_flow_product_period_indicator
+    geographies: [eu, member_states, many_non_eu_reporting_countries, partner_countries]
+    frequencies: [monthly, annual]
+    primary_for:
+      - detailed_goods_imports_and_exports
+      - trade_by_product_and_partner
+    secondary_for:
+      - external_trade_component_of_multi_measure_questions
+    limitations:
+      - Goods trade is not services trade.
+      - Complete datasets are too large and API requires filtering.
+    evidence:
+      - https://ec.europa.eu/eurostat/web/international-trade-in-goods
+      - https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-getting-started/comext-database
+
+  bra:
+    name: Brottsförebyggande rådet
+    producer_role: primary_statistical_authority
+    tier: A
+    catalog_scope:
+      - reported_crimes
+      - confirmed_lethal_violence
+      - processed_crimes
+      - suspected_persons
+      - processed_crime_suspicions
+      - sanctioned_persons
+      - prison_and_remand
+      - probation
+      - recidivism
+      - criminal_process_results_and_processing_times
+      - crime_victimisation_and_safety_surveys
+      - school_crime_survey
+      - politicians_safety_survey
+      - hate_crime_and_selected_other_recurring_statistics
+    integrated_scope:
+      - reported_crimes
+      - processed_crimes
+      - suspected_persons
+      - processed_crime_suspicions
+      - sanctioned_persons
+    geographies: [sweden, national, regional, local_product_specific]
+    frequencies: [annual, monthly_or_quarterly_product_specific, survey_wave]
+    primary_for:
+      - Swedish_registered_crime_and_criminal_justice_statistics
+      - Swedish_crime_victimisation_and_safety_when_supported_by_product
+    secondary_for:
+      - justice_system_context
+    limitations:
+      - Current adapter covers only five product families despite broader Brå catalog.
+      - Persons, crimes, suspicions, decisions and survey responses are different observation units.
+      - Registered crime and survey victimisation measure different phenomena.
+    evidence:
+      - https://bra.se/
+      - https://bra.se/download/18.3183a4c019c47d273ac21f65/1771508951224/2026_%C3%85rsredovisning_2025.pdf
+
+  kolada:
+    name: Kolada / RKA
+    producer_role: aggregator_and_derived_kpi_platform
+    tier: A
+    catalog_scope:
+      - municipal_and_regional_KPIs
+      - quality_and_results
+      - resources
+      - volumes
+      - municipal_and_regional_finance
+      - education
+      - health_and_social_care
+      - demographics_and_cross_sector_comparisons
+      - organisational_unit_data_for_selected_KPIs
+    integrated_scope:
+      - KPI_metadata
+      - municipality_and_region_metadata
+      - KPI_values
+    geographies: [municipality, region, national, organisational_unit_product_specific]
+    frequencies: [mostly_annual, KPI_specific]
+    primary_for:
+      - comparable_predefined_municipal_and_regional_KPIs
+    secondary_for:
+      - cross_municipality_benchmarking
+      - derived_per_capita_or_quality_indicators
+    limitations:
+      - Many KPIs originate from other producers; preserve source from KPI metadata.
+      - Derived KPIs must not be confused with raw source observations.
+    evidence:
+      - https://kolada.se/om-oss/api/
+      - https://api.kolada.se/v3/docs
+
+  socialstyrelsen:
+    name: Socialstyrelsen
+    producer_role: primary_statistical_authority
+    tier: A
+    catalog_scope:
+      - health_and_disease
+      - healthcare_use
+      - dental_care
+      - causes_of_death
+      - medicines
+      - pregnancy_births_and_newborns
+      - cancer
+      - cardiovascular_conditions
+      - injuries_and_poisoning
+      - healthcare_personnel
+      - waiting_times
+      - municipal_healthcare
+      - social_services
+      - economic_assistance
+      - elderly_care
+      - disability_services
+    integrated_scope:
+      - statistics_database_subjects_dimensions_and_results
+    geographies: [sweden, national, region, county, municipality, hospital_or_provider_product_specific]
+    frequencies: [annual, monthly_product_specific]
+    primary_for:
+      - Swedish_healthcare_register_statistics
+      - Swedish_causes_of_death
+      - Swedish_social_services_statistics
+      - Swedish_healthcare_personnel_when_product_matches
+    secondary_for:
+      - health_outcome_context
+    limitations:
+      - Register populations and health events differ by product.
+      - Confidentiality and suppression can limit small-area values.
+    evidence:
+      - https://www.socialstyrelsen.se/statistik-och-data/statistik/statistikdatabasen/
+      - https://www.socialstyrelsen.se/statistik-och-data/statistik/om-statistiken/
+
+  folkhalsodata:
+    name: Folkhälsomyndigheten Folkhälsodata
+    producer_role: primary_and_aggregated_public_health_indicator_platform
+    tier: A
+    catalog_scope:
+      - health_determinants
+      - health_outcomes
+      - living_conditions
+      - lifestyles
+      - communicable_diseases
+      - vaccination
+      - mental_wellbeing
+      - alcohol_tobacco_and_other_public_health_indicators
+    integrated_scope:
+      - PxWeb_navigation_and_query_plans
+    geographies: [sweden, national, county, municipality]
+    frequencies: [annual, multi_year_average, indicator_specific]
+    primary_for:
+      - Swedish_public_health_indicators
+      - communicable_disease_and_vaccination_indicators_when_available
+    secondary_for:
+      - public_health_context_for_healthcare_or_social_questions
+    limitations:
+      - Indicators may be survey-based, register-based or multi-year averages; methodology must be verified.
+      - Original producer can vary by indicator.
+    evidence:
+      - https://www.folkhalsomyndigheten.se/statistik-och-data/om-vara-data/statistikdatabaser/folkhalsodata-hitta-och-hamta-statistik/
+
+  arbetsformedlingen:
+    name: Arbetsförmedlingen open data
+    producer_role: primary_operational_data_provider
+    tier: A
+    catalog_scope:
+      - current_job_ads
+      - historical_job_ads
+      - occupation_and_skill_terms_in_ads
+      - geographic_job_ad_demand
+    integrated_scope:
+      - JobSearch_current_ads
+      - normalised_search_summaries
+    geographies: [sweden, national, county, municipality, workplace_location]
+    frequencies: [near_real_time, historical_from_2016]
+    primary_for:
+      - advertised_job_demand
+      - content_of_job_ads
+    secondary_for:
+      - labour_demand_signal
+    limitations:
+      - Job ads are not unemployment, employment or unique vacancies.
+      - Current integration does not expose every open dataset from Arbetsförmedlingen.
+    evidence:
+      - https://data.arbetsformedlingen.se/dataset/job-ads/
+
+  riksbank:
+    name: Sveriges Riksbank
+    producer_role: primary_central_bank_and_statistical_authority
+    tier: A
+    catalog_scope:
+      - policy_and_Riksbank_rates
+      - Swedish_and_selected_international_market_rates
+      - exchange_rates_against_SEK
+      - SWESTR
+      - KIX_index
+      - payment_statistics
+      - financial_market_turnover
+      - responsibility_for_balance_of_payments_and_financial_market_statistics_published_by_SCB
+    integrated_scope:
+      - SWEA_interest_rates_exchange_rates_series_groups_latest_and_observations
+    geographies: [sweden, currency_pair_or_market_specific]
+    frequencies: [daily, weekly, monthly, quarterly, annual]
+    primary_for:
+      - Riksbank_policy_rates
+      - SWESTR
+      - official_Riksbank_exchange_rate_information
+    secondary_for:
+      - Swedish_financial_market_context
+    limitations:
+      - Exchange rates are indicative and not transaction rates.
+      - Some statistics under Riksbank responsibility are published through SCB and are outside SWEA integration.
+    evidence:
+      - https://www.riksbank.se/en-gb/statistics/
+      - https://www.riksbank.se/en-gb/statistics/interest-rates-and-exchange-rates/
+
+  energimyndigheten:
+    name: Energimyndigheten
+    producer_role: primary_statistical_authority
+    tier: A
+    catalog_scope:
+      - energy_supply
+      - energy_use_and_efficiency
+      - energy_balances
+      - electricity_and_gas
+      - energy_prices
+      - energy_infrastructure
+      - fuels
+      - district_heating
+      - transport_energy
+      - renewable_energy
+      - forecasts
+    integrated_scope:
+      - PxWeb_navigation_and_query_plans
+    geographies: [sweden, national, regional_or_sector_product_specific]
+    frequencies: [annual, quarterly, monthly, forecast]
+    primary_for:
+      - Swedish_energy_balances
+      - broad_energy_supply_and_use
+      - energy_statistics_by_carrier_and_sector
+    secondary_for:
+      - long_term_electricity_context
+    limitations:
+      - Use SVK for detailed operational physical electricity by bidding area/time.
+      - Some published forecasts are not official statistics.
+    evidence:
+      - https://www.energimyndigheten.se/statistik/officiell-energistatistik/
+      - https://www.energimyndigheten.se/statistik/officiell-energistatistik/energibalanser/arlig-energibalans/
+
+  forsakringskassan:
+    name: Försäkringskassan
+    producer_role: primary_statistical_authority
+    tier: A
+    catalog_scope:
+      - sickness_insurance
+      - parental_and_family_benefits
+      - disability_and_assistance_benefits
+      - dental_support
+      - labour_market_program_related_benefits
+      - international_healthcare
+      - social_insurance_forecasts_and_analysis
+    integrated_scope:
+      - public_dataset_metadata_and_distribution_validation
+    geographies: [sweden, national, county_or_municipality_product_specific]
+    frequencies: [monthly, annual, benefit_specific]
+    primary_for:
+      - Swedish_social_insurance_statistics
+    secondary_for:
+      - benefit_and_sickness_context
+    limitations:
+      - Integration is metadata/distribution-oriented rather than a universal query API.
+      - Benefit definitions and recipients/events must be kept distinct.
+    evidence:
+      - https://www.forsakringskassan.se/statistik-och-analys
+
+  jordbruksverket:
+    name: Jordbruksverket
+    producer_role: primary_statistical_authority
+    tier: A
+    catalog_scope:
+      - agriculture
+      - horticulture
+      - aquaculture
+      - crop_yields
+      - agricultural_land
+      - livestock
+      - agricultural_economy_and_prices
+      - food_consumption
+      - long_historical_series
+    integrated_scope:
+      - PxWeb_navigation_and_query_plans
+    geographies: [sweden, national, county, production_area_or_product_specific]
+    frequencies: [annual, monthly_or_seasonal_product_specific]
+    primary_for:
+      - Swedish_agricultural_horticultural_and_aquaculture_statistics
+    secondary_for:
+      - food_and_rural_context
+    limitations:
+      - Product definitions and geographic classifications vary across long time series.
+    evidence:
+      - https://jordbruksverket.se/om-jordbruksverket/jordbruksverkets-officiella-statistik
+      - https://jordbruksverket.se/om-jordbruksverket/jordbruksverkets-officiella-statistik/statistikdatabasen
+
+  skolverket:
+    name: Skolverket
+    producer_role: primary_statistical_authority_and_register_provider
+    tier: A
+    catalog_scope:
+      - schools_and_education_units
+      - pupils_and_students
+      - teachers_and_staff
+      - grades_and_results
+      - completion_and_transitions
+      - planned_educations
+      - costs_and_resources
+      - preschool
+      - compulsory_school
+      - upper_secondary_school
+      - adult_education
+      - other_school_forms
+    integrated_scope:
+      - planned_educations_and_selected_open_API_request_planning
+    geographies: [sweden, municipality, school_unit, provider, education_program_product_specific]
+    frequencies: [term, annual, current_register_product_specific]
+    primary_for:
+      - Swedish_school_unit_and_education_statistics
+    secondary_for:
+      - education_context_when_Kolada_KPI_is_not_the_requested_measure
+    limitations:
+      - Current adapter is substantially narrower than Skolverket's full statistical catalog.
+      - Use Kolada for predefined municipal comparison KPIs when those are the actual requested measure.
+    evidence:
+      - https://www.skolverket.se/skolutveckling/statistik
+
+  smhi:
+    name: SMHI Open Data
+    producer_role: primary_observation_and_statistical_provider
+    tier: A
+    catalog_scope:
+      - meteorological_observations
+      - hydrological_observations
+      - oceanographic_observations
+      - climate_data_and_statistics
+      - forecasts_and_warnings
+      - radar_and_model_data
+    integrated_scope:
+      - MetObs_meteorological_parameter_station_and_observation_data
+    geographies: [station, sweden, grid_or_area_product_specific]
+    frequencies: [sub_daily, daily, monthly, historical_archive]
+    primary_for:
+      - Swedish_meteorological_station_observations
+    secondary_for:
+      - weather_and_climate_context
+    limitations:
+      - Current integration covers MetObs, not the full hydrology/oceanography/model catalog.
+      - Quality codes, station continuity and corrected archives matter.
+    evidence:
+      - https://www.smhi.se/data/hitta-data-for-en-plats
+
+  worldbank:
+    name: World Bank
+    producer_role: aggregator_and_international_statistical_provider
+    tier: A
+    catalog_scope:
+      - nearly_16000_indicator_time_series
+      - more_than_45_databases
+      - development
+      - poverty
+      - population
+      - economy_and_growth
+      - education
+      - health
+      - environment
+      - trade
+      - debt
+      - human_capital
+      - subnational_poverty
+    integrated_scope:
+      - Indicators_API_v2_indicator_metadata_and_country_time_series
+    geographies: [countries, economies, regions, income_groups, aggregates]
+    frequencies: [annual, monthly_or_quarterly_for_selected_indicators]
+    primary_for:
+      - broad_global_development_indicators
+      - global_and_non_EU_country_comparisons_when_no_more_specialised_source_is_preferred
+    secondary_for:
+      - global_context
+    limitations:
+      - Many indicators originate from other organisations; sourceOrganization must be preserved.
+      - Prefer WHO, OECD, Eurostat, BIS or other specialist source when the question specifically targets their harmonised domain.
+    evidence:
+      - https://datahelpdesk.worldbank.org/knowledgebase/articles/889392
+      - https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-indicator-api-queries
+
+  oecd:
+    name: OECD Data Explorer
+    producer_role: international_harmonising_aggregator_and_statistical_provider
+    tier: A
+    catalog_scope:
+      - all_OECD_statistical_data
+      - economy
+      - labour
+      - education
+      - health
+      - taxation
+      - environment
+      - productivity
+      - trade
+      - industry
+      - science_technology_and_innovation
+      - governance_and_social_indicators
+    integrated_scope:
+      - Data_Explorer_SDMX_dataflow_and_data_queries
+    geographies: [OECD_members, partner_economies, aggregates]
+    frequencies: [annual, quarterly, monthly, dataset_specific]
+    primary_for:
+      - OECD_harmonised_comparisons
+      - OECD_specific_indicators
+    secondary_for:
+      - international_context
+    limitations:
+      - Dataset structures vary and must be discovered via SDMX metadata.
+      - Prefer Eurostat for EU-specific harmonised statistics when EU scope is central.
+    evidence:
+      - https://www.oecd.org/en/data/datasets/oecd-DE.html
+
+  who:
+    name: World Health Organization
+    producer_role: international_health_statistical_authority_and_aggregator
+    tier: A
+    catalog_scope:
+      - mortality_and_life_expectancy
+      - disease_burden
+      - communicable_diseases
+      - noncommunicable_diseases
+      - risk_factors
+      - maternal_child_and_reproductive_health
+      - immunisation
+      - health_systems_and_workforce
+      - universal_health_coverage
+      - environmental_health
+      - health_SDG_indicators
+    integrated_scope:
+      - Data_Hub_or_current_official_export_discovery_and_official_URL_validation
+    geographies: [countries, WHO_regions, global]
+    frequencies: [annual, survey_or_program_specific]
+    primary_for:
+      - global_health_indicators
+      - WHO_defined_health_measures
+    secondary_for:
+      - international_health_context
+    limitations:
+      - WHO data platforms are in transition; runtime must verify the current official export/API.
+      - Estimates may be modelled and include uncertainty intervals.
+    evidence:
+      - https://data.who.int/about/datadot/
+      - https://www.who.int/data
+
+  bis:
+    name: Bank for International Settlements
+    producer_role: international_financial_statistical_provider
+    tier: A
+    catalog_scope:
+      - international_banking
+      - debt_securities
+      - credit_to_non_financial_sector
+      - credit_to_GDP_gaps
+      - debt_service_ratios
+      - global_liquidity
+      - derivatives
+      - residential_and_commercial_property_prices
+      - consumer_prices
+      - bilateral_and_effective_exchange_rates
+      - central_bank_balance_sheets
+      - central_bank_policy_rates
+      - payment_statistics
+    integrated_scope:
+      - SDMX_structure_and_data_queries
+    geographies: [countries, banking_systems, international_aggregates]
+    frequencies: [daily_or_monthly_selected_series, quarterly, annual, survey_cycle]
+    primary_for:
+      - international_banking_and_global_liquidity
+      - harmonised_cross_country_credit_and_debt_service
+      - BIS_property_price_series
+      - effective_exchange_rates
+    secondary_for:
+      - international_financial_context
+    limitations:
+      - Some BIS series are constructed from national data using BIS assumptions/estimation.
+      - Use Riksbank or ECB for source-specific domestic/euro-area policy series when directly requested.
+    evidence:
+      - https://www.bis.org/statistics
+      - https://data.bis.org/topics
+
+  ecb:
+    name: European Central Bank Data Portal
+    producer_role: primary_euro_area_central_bank_and_statistical_provider
+    tier: A
+    catalog_scope:
+      - money_and_monetary_aggregates
+      - monetary_financial_institutions
+      - bank_loans_and_deposits
+      - interest_rates
+      - exchange_rates_and_competitiveness
+      - securities
+      - payments
+      - financial_markets
+      - euro_area_accounts_and_selected_economic_statistics
+    integrated_scope:
+      - Data_Portal_SDMX_dataflow_and_data_queries
+    geographies: [euro_area, euro_area_members, EU_or_counterparty_dimensions_dataset_specific]
+    frequencies: [daily, monthly, quarterly, annual, dataset_specific]
+    primary_for:
+      - euro_area_monetary_and_banking_statistics
+      - ECB_reference_exchange_rates
+    secondary_for:
+      - euro_area_financial_context
+    limitations:
+      - Prefer Eurostat for non-monetary general EU social/economic statistics.
+      - Reference exchange rates are informational rather than transaction rates.
+    evidence:
+      - https://www.ecb.europa.eu/stats/money_credit_banking/html/index.en.html
+      - https://www.ecb.europa.eu/stats/exchange_rates/html/index.en.html
+
+  euda:
+    name: European Union Drugs Agency
+    producer_role: specialised_EU_drug_information_authority_and_aggregator
+    tier: A
+    catalog_scope:
+      - drug_use_prevalence
+      - high_risk_drug_use
+      - drug_induced_deaths
+      - infectious_diseases
+      - treatment_demand
+      - drug_seizures
+      - price_purity_and_potency
+      - drug_use_in_prison
+      - drug_law_offences
+      - health_and_social_responses
+      - city_level_wastewater
+      - drug_checking_project_data
+    integrated_scope:
+      - SCORE_wastewater_2026_CSV_and_site_metadata
+    geographies: [EUDA_reporting_countries, national, subnational_product_specific, city]
+    frequencies: [annual, study_year, project_specific]
+    primary_for:
+      - European_drug_situation_comparisons_when_EUDA_product_is_supported
+      - wastewater_drug_residue_comparisons
+    secondary_for:
+      - European_context_for_Swedish_drug_indicators
+    limitations:
+      - Current adapter covers wastewater only despite much broader EUDA catalog.
+      - Prevalence, seizures, wastewater, treatment and offences are non-interchangeable indicators.
+    evidence:
+      - https://www.euda.europa.eu/data/stats2026_sq
+      - https://www.euda.europa.eu/publications/european-drug-report/2026/annex-tables_da
+
+  tullverket:
+    name: Tullverket
+    producer_role: primary_operational_enforcement_data_provider
+    tier: A
+    catalog_scope:
+      - seizures_of_restricted_goods
+      - narcotics
+      - alcohol
+      - tobacco
+      - doping_substances
+      - medicines
+      - firearms_and_other_weapons
+      - explosives
+    integrated_scope:
+      - seizure_statistics_page_and_verified_CSV_export_planning
+    geographies: [sweden, county, place_product_specific]
+    frequencies: [half_year]
+    primary_for:
+      - Swedish_Customs_seizures
+    secondary_for:
+      - enforcement_indicator_in_multi_source_drug_or_restricted_goods_analysis
+    limitations:
+      - Seizures are operational outcomes, not direct prevalence, consumption or market-size measures.
+      - Units include kilograms, litres and pieces and must not be combined blindly.
+    evidence:
+      - https://www.tullverket.se/sv/omoss/beslagsstatistik.4.226de36015804b8cf353949.html
+
+  statskontoret:
+    name: Statskontoret
+    producer_role: primary_statistical_authority_for_state_budget_outturn_and_government_metadata
+    tier: A
+    catalog_scope:
+      - monthly_state_budget_outturn
+      - annual_state_budget_outturn
+      - state_budget_time_series
+      - real_economic_distribution_of_appropriations
+      - agency_directory
+      - annual_work_units
+      - agency_governance_form
+    integrated_scope:
+      - monthly_budget_outturn
+      - annual_budget_outturn
+      - agency_directory
+    geographies: [sweden, government_agency, appropriation_and_budget_structure]
+    frequencies: [monthly, annual]
+    primary_for:
+      - Swedish_state_budget_outturn
+      - appropriations_and_budget_outturn_by_agency
+      - government_agency_directory_and_annual_work_units
+    secondary_for:
+      - state_finance_context
+    limitations:
+      - Appropriation outturn is not the same as an agency's accrual-based total cost.
+      - Real-economic distribution exists but is not currently integrated.
+    evidence:
+      - https://www.statskontoret.se/analys-och-statistik/oppna-data/
+      - https://www.statskontoret.se/analys-och-statistik/officiell-statistik/tidsserier-statens-budget-m.m
+
+  svk:
+    name: Svenska kraftnät Mimer
+    producer_role: primary_power_system_operational_data_provider
+    tier: A
+    catalog_scope:
+      - physical_electricity_production
+      - physical_electricity_consumption
+      - production_and_consumption_types
+      - bidding_areas
+      - network_areas
+      - actual_and_planned_values_where_available
+    integrated_scope:
+      - Mimer_product_type_metadata
+      - production_consumption_statistics_by_period_bidding_area_and_network_area
+    geographies: [sweden, SE1, SE2, SE3, SE4, network_area]
+    frequencies: [operational_time_series_endpoint_specific]
+    primary_for:
+      - detailed_Swedish_physical_electricity_production_and_consumption
+    secondary_for:
+      - operational_electricity_context
+    limitations:
+      - Not customer electricity prices.
+      - Not Nord Pool spot/day-ahead prices.
+      - Actual and Planned must remain separate.
+    evidence:
+      - https://mimer.svk.se/swagger/ui/index
+
+external_fallback:
+  trigger:
+    - no_tier_A_source_covers_required_measure
+    - tier_A_source_exists_but_integrated_scope_cannot_retrieve_required_measure
+  search_order:
+    - tier_B_official_primary_source_or_official_open_data
+    - tier_B_official_international_organisation
+    - tier_C_credible_research_or_secondary_source
+  requirements:
+    - identify_producer_and_dataset_before_extracting_values
+    - verify_definition_population_geography_period_unit_and_status
+    - prefer_machine_readable_official_API_or_download
+    - avoid_undocumented_internal_endpoints_and_arbitrary_scraping
+    - run_METADATA_GATE_METHOD_GATE_PROVENANCE_GATE
+    - label_source_as_external_not_quality_assured_by_Statistikassistenten
+  response_disclosure: >
+    State that no integrated quality-assured source covered the required measure,
+    name the external source used, and distinguish source verification performed
+    for this answer from inclusion in the permanent source registry.
