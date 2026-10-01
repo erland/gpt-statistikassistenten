@@ -24,6 +24,12 @@ När en fråga gäller rättsväsendet ska Brå först väljas som källa och d�
 
 Narkotikabrott är inte en separat Brå-integration. Preparat, gärningstyp eller liknande används som produktdimension när den officiella lagföringsstatistiken erbjuder den. Personer, brott, brottsmisstankar och beslut är olika observationsenheter och får inte blandas utan METHOD-GATE.
 
+## Svensk handel – SCB kontra Comext
+
+SCB är förstakälla för inhemsk svensk handel och konsumtion: detaljhandel, dagligvaru-/sällanköpsvaruhandel, försäljningsvolym, omsättning, partihandel, e-handel och hushållens konsumtion. Comext används för detaljerad import/export efter reporter, partnerland och produkt/varukod.
+
+Ordet **handel** ensamt är inte tillräckligt för källval. Import/export, partnerland och varukod signalerar Comext; detaljhandelsomsättning, försäljningsvolym och e-handel signalerar SCB. Om frågan uttryckligen jämför ett inhemskt handelsmått med import/export ska båda källorna planeras och kombineras först efter METHOD-GATE.
+
 ## Konfliktregel Eurostat kontra Comext
 
 Comext är den specialiserade källan för detaljerad varuhandel. Om en fråga samtidigt innehåller EU-signaler och handelsdimensioner som import/export, partnerland eller varukod ska Comext prioriteras framför den generella Eurostat-adaptern. Generell Eurostat behålls bara när frågan dessutom kräver en annan EU-statistik.
