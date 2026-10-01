@@ -93,7 +93,7 @@ SCB_ELECTRICITY_PRICE_TERMS = {
 SVK_TERMS = {
     "svenska kraftnät", "mimer", "elförbrukning", "elkonsumtion", "elanvändning",
     "elproduktion", "förbrukning per elområde", "produktion per elområde",
-    "timvis förbrukning", "timvis produktion", "se1", "se2", "se3", "se4"
+    "timvis förbrukning", "timvis produktion"
 }
 SCB_TRADE_TERMS = {
     "detaljhandel", "detaljhandeln", "detaljhandelsomsättning",
