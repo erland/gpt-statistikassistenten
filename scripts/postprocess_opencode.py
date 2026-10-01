@@ -6,6 +6,7 @@ from pathlib import Path
 
 OPS = {
  'source-planner': ('source_planner',['plan_sources']),
+ 'adaptive-source-planner': ('adaptive_source_planner',['registry_summary','source_capability','finalize_plan']),
  'scb-adapter': ('scb_adapter',['search_url','metadata_url','validate_selection','estimate_cells','post_request_plan']),
  'eurostat-adapter': ('eurostat_adapter',['dataflow_catalog_url','structure_url','validate_filters','data_request_plan']),
  'comext-adapter': ('comext_adapter',['dataflow_catalog_url','structure_url','validate_role_map','trade_request_plan']),

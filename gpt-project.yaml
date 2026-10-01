@@ -302,8 +302,17 @@ tools:
   - id: source-planner
     type: script
     requirement: recommended
-    purpose: Välj källor och skapa konservativ frågeplan.
+    purpose: Välj källor och skapa konservativ frågeplan (v1 guardrail).
     script: scripts/source_planner.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
+  - id: adaptive-source-planner
+    type: script
+    requirement: recommended
+    purpose: Validera semantisk frågeplan mot source registry och välj direct eller review_before_execution.
+    script: scripts/adaptive_source_planner.py
     deterministic: true
     mutates_workspace: false
     working_directory: workspace

@@ -2,34 +2,36 @@
 
 ## Lägesbild
 
-Tidigare källutbyggnader är genomförda. Pågående steg 25A analyserar hur Statistikassistenten ska skala till många källor utan att källvalet blir ett växande nät av nyckelord och parvisa specialregler.
+Steg 25A och 25B är genomförda. Pågående steg 25C implementerar Source Query Plan v2 som faktisk planeringsguardrail på samma PR.
 
-## Pågående källinventering
+## Implementerat i 25C
 
-- Samtliga 23 integrerade källor finns i ett maskinläsbart source registry.
-- Registret skiljer uttryckligen mellan källans officiella katalog och vad nuvarande adapter kan hämta säkert.
-- Källorna klassificeras efter producentroll, geografi, frekvens, primär-/sekundär användning och begränsningar.
-- Aggregatorer ska bevara ursprunglig statistikproducent i proveniensen.
-- Primärkälla definieras per efterfrågat mått, inte som en global källranking.
-- Extern fallback definieras för fall där ingen integrerad källa täcker ett nödvändigt mått.
-- Externa officiella källor får användas efter metadata-/metodkontroll men ska tydligt märkas som ännu inte kvalitetssäkrade av Statistikassistenten.
-- Ingen runtime- eller planner-logik ändras i steg 25A.
+- Ny `scripts/adaptive_source_planner.py`.
+- GPT:n gör semantisk nedbrytning av frågan; deterministisk kod validerar planen mot source registry.
+- Verktyget exponerar `registry_summary`, `source_capability` och `finalize_plan`.
+- `finalize_plan` avgör `direct`, `needs_user_review`, `needs_clarification` eller `blocked`.
+- Kända registry-källor får inte felaktigt märkas som externa eller få annan tier.
+- Oregistrerade källor får inte hävda tier A.
+- Extern primary/supporting-källa kräver explicit external fallback och disclosure.
+- Catalog-only, tier B/C, medium/low confidence och relevanta metodrisker leder till användargranskning.
+- Flera integrerade källor eller en enkel deterministisk beräkning kräver inte automatiskt granskning om confidence är high och inga relevanta metodrisker finns.
+- Canonical instruktion använder source registry som sanningskälla i stället för en duplicerad lång källista.
+- V1-plannern behålls som kompatibilitets-/guardrail under övergången.
+- OpenCode och tool contract har adaptive-source-planner registrerad.
 
-## Artefakter
+## Tester
 
-- `docs/source-capability-analysis.md`
-- `knowledge/source-registry.yaml`
-- `schemas/source-registry.schema.json`
-- `tests/test_source_registry.py`
+Nya runtime-tester täcker bland annat direktläge, metodrisk, säker flerkällskombination, catalog-only, extern fallback, confidence, clarification och felaktig extern tier A.
 
 ## Validering
 
-- 122 regressionstester passerar.
+- 136 regressionstester passerar.
 - Projektlint: 0 fel, 0 varningar.
 - Modellrobusthet: PASS.
 - Final hygiene: PASS.
 - Distribution validation: PASS.
+- OpenCode-build och verktygspaketering: PASS.
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #11. Därefter bör steg 25B definiera en ny fråge-/källplanmodell baserad på informationsbehov och källroller innan runtime-beteendet ändras.
+Granska och merge:a PR #12. Extern webbsökning/exekvering av fallback hålls som ett separat nästa steg efter merge.
