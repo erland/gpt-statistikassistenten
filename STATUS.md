@@ -2,9 +2,9 @@
 
 ## Lägesbild
 
-Tidigare källutbyggnader är genomförda. Pågående steg 23 lägger till Statskontorets öppna data för statens budget och myndighetsförteckning.
+Tidigare källutbyggnader är genomförda. Steg 23 lägger till Statskontorets öppna data för statens budget och myndighetsförteckning.
 
-## Pågående Statskontoret-integration
+## Genomförd Statskontoret-integration
 
 - Månadsutfall för statens budget planeras från Statskontorets officiella öppna data, inklusive myndighet och anslagspost/anslagsdelpost.
 - Årsutfall används för budget och utfall per anslag med bevarad preliminär/definitiv status.
@@ -13,6 +13,14 @@ Tidigare källutbyggnader är genomförda. Pågående steg 23 lägger till Stats
 - SCB används fortsatt för antal anställda och löner per myndighet.
 - Metodregler skiljer anslagsutfall från myndighetens totala periodiserade kostnad samt årsarbetskrafter från antal anställda.
 
+## Validering
+
+- 110 regressionstester passerar.
+- Projektlint: 0 fel, 0 varningar.
+- Modellrobusthet: PASS.
+- Final hygiene: PASS.
+- Distribution validation: PASS.
+
 ## Nästa rekommenderade steg
 
-Kör full CI och merge:a först efter grön distributionsvalidering.
+Granska och merge:a PR #9.
