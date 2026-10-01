@@ -22,6 +22,15 @@ Steg 25A–25C är genomförda. Pågående steg 25D gör extern fallback körbar
 - Quality gate blockerar externa resultat som saknar verifiering eller disclosure.
 - External source validator är registrerad som tool och OpenCode-wrapper.
 
+## Validering
+
+- 147 regressionstester passerar.
+- Projektlint: 0 fel, 0 varningar.
+- Modellrobusthet: PASS.
+- Final hygiene: PASS.
+- Distribution validation: PASS.
+- OpenCode/tool-paketering: PASS.
+
 ## Nästa rekommenderade steg
 
-Kör full CI. Efter grön validering kan steg 25D markeras klart och PR:n granskas för merge.
+Granska och merge:a PR #13.
