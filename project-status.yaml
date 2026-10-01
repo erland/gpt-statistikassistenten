@@ -77,7 +77,7 @@ completed_steps:
   result: passed
 - id: step-25a
   title: Källinventering och source registry
-  result: in_progress
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -101,6 +101,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: validate-source-registry
-  title: Validera källinventering och source registry
-  reason: Samtliga integrerade källor är kartlagda med katalogomfång, integrerat omfång, primärroller och extern fallback-policy.
+  recommended: design-source-query-plan-v2
+  title: Definiera ny fråge- och källplanmodell
+  reason: Source registry är validerat för samtliga 23 integrerade källor; nästa steg är att modellera informationsbehov, källroller, risker och planeringsläge innan runtime ändras.
