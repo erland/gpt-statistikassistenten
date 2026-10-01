@@ -48,7 +48,8 @@
           "ecb",
         "euda",
         "tullverket",
-        "statskontoret"
+        "statskontoret",
+        "svk"
         ]
       },
       "uniqueItems": true,
@@ -94,7 +95,8 @@
               "ecb",
             "euda",
             "tullverket",
-            "statskontoret"
+            "statskontoret",
+            "svk"
             ]
           },
           "purpose": {

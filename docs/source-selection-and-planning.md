@@ -58,6 +58,14 @@ Planen följer `schemas/source-query-plan.schema.json` och innehåller:
 När flera källor överlappar ska den mest primära/statistikansvariga källan väljas för själva måttet, medan Kolada kan vara lämplig för jämförbara färdigdefinierade kommunnyckeltal. Dubbletter får inte räknas som separata observationer.
 
 
+## Elpris, produktion och förbrukning
+
+- **SCB** prioriteras för hushållens/övriga kunders elpris, elhandelspris, elnätspris och elavtal.
+- **Svenska kraftnät** prioriteras för fysisk produktion/förbrukning per period och elområde via Mimer.
+- **Energimyndigheten** används för bredare energi-/elanvändning och energibalanser.
+- Frågor som kombinerar pris och förbrukning kan använda SCB + Svenska kraftnät efter METHOD-GATE.
+- Spotpris/day-ahead är ett separat marknadsmått och täcks inte av denna integration.
+
 ## Ytterligare domänkällor
 
 - **Energimyndigheten** prioriteras för energibalanser, energianvändning, elproduktion, kraftslag, biogas och energiprognoser.
