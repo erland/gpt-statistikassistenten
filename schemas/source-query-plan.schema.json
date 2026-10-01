@@ -47,7 +47,8 @@
           "bis",
           "ecb",
         "euda",
-        "tullverket"
+        "tullverket",
+        "statskontoret"
         ]
       },
       "uniqueItems": true,
@@ -92,7 +93,8 @@
               "bis",
               "ecb",
             "euda",
-            "tullverket"
+            "tullverket",
+            "statskontoret"
             ]
           },
           "purpose": {
