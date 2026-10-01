@@ -26,6 +26,7 @@ Statistikassistenten är ett GPT-projekt för verifierbara frågor mot officiell
 - EUDA/SCORE wastewater analysis
 - Tullverkets beslagsstatistik
 - Statskontorets öppna data: budgetutfall och myndighetsförteckning
+- Svenska kraftnät Mimer: fysisk elproduktion och elförbrukning
 
 ## Viktig princip
 
@@ -68,6 +69,7 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 - EUDA/SCORE: öppna avloppsmätningar av narkotikarester per europeisk mätort.
 - Tullverket: narkotika- och andra beslagsdata via officiell statistik och CSV-export.
 - Statskontoret: månads-/årsutfall för statens budget samt myndighetsförteckning via officiella öppna CSV/Excel-distributioner.
+- Svenska kraftnät: fysisk elproduktion och elförbrukning via Mimer API; SCB används för kundpris/elavtal.
 - Källval/frågeplanering för enkla och kombinerade statistikfrågor.
 - Deterministiska beräkningar för förändring, andel, index och per-capita.
 - Säkerhets- och kvalitetsgates som blockerar ofullständig provenance, felaktiga maskerade värden, otillräckligt verifierade beräkningar och obelagda kausala slutsatser.
