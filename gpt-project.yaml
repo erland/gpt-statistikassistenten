@@ -497,6 +497,15 @@ tools:
     mutates_workspace: false
     working_directory: workspace
     runtime_fallback: degrade
+  - id: statskontoret-adapter
+    type: script
+    requirement: recommended
+    purpose: Planera verifierade uttag från Statskontorets öppna budgetdata och myndighetsförteckning.
+    script: scripts/statskontoret_adapter.py
+    deterministic: true
+    mutates_workspace: false
+    working_directory: workspace
+    runtime_fallback: degrade
   - id: calculation-engine
     type: script
     requirement: recommended

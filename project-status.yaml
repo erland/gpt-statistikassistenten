@@ -69,6 +69,9 @@ completed_steps:
 - id: step-22
   title: Förbättra SCB-stöd för svensk handel och e-handel
   result: passed
+- id: step-23
+  title: Lägg till Statskontorets budgetutfall och myndighetsförteckning
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -93,5 +96,5 @@ project_hygiene:
 blocking_issues: []
 next_step:
   recommended: review-and-merge
-  title: Granska och merge:a SCB-handelsförbättringen
-  reason: SCB-routing och metodguardrails för svensk handel/e-handel är validerade och full CI passerar med 99 tester.
+  title: Granska och merge:a Statskontoret-integrationen
+  reason: Officiella öppna budgetdata och myndighetsförteckning är integrerade och full CI passerar med 110 tester.

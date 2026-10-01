@@ -110,5 +110,14 @@ Bas-URL: `https://data-api.ecb.europa.eu/service`. ECB använder SDMX 2.1 med me
 ## EUDA/SCORE wastewater analysis
 Metadata/factsheet: `https://www.euda.europa.eu/publications/pods/waste-water-analysis_en`. EUDA publicerar återanvändbara CSV-filer och platsmetadata. Den verifierade 2026-distributionen täcker studier 2011–2025. Huvudenheten är populationsnormaliserad restmängd, `mg/1000 population/day`. Kokain mäts via benzoylecgonine och cannabis via THC-COOH. Värdena beskriver drogrestbelastning i avloppsvatten och får inte beskrivas som antal användare eller prevalens. Ange EUDA och SCORE som källa och koppla platsinformation via SiteID.
 
+## Statskontoret – statens budget och myndighetsförteckning
+Statskontoret publicerar öppna data för månadsutfall och årsutfall för statens budget samt myndighetsförteckningen. Använd de officiella produktsidorna och den CSV/Excel-distribution som är publicerad där; anta inget odokumenterat Hermes-API.
+
+- **Månadsutfall**: från 2006; inkomster på inkomstundertitel och myndighet, utgifter på anslagspost/anslagsdelpost och myndighet.
+- **Årsutfall**: budget och utfall per anslag; årsutfallet ingår i Sveriges officiella statistik. Bevara preliminär/definitiv status.
+- **Myndighetsförteckning**: årsarbetskrafter och organisationsmetadata. Populationen skiljer sig från SCB:s myndighetsregister.
+
+Anslagsutgift/anslagsutfall är inte samma sak som en myndighets totala periodiserade kostnad. Årsarbetskrafter är inte samma mått som antal anställda. För antal anställda och löner per myndighet används SCB när motsvarande statistik finns. Filerna är CC0 enligt Statskontorets produktsidor.
+
 ## Tullverkets beslagsstatistik
 Officiell ingång: `https://www.tullverket.se/sv/omoss/beslagsstatistik.4.226de36015804b8cf353949.html`. Statistiken filtreras bland annat efter halvår, varutyp, varuslag, län och plats och kan exporteras till CSV. Verifiera alltid aktuella varutyper i källan; tjänsten omfattar bland annat alkohol, vapen/farliga föremål, dopningspreparat, läkemedel, narkotika, skjutvapen, sprängämnen och tobak. Ett stabilt generellt API är inte dokumenterat, så använd den officiella exportfunktionen i stället för antagna interna endpoints. Bevara enhet per rad (kilo/liter/styck), uppdateringsdatum och eventuella revideringar. Beslag är ett operativt utfall och inte ett direkt mått på konsumtion eller marknadsstorlek.
