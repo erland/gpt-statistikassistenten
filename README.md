@@ -45,7 +45,7 @@ Assistenten verifierar metadata före datauttag och skiljer alltid på hämtade 
 Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från samma canonical kontrakt via den vendorerade GPT Byggaren 1.5.0-toolchainen.
 ## Implementerade kärnfunktioner
 
-- SCB PxWebApi v2: tabellsökning, metadata-gate och verifierad uttagsplan.
+- SCB PxWebApi v2: tabellsökning, metadata-gate och verifierad uttagsplan, inklusive svensk handel, e-handel och hushållskonsumtion.
 - Eurostat SDMX 3.0: dataflow-katalog, strukturmetadata och verifierade komponentfilter.
 - Eurostat Comext: verifierad handelsplan för rapportör, partner, flöde, produkt, period och indikator.
 - Brå: produktbaserad adapter/fallback för anmälda/handlagda brott, misstänkta personer, handlagda brottsmisstankar och personer lagförda för brott.
