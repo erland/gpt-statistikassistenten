@@ -71,7 +71,7 @@ completed_steps:
   result: passed
 - id: step-23
   title: Lägg till Statskontorets budgetutfall och myndighetsförteckning
-  result: in_progress
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -95,6 +95,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: validate-statskontoret
-  title: Validera Statskontoret-integration
-  reason: Adapter, routing, metodregler och tester är implementerade för öppna budgetutfall och myndighetsförteckning.
+  recommended: review-and-merge
+  title: Granska och merge:a Statskontoret-integrationen
+  reason: Officiella öppna budgetdata och myndighetsförteckning är integrerade och full CI passerar med 110 tester.
