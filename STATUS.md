@@ -2,25 +2,17 @@
 
 ## Lägesbild
 
-Tidigare källutbyggnader är genomförda. Steg 23 lägger till Statskontorets öppna data för statens budget och myndighetsförteckning.
+Tidigare källutbyggnader är genomförda. Pågående steg 24 förbättrar elprisdata via SCB och lägger till Svenska kraftnäts Mimer API för fysisk elproduktion och elförbrukning.
 
-## Genomförd Statskontoret-integration
+## Pågående eldataförbättring
 
-- Månadsutfall för statens budget planeras från Statskontorets officiella öppna data, inklusive myndighet och anslagspost/anslagsdelpost.
-- Årsutfall används för budget och utfall per anslag med bevarad preliminär/definitiv status.
-- Myndighetsförteckningen används för årsarbetskrafter och organisationsmetadata.
-- Runtime väljer den aktuella CSV/Excel-distribution som publiceras på den officiella produktsidan; inget odokumenterat Hermes-API eller hårdkodat filnamn används.
-- SCB används fortsatt för antal anställda och löner per myndighet.
-- Metodregler skiljer anslagsutfall från myndighetens totala periodiserade kostnad samt årsarbetskrafter från antal anställda.
-
-## Validering
-
-- 110 regressionstester passerar.
-- Projektlint: 0 fel, 0 varningar.
-- Modellrobusthet: PASS.
-- Final hygiene: PASS.
-- Distribution validation: PASS.
+- SCB används för elhandelspris, elnätspris, elavtal och publicerade kund-/totalpriser.
+- Svenska kraftnät används för fysisk produktion/förbrukning efter verifierad typ, period och elområde/nätområde.
+- Energimyndigheten används fortsatt för bredare energi-/elanvändning och energibalanser.
+- Kundpris, spotpris och fysisk förbrukning behandlas som olika mått.
+- Nord Pool spotpris ingår ännu inte.
+- Mimer-adaptern verifierar produkt-/förbrukningstyp före data och skiljer Actual från Planned.
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #9.
+Kör full CI och merge:a först efter grön distributionsvalidering.
