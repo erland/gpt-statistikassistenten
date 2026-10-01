@@ -144,7 +144,10 @@ EUDA_TERMS = {
 }
 TULLVERKET_TERMS = {
     "tullverket", "tullens beslag", "tullbeslag", "beslagtagit", "beslagtaget",
-    "narkotikabeslag", "kokainbeslag", "cannabisbeslag", "amfetaminbeslag"
+    "narkotikabeslag", "kokainbeslag", "cannabisbeslag", "amfetaminbeslag",
+    "alkoholbeslag", "tobaksbeslag", "cigarettbeslag", "dopningsbeslag",
+    "läkemedelsbeslag", "vapenbeslag", "beslag av skjutvapen",
+    "beslagtagna skjutvapen", "beslag av sprängämnen", "beslagtagna sprängämnen"
 }
 
 PER_CAPITA_TERMS = {
@@ -204,7 +207,7 @@ def _signals(question: str) -> list[Signal]:
     if _contains_any(q, EUDA_TERMS):
         out.append(Signal("euda", 8, "Frågan gäller EUDA/SCORE:s öppna narkotikadata, särskilt avloppsmätningar."))
     if _contains_any(q, TULLVERKET_TERMS):
-        out.append(Signal("tullverket", 8, "Frågan gäller Tullverkets publika beslagsstatistik."))
+        out.append(Signal("tullverket", 8, "Frågan gäller Tullverkets publika beslagsstatistik för restriktionsvaror."))
     if _contains_any(q, SCB_TERMS):
         out.append(Signal("scb", 3, "Frågan innehåller svensk samhällsstatistik eller svensk geografi."))
     return out
@@ -327,7 +330,7 @@ def plan_sources(question: str) -> dict:
             "bis": "Sök och verifiera internationell finans- och bankstatistik via BIS SDMX API.",
             "ecb": "Sök och verifiera euroområdets monetära och finansiella statistik via ECB Data Portal SDMX.",
             "euda": "Sök och verifiera EUDA/SCORE:s öppna avloppsdata och platsmetadata före analys.",
-            "tullverket": "Sök och verifiera Tullverkets beslagsstatistik och använd officiell CSV-export utan antaget API.",
+            "tullverket": "Sök och verifiera Tullverkets beslagsstatistik för restriktionsvaror och använd officiell CSV-export utan antaget API.",
         }[source]
         step = {
             "id": f"source-{idx}-{source}",
