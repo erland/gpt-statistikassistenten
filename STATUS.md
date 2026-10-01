@@ -2,36 +2,26 @@
 
 ## Lägesbild
 
-Steg 25A och 25B är genomförda. Pågående steg 25C implementerar Source Query Plan v2 som faktisk planeringsguardrail på samma PR.
+Steg 25A–25C är genomförda. Pågående steg 25D gör extern fallback körbar när ingen integrerad källa täcker ett informationsbehov.
 
-## Implementerat i 25C
+## Implementerat i 25D
 
-- Ny `scripts/adaptive_source_planner.py`.
-- GPT:n gör semantisk nedbrytning av frågan; deterministisk kod validerar planen mot source registry.
-- Verktyget exponerar `registry_summary`, `source_capability` och `finalize_plan`.
-- `finalize_plan` avgör `direct`, `needs_user_review`, `needs_clarification` eller `blocked`.
-- Kända registry-källor får inte felaktigt märkas som externa eller få annan tier.
-- Oregistrerade källor får inte hävda tier A.
-- Extern primary/supporting-källa kräver explicit external fallback och disclosure.
-- Catalog-only, tier B/C, medium/low confidence och relevanta metodrisker leder till användargranskning.
-- Flera integrerade källor eller en enkel deterministisk beräkning kräver inte automatiskt granskning om confidence är high och inga relevanta metodrisker finns.
-- Canonical instruktion använder source registry som sanningskälla i stället för en duplicerad lång källista.
-- V1-plannern behålls som kompatibilitets-/guardrail under övergången.
-- OpenCode och tool contract har adaptive-source-planner registrerad.
-
-## Tester
-
-Nya runtime-tester täcker bland annat direktläge, metodrisk, säker flerkällskombination, catalog-only, extern fallback, confidence, clarification och felaktig extern tier A.
-
-## Validering
-
-- 136 regressionstester passerar.
-- Projektlint: 0 fel, 0 varningar.
-- Modellrobusthet: PASS.
-- Final hygiene: PASS.
-- Distribution validation: PASS.
-- OpenCode-build och verktygspaketering: PASS.
+- Nytt schema `schemas/external-source-assessment.schema.json`.
+- Ny `scripts/external_source_validator.py` med:
+  - sökordning för externa källor,
+  - tier B/C/D-validering,
+  - krav på definition, population, geografi, period, enhet och status/revision,
+  - krav på HTTPS och evidens,
+  - obligatorisk disclosure.
+- Tier B kräver officiell primärkälla eller officiell internationell organisation.
+- Tier C tillåts för trovärdig forskning/sekundär källa när officiell källa inte räcker.
+- Tier D blockeras.
+- Canonical instruktion kräver användargranskning innan extern sökning/exekvering.
+- Extern sökning ska leta efter dataset/källa, inte efter ett färdigformulerat svar.
+- Provenance har frivill quality_assurance-struktur för source tier, integrationsstatus och verifieringsstatus.
+- Quality gate blockerar externa resultat som saknar verifiering eller disclosure.
+- External source validator är registrerad som tool och OpenCode-wrapper.
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #12. Extern webbsökning/exekvering av fallback hålls som ett separat nästa steg efter merge.
+Kör full CI. Efter grön validering kan steg 25D markeras klart och PR:n granskas för merge.
