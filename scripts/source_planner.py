@@ -343,6 +343,22 @@ def plan_sources(question: str) -> dict:
 
     selected, trade_conflicts = _trade_conflict(question, selected)
     conflicts.extend(trade_conflicts)
+
+    # Resolve overlap between broad energy statistics and operational SVK data.
+    if "svk" in selected and "energimyndigheten" in selected:
+        svk_specific = any(term in q for term in (
+            "se1", "se2", "se3", "se4", "elområde", "nätområde",
+            "timvis", "timme", "förra månaden", "aktuell förbrukning"
+        ))
+        energy_specific = any(term in q for term in (
+            "kraftslag", "energibalans", "energianvändning", "årsvis", "årlig"
+        ))
+        if svk_specific and not energy_specific:
+            selected.remove("energimyndigheten")
+            conflicts.append("Detaljerad fysisk eldata per elområde/tid routas till Svenska kraftnät framför Energimyndigheten.")
+        elif energy_specific and not svk_specific:
+            selected.remove("svk")
+            conflicts.append("Bred energi-/kraftslagsstatistik routas till Energimyndigheten framför Svenska kraftnät.")
     if "comext" in selected and "eurostat" in scores and "eurostat" not in selected:
         conflicts.append("EU-signal finns, men detaljerad varuhandel routas till Comext i stället för generella Eurostat-adaptern.")
 
