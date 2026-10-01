@@ -766,5 +766,6 @@ external_fallback:
     - label_source_as_external_not_quality_assured_by_Statistikassistenten
   response_disclosure: >
     State that no integrated quality-assured source covered the required measure,
-    name the external source used, and distinguish source verification performed
-    for this answer from inclusion in the permanent source registry.
+    name the external source used, explicitly say that it is not quality-assured
+    by Statistikassistenten, and distinguish verification performed for this
+    answer from inclusion in the permanent source registry.
