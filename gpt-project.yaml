@@ -308,11 +308,11 @@ tools:
     mutates_workspace: false
     working_directory: workspace
     runtime_fallback: degrade
-  - id: source-planner-v2
+  - id: adaptive-source-planner
     type: script
     requirement: recommended
     purpose: Validera semantisk frågeplan mot source registry och välj direct eller review_before_execution.
-    script: scripts/source_planner_v2.py
+    script: scripts/adaptive_source_planner.py
     deterministic: true
     mutates_workspace: false
     working_directory: workspace
