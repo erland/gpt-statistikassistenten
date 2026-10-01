@@ -2,32 +2,17 @@
 
 ## Lägesbild
 
-Tidigare källutbyggnader är genomförda. Steg 21 breddar Brå från enbart anmälda brott till flera officiella produkter i rättskedjan.
+Tidigare källutbyggnader är genomförda. Pågående steg 22 förbättrar användningen av den befintliga generella SCB-adaptern för svensk handel, e-handel och hushållskonsumtion.
 
-## Genomförd Brå-utbyggnad
+## Pågående SCB-förbättring
 
-- Anmälda brott.
-- Handlagda brott.
-- Misstänkta personer.
-- Handlagda brottsmisstankar.
-- Personer lagförda för brott.
-- Narkotikabrott/preparat hanteras som dimensioner i generella Brå-produkter när de publiceras, inte som separat specialintegration.
-- Ingen generell Brå-API-endpoint antas; officiell tjänst, tabell eller publicerad fil verifieras per produkt.
-- OpenCode-adaptern stöder produktupptäckt, produktmetadata och validerade urvalsplaner.
-- Befintlig adapter för anmälda brott är bakåtkompatibel.
-
-## Metodprincip
-
-Personer, brott, brottsmisstankar och lagföringsbeslut är olika observationsenheter. Statistikassistenten väljer rätt produkt före datauttag och blandar dem inte utan METHOD-GATE.
-
-## Validering
-
-- 92 regressionstester passerar.
-- Projektlint: 0 fel, 0 varningar.
-- Modellrobusthet: PASS.
-- Final hygiene: PASS.
-- Distribution validation: PASS.
+- Detaljhandel, dagligvaru-/sällanköpsvaruhandel, försäljningsvolym, partihandel, e-handel och hushållens konsumtion routas tydligare till SCB.
+- Import/export, partnerland och varukod routas fortsatt till Comext.
+- Frågor som kombinerar inhemsk handel och utrikeshandel kan planera SCB + Comext.
+- Ingen ny SCB-handelsadapter eller hårdkodade tabell-ID:n införs.
+- Metodregler skiljer omsättning från volym, löpande från fasta priser, råa från kalender-/säsongskorrigerade serier samt företags- från konsument-e-handel.
+- Tabellspecifika symboler och dokumenterade metodförändringar ska verifieras via metadata/dokumentation före tolkning.
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #7.
+Kör full CI och merge:a först efter grön distributionsvalidering.
