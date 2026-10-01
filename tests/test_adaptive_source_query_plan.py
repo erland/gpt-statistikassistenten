@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _schema():
-    return json.loads((ROOT / "schemas/source-query-plan-v2.schema.json").read_text(encoding="utf-8"))
+    return json.loads((ROOT / "schemas/adaptive-source-query-plan.schema.json").read_text(encoding="utf-8"))
 
 
 def _validate(plan):
