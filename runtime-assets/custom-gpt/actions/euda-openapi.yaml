@@ -1,0 +1,27 @@
+openapi: 3.1.0
+info:
+  title: EUDA SCORE wastewater source data
+  version: 2026.1
+servers:
+  - url: https://d9www.euda.europa.eu
+paths:
+  /sites/default/files/data/data-nodes/33337/versions/5/ww2026-all-data_en.csv:
+    get:
+      operationId: getEudaWastewaterAllData2026
+      summary: Download EUDA/SCORE wastewater observations
+      responses:
+        '200':
+          description: EUDA/SCORE wastewater observations, studies 2011-2025
+          content:
+            text/csv:
+              schema: {type: string}
+  /sites/default/files/data/data-nodes/33337/versions/5/ww2026-site-info-table_en.csv:
+    get:
+      operationId: getEudaWastewaterSiteInfo2026
+      summary: Download EUDA/SCORE wastewater site metadata
+      responses:
+        '200':
+          description: Wastewater treatment site metadata
+          content:
+            text/csv:
+              schema: {type: string}
