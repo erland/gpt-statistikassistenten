@@ -22,6 +22,14 @@ Tidigare källutbyggnader är genomförda. Pågående steg 25A analyserar hur St
 - `schemas/source-registry.schema.json`
 - `tests/test_source_registry.py`
 
+## Validering
+
+- 122 regressionstester passerar.
+- Projektlint: 0 fel, 0 varningar.
+- Modellrobusthet: PASS.
+- Final hygiene: PASS.
+- Distribution validation: PASS.
+
 ## Nästa rekommenderade steg
 
-Validera 25A. Efter merge bör steg 25B definiera en ny fråge-/källplanmodell baserad på informationsbehov och källroller innan runtime-beteendet ändras.
+Granska och merge:a PR #11. Därefter bör steg 25B definiera en ny fråge-/källplanmodell baserad på informationsbehov och källroller innan runtime-beteendet ändras.
