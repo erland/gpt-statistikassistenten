@@ -85,8 +85,15 @@ def _validate_information_needs(plan: dict[str, Any]) -> set[str]:
             raise SourcePlannerV2Error(f"duplicate information need id: {need_id}")
         ids.add(need_id)
 
-        if not isinstance(need.get("breakdowns", []), list):
-            raise SourcePlannerV2Error(f"{need_id}.breakdowns must be a list")
+        breakdowns = need.get("breakdowns")
+        if not isinstance(breakdowns, list) or any(not isinstance(item, str) or not item.strip() for item in breakdowns):
+            raise SourcePlannerV2Error(f"{need_id}.breakdowns must be a list of strings")
+        if need.get("comparison_mode") not in {
+            "single_value", "trend", "cross_section", "national",
+            "municipal_comparison", "eu_harmonised", "oecd_harmonised",
+            "global_harmonised", "custom"
+        }:
+            raise SourcePlannerV2Error(f"{need_id}.comparison_mode is invalid")
         if not isinstance(need.get("derived"), bool):
             raise SourcePlannerV2Error(f"{need_id}.derived must be boolean")
         if need["derived"]:
@@ -152,6 +159,11 @@ def _validate_source_roles(plan: dict[str, Any], need_ids: set[str]) -> None:
                 raise SourcePlannerV2Error(
                     f"unregistered source {source_id} cannot be tier A"
                 )
+
+        _require_string(role.get("reason"), f"source_roles[{index}].reason")
+        limitations = role.get("limitations")
+        if not isinstance(limitations, list) or any(not isinstance(item, str) or not item.strip() for item in limitations):
+            raise SourcePlannerV2Error(f"source_roles[{index}].limitations must be a list of strings")
 
         if role_name == "primary":
             primary_by_need[need_id] += 1
@@ -253,8 +265,17 @@ def finalize_plan(plan: dict[str, Any]) -> dict[str, Any]:
     )
     if external_selected and not (isinstance(fallback, dict) and fallback.get("required") is True):
         raise SourcePlannerV2Error("external selected source requires external_fallback.required=true")
-    if fallback and fallback.get("required") and not fallback.get("disclosure_required"):
-        raise SourcePlannerV2Error("external fallback requires disclosure_required=true")
+    if fallback is not None:
+        if not isinstance(fallback, dict):
+            raise SourcePlannerV2Error("external_fallback must be an object")
+        if not isinstance(fallback.get("required"), bool):
+            raise SourcePlannerV2Error("external_fallback.required must be boolean")
+        _require_string(fallback.get("reason"), "external_fallback.reason")
+        _require_string(fallback.get("search_target"), "external_fallback.search_target")
+        if not isinstance(fallback.get("disclosure_required"), bool):
+            raise SourcePlannerV2Error("external_fallback.disclosure_required must be boolean")
+        if fallback.get("required") and not fallback.get("disclosure_required"):
+            raise SourcePlannerV2Error("external fallback requires disclosure_required=true")
 
     if any(
         role["role"] == "primary" and role["tier"] == "D"
