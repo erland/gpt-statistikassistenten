@@ -1,4 +1,4 @@
-from scripts.source_planner_v2 import SourcePlannerV2Error, finalize_plan, registry_summary, source_capability
+from scripts.adaptive_source_planner import SourcePlannerV2Error, finalize_plan, registry_summary, source_capability
 
 
 def base_need(need_id="population", measure="folkmängd"):
