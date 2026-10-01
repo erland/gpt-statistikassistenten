@@ -57,7 +57,7 @@ BRA_TERMS = {
     "lagförda personer", "lagförda för", "lagföringsbeslut", "påföljd",
     "strafföreläggande", "åtalsunderlåtelse",
     "misshandel", "bilstöld", "bilstölder", "inbrott", "narkotikabrott",
-    "rån", "stöld", "stölder", "trafikbrott", "bedrägeribrott", "skadegörelsebrott"
+    "stöld", "stölder", "trafikbrott", "bedrägeribrott", "skadegörelsebrott"
 }
 COMEXT_TERMS = {
     "import", "export", "utrikeshandel", "handelsvärde", "varukod",
@@ -71,6 +71,13 @@ SCB_TERMS = {
     "befolkning", "invånare", "folkmängd", "arbetslöshet", "sysselsättning",
     "bnp", "kpi", "inflation", "inkomst", "kommun", "län", "sverige",
     "företag", "födda", "döda"
+}
+SCB_TRADE_TERMS = {
+    "detaljhandel", "detaljhandeln", "detaljhandelsomsättning",
+    "försäljningsvolym", "dagligvaruhandel", "sällanköpsvaruhandel",
+    "partihandel", "butikshandel", "e-handel", "ehandel",
+    "e-handelsomsättning", "ehandelsomsättning", "handlar på nätet",
+    "köp via internet", "hushållens konsumtion", "konsumtionsindikator"
 }
 
 KOLADA_TERMS = {
@@ -171,7 +178,7 @@ def _contains_any(text: str, terms: Iterable[str]) -> bool:
 def _signals(question: str) -> list[Signal]:
     q = _norm(question)
     out: list[Signal] = []
-    if _contains_any(q, BRA_TERMS):
+    if _contains_any(q, BRA_TERMS) or re.search(r"(?<!\w)rån(?!\w)", q):
         out.append(Signal("bra", 7, "Frågan gäller Brås kriminal- eller rättsväsandestatistik."))
     if _contains_any(q, COMEXT_TERMS):
         out.append(Signal("comext", 6, "Frågan gäller import/export eller detaljerad varuhandel."))
@@ -213,7 +220,9 @@ def _signals(question: str) -> list[Signal]:
         out.append(Signal("euda", 8, "Frågan gäller EUDA/SCORE:s öppna narkotikadata, särskilt avloppsmätningar."))
     if _contains_any(q, TULLVERKET_TERMS):
         out.append(Signal("tullverket", 8, "Frågan gäller Tullverkets publika beslagsstatistik för restriktionsvaror."))
-    if _contains_any(q, SCB_TERMS):
+    if _contains_any(q, SCB_TRADE_TERMS):
+        out.append(Signal("scb", 7, "Frågan gäller svensk handel, e-handel eller hushållskonsumtion som SCB publicerar."))
+    elif _contains_any(q, SCB_TERMS):
         out.append(Signal("scb", 3, "Frågan innehåller svensk samhällsstatistik eller svensk geografi."))
     return out
 
@@ -237,6 +246,11 @@ def _trade_conflict(question: str, sources: list[str]) -> tuple[list[str], list[
         if not non_trade_eu:
             result.remove("eurostat")
             conflicts.append("Detaljerad varuhandel routas till Comext i stället för generella Eurostat-adaptern.")
+    if "comext" in result and "worldbank" in result:
+        non_trade_global = any(term in q for term in ("befolkning", "bnp", "fattigdom", "arbetslös", "inkomst"))
+        if not non_trade_global:
+            result.remove("worldbank")
+            conflicts.append("Global geografi kräver inte World Bank när frågan gäller detaljerad varuhandel via Comext.")
     return result, conflicts
 
 
@@ -287,8 +301,12 @@ def plan_sources(question: str) -> dict:
         if extra_scb and "scb" not in selected:
             selected.append("scb")
     if "comext" in selected and "scb" in scores:
-        # Swedish geography words are not enough to require SCB for a trade query.
-        extra_scb = any(term in q for term in ("befolkning", "bnp", "arbetslös", "inflation", "företag"))
+        # Swedish geography words alone do not require SCB for detailed goods trade,
+        # but a separate domestic trade/consumption metric should be retained.
+        extra_scb = (
+            _contains_any(q, SCB_TRADE_TERMS)
+            or any(term in q for term in ("befolkning", "bnp", "arbetslös", "inflation", "företag"))
+        )
         if extra_scb and "scb" not in selected:
             selected.append("scb")
 
@@ -315,7 +333,7 @@ def plan_sources(question: str) -> dict:
     steps = []
     for idx, source in enumerate(selected, start=1):
         purpose = {
-            "scb": "Sök och verifiera svensk officiell statistik via SCB innan datauttag.",
+            "scb": "Sök och verifiera svensk officiell statistik via SCB; för handel skilj omsättning, volym, e-handel och hushållskonsumtion innan datauttag.",
             "eurostat": "Sök och verifiera generell EU-statistik via Eurostat SDMX.",
             "comext": "Sök och verifiera detaljerad varuhandel via Eurostat/Comext.",
             "bra": "Välj och verifiera rätt Brå-produkt: anmälda brott, handlagda brott, misstänkta personer, handlagda brottsmisstankar eller personer lagförda för brott.",
