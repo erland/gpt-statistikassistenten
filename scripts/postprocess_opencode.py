@@ -9,7 +9,7 @@ OPS = {
  'scb-adapter': ('scb_adapter',['search_url','metadata_url','validate_selection','estimate_cells','post_request_plan']),
  'eurostat-adapter': ('eurostat_adapter',['dataflow_catalog_url','structure_url','validate_filters','data_request_plan']),
  'comext-adapter': ('comext_adapter',['dataflow_catalog_url','structure_url','validate_role_map','trade_request_plan']),
- 'bra-adapter': ('bra_adapter',['discovery_plan','validate_metadata_snapshot','reported_crimes_plan']),
+ 'bra-adapter': ('bra_adapter',['available_products','discovery_plan','product_discovery_plan','validate_product_snapshot','validate_metadata_snapshot','product_selection_plan','reported_crimes_plan']),
  'kolada-adapter': ('kolada_adapter',['docs_url','kpi_metadata_url','municipality_metadata_url','data_url','validate_kpi_metadata']),
  'socialstyrelsen-adapter': ('socialstyrelsen_adapter',['subjects_url','dimension_url','result_url']),
  'folkhalsodata-adapter': ('folkhalsodata_adapter',['root_url','node_url','query_plan']),
