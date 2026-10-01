@@ -60,6 +60,9 @@ completed_steps:
 - id: step-19
   title: EUDA och Tullverkets narkotikarelaterade öppna data
   result: passed
+- id: step-20
+  title: Generalisera Tullverkets beslagsstatistik
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -84,5 +87,5 @@ project_hygiene:
 blocking_issues: []
 next_step:
   recommended: review-and-merge
-  title: Granska och merge:a EUDA/Tullverket-utbyggnaden
-  reason: EUDA/SCORE och Tullverket är implementerade och full CI har passerat med 80 tester. Brå/RMV har analyserats separat utan implementation.
+  title: Granska och merge:a generell Tullverket-routing
+  reason: Tullverkets hela publika beslagsstatistik stöds nu generellt och full CI passerar med 82 tester. Brå är nästa separata steg.

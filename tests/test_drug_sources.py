@@ -18,11 +18,22 @@ class DrugSourceTests(unittest.TestCase):
             euda.validate_official_data_url("https://example.com/data.csv")
 
     def test_tullverket_plan(self):
-        plan=tull.seizure_plan(periods=["2025-H1","2025-H2"],commodity="Kokain",county="Stockholms län")
+        plan=tull.seizure_plan(periods=["2025-H1","2025-H2"],commodity_type="Narkotika",commodity="Kokain",county="Stockholms län")
         self.assertEqual(plan["method"],"official-page-csv-export")
         self.assertEqual(plan["filters"]["commodity_type"],"Narkotika")
         with self.assertRaises(tull.TullverketAdapterError):
             tull.seizure_plan(periods=["2025"])
+
+    def test_tullverket_general_seizure_types(self):
+        plan=tull.seizure_plan(periods=["2026-H1"],commodity_type="Skjutvapen")
+        self.assertEqual(plan["filters"]["commodity_type"],"Skjutvapen")
+        self.assertIsNone(tull.seizure_plan()["filters"]["commodity_type"])
+
+    def test_router_general_tullverket_seizures(self):
+        self.assertEqual(plan_sources("Hur många skjutvapen har Tullverket beslagtagit?")["sources"],["tullverket"])
+        self.assertEqual(plan_sources("Hur har tobaksbeslagen utvecklats?")["sources"],["tullverket"])
+        self.assertEqual(plan_sources("Hur mycket alkohol har Tullverket beslagtagit?")["sources"],["tullverket"])
+        self.assertEqual(plan_sources("Hur många beslag av sprängämnen gjorde Tullverket?")["sources"],["tullverket"])
 
     def test_router_drug_sources(self):
         self.assertEqual(plan_sources("Hur har kokain i avloppsvatten utvecklats i svenska städer?")["sources"],["euda"])
