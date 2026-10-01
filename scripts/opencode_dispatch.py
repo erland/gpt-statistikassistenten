@@ -29,6 +29,8 @@ ALLOW = {
   'who_adapter': {'hub_url','indicators_url','validate_official_url'},
   'bis_adapter': {'structure_url','data_url'},
   'ecb_adapter': {'dataflow_url','data_url'},
+  'euda_adapter': {'wastewater_metadata_url','wastewater_source_url','validate_official_data_url','wastewater_plan'},
+  'tullverket_adapter': {'statistics_url','seizure_plan'},
   'calculation_engine': {'absolute_change','percent_change','index_series','per_capita','share'},
   'presentation_export': {'from_statistical_result','from_calculation_result','to_markdown','to_csv'},
   'quality_gate': {'validate_statistical_result','validate_calculation_result','validate_presentation','run_quality_gate'},
