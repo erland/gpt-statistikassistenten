@@ -17,6 +17,17 @@
 Bas-URL: `https://statistikdatabasen.scb.se/api/v2`.
 Arbetsordning: sök `/tables` → verifiera `/tables/{id}/metadata` → hämta `/tables/{id}/data` med explicit selektion. Komplexa urval bör göras med POST. Max 150 000 dataceller per uttag. Verifiera obligatoriska variabler och värdekoder i metadata.
 
+## SCB – handel, e-handel och konsumtion
+Använd den generella SCB/PxWeb-adaptern även för svensk handel; skapa ingen separat handelsadapter. Relevanta produktfamiljer omfattar detaljhandelns omsättning/försäljningsvolym, partihandel, företagens e-handel, befolkningens e-handel och hushållens konsumtion.
+
+Metodregler:
+- skilj omsättning i löpande priser från försäljningsvolym/fasta priser,
+- skilj råa värden från kalenderkorrigerade och säsongsrensade serier,
+- välj näringsgren och referensperiod från metadata i stället för att hårdkoda tabell-ID,
+- skilj företagens e-handelsmått från konsumenternas internetköp,
+- kontrollera tabellens symbolförklaring; i vissa e-handelstabeller kan 0 betyda ett positivt värde under publiceringsgränsen medan `..` betyder saknat/osäkert värde,
+- kontrollera dokumenterade metod-/insamlingsförändringar före tidsjämförelser; detaljhandelsstatistiken ändrade delar av datainsamlingen 2026.
+
 ## Eurostat SDMX 3.0
 Bas-URL: `https://ec.europa.eu/eurostat/api/dissemination/sdmx/3.0`.
 Dataset kan upptäckas via Eurostats katalog eller dataflows. Hämta dataflow/DSD/codelists före tolkning av koder. Datafrågor kan använda series-key eller komponentfilter. Dataset med `DS-`-prefix hör till Comext.
