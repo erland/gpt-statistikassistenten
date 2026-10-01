@@ -41,6 +41,7 @@ Assistenten verifierar metadata före datauttag och skiljer alltid på hämtade 
 - `PROJECT.md` – målbild och arkitektur
 - `STATUS.md` – läsbar status
 - `schemas/` – kontraktsscheman
+- `knowledge/source-registry.yaml` – maskinläsbar katalog över källornas verkliga och integrerade kapacitet
 
 ## Distributioner
 

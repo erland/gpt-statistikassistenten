@@ -75,6 +75,9 @@ completed_steps:
 - id: step-24
   title: Förbättra elpris och fysisk elstatistik
   result: passed
+- id: step-25a
+  title: Källinventering och source registry
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -98,6 +101,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: review-and-merge
-  title: Granska och merge:a eldataförbättringen
-  reason: SCB-routing för kundpris/elavtal och Svenska kraftnäts Mimer-adapter för fysisk eldata är validerade och full CI passerar.
+  recommended: design-source-query-plan-v2
+  title: Definiera ny fråge- och källplanmodell
+  reason: Source registry är validerat för samtliga 23 integrerade källor; nästa steg är att modellera informationsbehov, källroller, risker och planeringsläge innan runtime ändras.
