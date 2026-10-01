@@ -7,7 +7,7 @@ Statistikassistenten är ett GPT-projekt för verifierbara frågor mot officiell
 - SCB Statistikdatabasen / PxWeb
 - Eurostat
 - Eurostat Comext
-- Brå, initialt statistik över anmälda brott
+- Brå: anmälda/handlagda brott, misstänkta personer, handlagda brottsmisstankar och lagförda
 - Kolada API v3
 - Socialstyrelsens Statistikdatabas
 - Folkhälsomyndighetens Folkhälsodata
@@ -48,7 +48,7 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 - SCB PxWebApi v2: tabellsökning, metadata-gate och verifierad uttagsplan.
 - Eurostat SDMX 3.0: dataflow-katalog, strukturmetadata och verifierade komponentfilter.
 - Eurostat Comext: verifierad handelsplan för rapportör, partner, flöde, produkt, period och indikator.
-- Brå: verifierad adapter/fallback för statistik över anmälda brott.
+- Brå: produktbaserad adapter/fallback för anmälda/handlagda brott, misstänkta personer, handlagda brottsmisstankar och personer lagförda för brott.
 - Kolada: kommun-/regionnyckeltal med metadata och källproveniens.
 - Socialstyrelsen: ämnes-/dimensionsstyrda uttag från Statistikdatabasen.
 - Folkhälsodata: PxWeb-baserade folkhälsoindikatorer.
@@ -73,7 +73,7 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 
 ## CI och release
 
-- `.github/workflows/ci.yml` kör lint, robusthetskontroll, 76 regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
+- `.github/workflows/ci.yml` kör lint, robusthetskontroll, 88 regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
 - `.github/workflows/release.yml` triggas när en GitHub Release publiceras. Taggar som `v1.0.0` eller `v1.0.0-rc1` styr versionsnumret i artefakterna.
 - Release-workflow bifogar alla ZIP-filer, `SHA256SUMS.txt` och `DELIVERY-MANIFEST.json` till releasen.
 - Custom GPT:s OpenAPI Actions ligger canonical i `runtime-assets/custom-gpt/actions/` och följer därför med deterministiskt i varje releasebygge.
