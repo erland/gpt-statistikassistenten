@@ -42,6 +42,7 @@ Assistenten verifierar metadata före datauttag och skiljer alltid på hämtade 
 - `STATUS.md` – läsbar status
 - `schemas/` – kontraktsscheman
 - `knowledge/source-registry.yaml` – maskinläsbar katalog över källornas verkliga och integrerade kapacitet
+- `schemas/source-query-plan-v2.schema.json` – nästa generations planmodell för informationsbehov, källroller och extern fallback
 
 ## Distributioner
 
