@@ -45,7 +45,9 @@
           "oecd",
           "who",
           "bis",
-          "ecb"
+          "ecb",
+        "euda",
+        "tullverket"
         ]
       },
       "uniqueItems": true,
@@ -88,7 +90,9 @@
               "oecd",
               "who",
               "bis",
-              "ecb"
+              "ecb",
+            "euda",
+            "tullverket"
             ]
           },
           "purpose": {
