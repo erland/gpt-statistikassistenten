@@ -68,6 +68,14 @@ När flera källor överlappar ska den mest primära/statistikansvariga källan 
 
 Generiska geografiord som Sverige, kommun eller län ska inte dra en fråga från en tydlig domänkälla till SCB.
 
+## Statliga myndigheter – ekonomi och personal
+
+- **Statskontoret** prioriteras för statens budget, anslag, anslagsposter, månads-/årsutfall och myndighetsförteckning/årsarbetskrafter.
+- **SCB** prioriteras för antal anställda, löner och personalstruktur i statlig sektor.
+- En fråga som jämför budget/anslagsutfall med personal kan använda Statskontoret + SCB, men först efter METHOD-GATE.
+- Anslagsutfall får inte beskrivas som myndighetens totala kostnad. Årsarbetskrafter och antal anställda är olika mått.
+- Använd endast Statskontorets publicerade öppna datafiler; bygg inte mot odokumenterade Hermes-endpoints.
+
 ## Narkotika, restriktionsvaror och drogrelaterade indikatorer
 
 - **EUDA/SCORE** prioriteras för avloppsmätningar av narkotikarester och europeiska stadsjämförelser. Avloppsdata är en samhällssignal och får inte omvandlas till antal användare eller prevalens utan separat metodstöd.
