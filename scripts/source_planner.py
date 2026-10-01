@@ -46,6 +46,7 @@ SOURCE_ADAPTER = {
     "euda": "scripts/euda_adapter.py",
     "tullverket": "scripts/tullverket_adapter.py",
     "statskontoret": "scripts/statskontoret_adapter.py",
+    "svk": "scripts/svk_adapter.py",
 }
 
 # Deliberately narrow, high-signal concepts. Broader language is handled by
@@ -83,6 +84,16 @@ STATSKONTORET_TERMS = {
     "årsutfall", "anslag", "anslagsutgift", "anslagspost", "anslagsdelpost",
     "budget mot utfall", "myndighetsförteckning", "årsarbetskrafter",
     "ledningsform"
+}
+SCB_ELECTRICITY_PRICE_TERMS = {
+    "elpris", "elpriser", "elhandelspris", "elhandelspriser", "elnätspris",
+    "elnätspriser", "elavtal", "avtalstyp", "fastprisavtal", "rörligt elpris",
+    "totalpris el", "pris på el för hushåll"
+}
+SVK_TERMS = {
+    "svenska kraftnät", "mimer", "elförbrukning", "elkonsumtion", "elanvändning",
+    "elproduktion", "förbrukning per elområde", "produktion per elområde",
+    "timvis förbrukning", "timvis produktion", "se1", "se2", "se3", "se4"
 }
 SCB_TRADE_TERMS = {
     "detaljhandel", "detaljhandeln", "detaljhandelsomsättning",
@@ -234,6 +245,10 @@ def _signals(question: str) -> list[Signal]:
         out.append(Signal("tullverket", 8, "Frågan gäller Tullverkets publika beslagsstatistik för restriktionsvaror."))
     if _contains_any(q, STATSKONTORET_TERMS):
         out.append(Signal("statskontoret", 8, "Frågan gäller Statskontorets öppna data om statens budget eller myndighetsförteckning."))
+    if _contains_any(q, SVK_TERMS):
+        out.append(Signal("svk", 8, "Frågan gäller fysisk elproduktion eller elförbrukning från Svenska kraftnät."))
+    if _contains_any(q, SCB_ELECTRICITY_PRICE_TERMS):
+        out.append(Signal("scb", 7, "Frågan gäller kundernas elpris, nätpris eller elavtal som SCB publicerar."))
     if _contains_any(q, SCB_AGENCY_EMPLOYMENT_TERMS):
         out.append(Signal("scb", 7, "Frågan gäller anställda eller löner i statliga myndigheter som SCB publicerar."))
     elif _contains_any(q, SCB_TRADE_TERMS):
@@ -344,7 +359,7 @@ def plan_sources(question: str) -> dict:
     if has_eu and has_scb and not explicit_sweden and not explicit_eu:
         ambiguities.append("Både svensk och europeisk statistik kan vara relevant, men geografin är inte tydlig.")
 
-    order = ("euda", "tullverket", "statskontoret", "bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "energimyndigheten", "forsakringskassan", "jordbruksverket", "skolverket", "smhi", "worldbank", "oecd", "who", "bis", "ecb", "comext", "scb", "eurostat")
+    order = ("euda", "tullverket", "statskontoret", "svk", "bra", "kolada", "socialstyrelsen", "folkhalsodata", "arbetsformedlingen", "riksbank", "energimyndigheten", "forsakringskassan", "jordbruksverket", "skolverket", "smhi", "worldbank", "oecd", "who", "bis", "ecb", "comext", "scb", "eurostat")
     selected = sorted(set(selected), key=lambda s: order.index(s))
     steps = []
     for idx, source in enumerate(selected, start=1):
@@ -371,6 +386,7 @@ def plan_sources(question: str) -> dict:
             "euda": "Sök och verifiera EUDA/SCORE:s öppna avloppsdata och platsmetadata före analys.",
             "tullverket": "Sök och verifiera Tullverkets beslagsstatistik för restriktionsvaror och använd officiell CSV-export utan antaget API.",
             "statskontoret": "Sök Statskontorets officiella öppna data för statens budget eller myndighetsförteckning och verifiera publicerad CSV/Excel-distribution.",
+            "svk": "Verifiera produkt-/förbrukningstyp i Svenska kraftnäts Mimer API och hämta fysisk produktion/förbrukning för vald period och elområde.",
         }[source]
         step = {
             "id": f"source-{idx}-{source}",
