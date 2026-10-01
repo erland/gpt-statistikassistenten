@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://statistikassistenten.local/schemas/external-source-assessment.schema.json",
+  "title": "External Source Assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_id", "organization", "dataset_title", "dataset_url",
+    "source_kind", "source_tier", "official_status", "access_method",
+    "need_id", "metadata_checks", "limitations"
+  ],
+  "properties": {
+    "source_id": {"type": "string", "minLength": 1},
+    "organization": {"type": "string", "minLength": 1},
+    "dataset_title": {"type": "string", "minLength": 1},
+    "dataset_url": {"type": "string", "format": "uri"},
+    "source_kind": {
+      "enum": ["official_primary", "official_international", "research", "secondary"]
+    },
+    "source_tier": {"enum": ["B", "C", "D"]},
+    "official_status": {
+      "enum": [
+        "official_statistics", "official_open_data", "official_operational_data",
+        "official_publication", "research_data", "secondary_compilation"
+      ]
+    },
+    "access_method": {"enum": ["api", "file", "web_service", "manual"]},
+    "need_id": {"type": "string", "minLength": 1},
+    "machine_readable": {"type": "boolean"},
+    "publisher_is_producer": {"type": "boolean"},
+    "metadata_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["definition", "population", "geography", "period", "unit", "status_or_revision"],
+      "properties": {
+        "definition": {"type": "boolean"},
+        "population": {"type": "boolean"},
+        "geography": {"type": "boolean"},
+        "period": {"type": "boolean"},
+        "unit": {"type": "boolean"},
+        "status_or_revision": {"type": "boolean"},
+        "license_or_terms": {"type": "boolean"}
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "evidence_urls": {
+      "type": "array",
+      "items": {"type": "string", "format": "uri"},
+      "uniqueItems": true
+    }
+  }
+}
