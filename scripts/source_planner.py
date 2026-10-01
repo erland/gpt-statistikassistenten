@@ -178,7 +178,7 @@ def _contains_any(text: str, terms: Iterable[str]) -> bool:
 def _signals(question: str) -> list[Signal]:
     q = _norm(question)
     out: list[Signal] = []
-    if _contains_any(q, BRA_TERMS) or re.search(r"(?<!\\w)rån(?!\\w)", q):
+    if _contains_any(q, BRA_TERMS) or re.search(r"(?<!\w)rån(?!\w)", q):
         out.append(Signal("bra", 7, "Frågan gäller Brås kriminal- eller rättsväsandestatistik."))
     if _contains_any(q, COMEXT_TERMS):
         out.append(Signal("comext", 6, "Frågan gäller import/export eller detaljerad varuhandel."))
