@@ -2,26 +2,17 @@
 
 ## Lägesbild
 
-Tidigare källutbyggnader är genomförda. Steg 22 förbättrar användningen av den befintliga generella SCB-adaptern för svensk handel, e-handel och hushållskonsumtion.
+Tidigare källutbyggnader är genomförda. Pågående steg 23 lägger till Statskontorets öppna data för statens budget och myndighetsförteckning.
 
-## Genomförd SCB-förbättring
+## Pågående Statskontoret-integration
 
-- Detaljhandel, dagligvaru-/sällanköpsvaruhandel, försäljningsvolym, partihandel, e-handel och hushållens konsumtion routas tydligare till SCB.
-- Import/export, partnerland och varukod routas fortsatt till Comext.
-- Frågor som kombinerar inhemsk handel och utrikeshandel kan planera SCB + Comext.
-- Ingen ny SCB-handelsadapter eller hårdkodade tabell-ID:n införs.
-- Metodregler skiljer omsättning från volym, löpande från fasta priser, råa från kalender-/säsongskorrigerade serier samt företags- från konsument-e-handel.
-- Tabellspecifika symboler och dokumenterade metodförändringar verifieras via metadata/dokumentation före tolkning.
-- Routingkonflikter har samtidigt korrigerats så att ordet `från` inte feltolkas som brottstypen rån och så att detaljerad varuhandel med exempelvis Kina inte felaktigt drar in World Bank.
-
-## Validering
-
-- 99 regressionstester passerar.
-- Projektlint: 0 fel, 0 varningar.
-- Modellrobusthet: PASS.
-- Final hygiene: PASS.
-- Distribution validation: PASS.
+- Månadsutfall för statens budget planeras från Statskontorets officiella öppna data, inklusive myndighet och anslagspost/anslagsdelpost.
+- Årsutfall används för budget och utfall per anslag med bevarad preliminär/definitiv status.
+- Myndighetsförteckningen används för årsarbetskrafter och organisationsmetadata.
+- Runtime väljer den aktuella CSV/Excel-distribution som publiceras på den officiella produktsidan; inget odokumenterat Hermes-API eller hårdkodat filnamn används.
+- SCB används fortsatt för antal anställda och löner per myndighet.
+- Metodregler skiljer anslagsutfall från myndighetens totala periodiserade kostnad samt årsarbetskrafter från antal anställda.
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #8.
+Kör full CI och merge:a först efter grön distributionsvalidering.
