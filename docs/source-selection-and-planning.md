@@ -12,6 +12,18 @@ Steg 7 inför ett källneutralt planeringslager mellan användarfrågan och de k
 6. En kombinationsplan är endast en plan. Resultat får inte kombineras förrän METHOD-GATE har verifierat definitioner, geografi, perioder och enheter.
 7. Vid verklig tvetydighet ska frågan markeras `needs_clarification` i stället för att en källa gissas.
 
+## Brå-produktval
+
+När en fråga gäller rättsväsendet ska Brå först väljas som källa och därefter rätt produkt:
+
+- **anmälda brott** för registrerade brottsanmälningar,
+- **handlagda brott** för avslutade brottsärenden, personuppklaring och lagföringsprocent,
+- **misstänkta personer** för antal/struktur bland personer som varit minst skäligen misstänkta,
+- **handlagda brottsmisstankar** för beslut kring enskilda brottsmisstankar,
+- **personer lagförda för brott** för lagföringsbeslut, huvudbrott, påföljder och andra publicerade lagföringsdimensioner.
+
+Narkotikabrott är inte en separat Brå-integration. Preparat, gärningstyp eller liknande används som produktdimension när den officiella lagföringsstatistiken erbjuder den. Personer, brott, brottsmisstankar och beslut är olika observationsenheter och får inte blandas utan METHOD-GATE.
+
 ## Konfliktregel Eurostat kontra Comext
 
 Comext är den specialiserade källan för detaljerad varuhandel. Om en fråga samtidigt innehåller EU-signaler och handelsdimensioner som import/export, partnerland eller varukod ska Comext prioriteras framför den generella Eurostat-adaptern. Generell Eurostat behålls bara när frågan dessutom kräver en annan EU-statistik.
