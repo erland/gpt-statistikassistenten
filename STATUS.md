@@ -2,29 +2,20 @@
 
 ## Lägesbild
 
-De ursprungliga 15 utvecklingsstegen och tre efterföljande källutbyggnader är genomförda. Den aktuella PR:n lägger till World Bank, OECD, WHO, BIS och ECB och gör Statistikassistenten till en svensk, europeisk och global statistikassistent.
+De ursprungliga utvecklingsstegen och tidigare källutbyggnader är genomförda. Pågående steg 19 lägger till två nyckelfria narkotikarelaterade källor: EUDA/SCORE och Tullverkets beslagsstatistik.
 
-## Validering
+## Pågående utbyggnad
 
-- 76 regressionstester passerar i GitHub Actions.
-- Projektlint: 0 fel, 0 varningar.
-- Modellrobusthet: godkänd.
-- Final hygiene: godkänd.
-- Distribution validation: PASS för projekt, ChatGPT Chat, ChatGPT Custom och OpenCode.
-- Custom GPT Actions verifieras för tidigare Actions samt World Bank, OECD, BIS och ECB.
+- EUDA/SCORE wastewater analysis: verifierad 2026-distribution med CSV för observationer och SiteID-baserad platsmetadata.
+- Tullverket: officiell beslagsstatistik med CSV-export, utan antagande om odokumenterat internt API.
+- Källplaneraren skiljer avloppsmätningar från tullbeslag och kan kombinera båda först efter METHOD-GATE.
+- ChatGPT Custom får EUDA Action; Tullverket använder officiell webb/CSV-fallback.
+- OpenCode får deterministiska wrappers för båda adaptrarna.
 
-## Nya källor i denna utbyggnad
+## Metodprinciper
 
-- World Bank Indicators API v2 – bred global utvecklings-, befolknings-, fattigdoms- och makrostatistik.
-- OECD Data Explorer – harmoniserade internationella jämförelser via SDMX.
-- WHO World Health Data Hub – global hälsostatistik via aktuell officiell export/API.
-- BIS Data Portal – internationell bank-, kredit-, bostadspris- och finansstatistik via SDMX.
-- ECB Data Portal – euroområdets monetära och finansiella statistik via SDMX.
-
-## Runtime-strategi
-
-World Bank, OECD, BIS och ECB har Custom GPT Actions. WHO använder verifierad World Health Data Hub-export/API-fallback eftersom det äldre GHO OData-gränssnittet är utfasat och inte ska byggas in som permanent kontrakt.
+Avloppsmätningar, beslag, brottsstatistik och vårdutfall mäter olika fenomen. Avloppsdata får inte beskrivas som antal användare/prevalens och beslag får inte beskrivas som konsumtion eller marknadsstorlek.
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #4. Därefter bör kärnuppsättningen av statistikkällor betraktas som tillräckligt bred; nya källor bör läggas till först när ett konkret användningsfall motiverar dem.
+Kör full CI/distributionsvalidering. Därefter görs en separat lämplighetsanalys av möjlig utökning av Brå och RMV innan någon sådan implementation påbörjas.
