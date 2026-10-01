@@ -22,6 +22,15 @@ Tidigare källutbyggnader och steg 25A är genomförda. Pågående steg 25B defi
 - `docs/source-query-plan-v2-examples.md`
 - `tests/test_source_query_plan_v2.py`
 
+## Validering
+
+- Source Query Plan v2-schema och exempel valideras av regressionstester.
+- Befintlig v1-planner och dess tester är oförändrade.
+- Projektlint: PASS.
+- Modellrobusthet: PASS.
+- Final hygiene: PASS.
+- Distribution validation: PASS.
+
 ## Nästa rekommenderade steg
 
-Validera 25B. Efter merge bör steg 25C implementera en planner som producerar v2-planer och beslutar mellan direktläge och användargranskning.
+Granska och merge:a PR #12. Därefter bör steg 25C implementera planner v2 och det adaptiva arbetsflödet.
