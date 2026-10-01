@@ -2,34 +2,26 @@
 
 ## Lägesbild
 
-Tidigare källutbyggnader är genomförda. Pågående steg 25A analyserar hur Statistikassistenten ska skala till många källor utan att källvalet blir ett växande nät av nyckelord och parvisa specialregler.
+Tidigare källutbyggnader och steg 25A är genomförda. Pågående steg 25B definierar nästa generations fråge- och källplanmodell utan att ändra runtime-beteendet.
 
-## Pågående källinventering
+## Pågående planmodell v2
 
-- Samtliga 23 integrerade källor finns i ett maskinläsbart source registry.
-- Registret skiljer uttryckligen mellan källans officiella katalog och vad nuvarande adapter kan hämta säkert.
-- Källorna klassificeras efter producentroll, geografi, frekvens, primär-/sekundär användning och begränsningar.
-- Aggregatorer ska bevara ursprunglig statistikproducent i proveniensen.
-- Primärkälla definieras per efterfrågat mått, inte som en global källranking.
-- Extern fallback definieras för fall där ingen integrerad källa täcker ett nödvändigt mått.
-- Externa officiella källor får användas efter metadata-/metodkontroll men ska tydligt märkas som ännu inte kvalitetssäkrade av Statistikassistenten.
-- Ingen runtime- eller planner-logik ändras i steg 25A.
+- Frågor modelleras som ett eller flera informationsbehov.
+- Varje informationsbehov beskriver mått, begrepp, population, geografi, period/frekvens, nedbrytningar och jämförelseläge.
+- Källor får rollerna primary, supporting, alternative eller excluded per informationsbehov.
+- Source tier och integrationsstatus följer source registry.
+- Kombination beskriver join-dimensioner, transformationer och metodrisker.
+- Direktläge och granskningsläge är explicit modellerade.
+- Extern fallback har eget planobjekt och kräver disclosure.
+- Befintlig source planner och v1-schema lämnas orörda i steg 25B.
 
 ## Artefakter
 
-- `docs/source-capability-analysis.md`
-- `knowledge/source-registry.yaml`
-- `schemas/source-registry.schema.json`
-- `tests/test_source_registry.py`
-
-## Validering
-
-- 122 regressionstester passerar.
-- Projektlint: 0 fel, 0 varningar.
-- Modellrobusthet: PASS.
-- Final hygiene: PASS.
-- Distribution validation: PASS.
+- `schemas/source-query-plan-v2.schema.json`
+- `docs/source-query-plan-v2-design.md`
+- `docs/source-query-plan-v2-examples.md`
+- `tests/test_source_query_plan_v2.py`
 
 ## Nästa rekommenderade steg
 
-Granska och merge:a PR #11. Därefter bör steg 25B definiera en ny fråge-/källplanmodell baserad på informationsbehov och källroller innan runtime-beteendet ändras.
+Validera 25B. Efter merge bör steg 25C implementera en planner som producerar v2-planer och beslutar mellan direktläge och användargranskning.
