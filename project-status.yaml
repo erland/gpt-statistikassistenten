@@ -80,7 +80,7 @@ completed_steps:
   result: passed
 - id: step-25b
   title: Ny fråge- och källplanmodell
-  result: in_progress
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -104,6 +104,6 @@ project_hygiene:
   report: reports/step-15-hygiene-prebuild.json
 blocking_issues: []
 next_step:
-  recommended: validate-source-query-plan-v2
-  title: Validera ny fråge- och källplanmodell
-  reason: V2-schema, designregler och exempel finns för direktläge, flerkällsgranskning och extern fallback utan att runtime ändrats.
+  recommended: implement-source-query-planner-v2
+  title: Implementera planner v2 och adaptivt planeringsläge
+  reason: V2-kontraktet är validerat; nästa steg är att producera planerna från source registry och växla mellan direktläge och användargranskning utan att förlora befintliga guardrails.
