@@ -6,7 +6,7 @@ Steg 25A och 25B är genomförda. Pågående steg 25C implementerar Source Query
 
 ## Implementerat i 25C
 
-- Ny `scripts/source_planner_v2.py`.
+- Ny `scripts/adaptive_source_planner.py`.
 - GPT:n gör semantisk nedbrytning av frågan; deterministisk kod validerar planen mot source registry.
 - Verktyget exponerar `registry_summary`, `source_capability` och `finalize_plan`.
 - `finalize_plan` avgör `direct`, `needs_user_review`, `needs_clarification` eller `blocked`.
@@ -17,7 +17,7 @@ Steg 25A och 25B är genomförda. Pågående steg 25C implementerar Source Query
 - Flera integrerade källor eller en enkel deterministisk beräkning kräver inte automatiskt granskning om confidence är high och inga relevanta metodrisker finns.
 - Canonical instruktion använder source registry som sanningskälla i stället för en duplicerad lång källista.
 - V1-plannern behålls som kompatibilitets-/guardrail under övergången.
-- OpenCode och tool contract har source-planner-v2 registrerad.
+- OpenCode och tool contract har adaptive-source-planner registrerad.
 
 ## Tester
 
