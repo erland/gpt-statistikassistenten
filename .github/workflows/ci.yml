@@ -32,9 +32,31 @@ jobs:
       - name: Final project hygiene
         run: python tools/gpt_builder/project_hygiene.py --project-root . --mode final
       - name: Build all distributions
-        run: python tools/gpt_builder/build_distributions.py --project-root . --version 0.0.0-ci --targets project,chat,custom-gpt,opencode
+        run: python tools/gpt_builder/build_distributions.py --project-root . --version 0.0.0-ci --targets project,chat,custom-gpt,opencode,plugin
       - name: Validate distributions
         run: python tools/gpt_builder/validate_distributions.py --project-root .
+      - name: Verify OpenAI Plugin resources are packaged
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP="dist/statistikassistenten-plugin-0.0.0-ci.zip"
+          unzip -l "$ZIP" | grep 'plugin.json'
+          unzip -l "$ZIP" | grep 'skills/statistikassistenten/SKILL.md'
+          unzip -l "$ZIP" | grep 'skills/statistikassistenten/references/source-registry.yaml'
+          unzip -l "$ZIP" | grep 'skills/statistikassistenten/scripts/adaptive_source_planner.py'
+          unzip -l "$ZIP" | grep 'skills/statistikassistenten/scripts/calculation_engine.py'
+          unzip -l "$ZIP" | grep 'skills/statistikassistenten/scripts/quality_gate.py'
+          python - <<'PY'
+          import json, zipfile
+          path = "dist/statistikassistenten-plugin-0.0.0-ci.zip"
+          with zipfile.ZipFile(path) as zf:
+              contract = json.loads(zf.read("runtime-contract.json"))
+          assert contract["runtime_id"] == "openai_plugin"
+          caps = contract["capabilities"]["requirements"]
+          assert caps["web"]["level"] == "required"
+          assert caps["structured_data"]["level"] == "required"
+          assert caps["code_execution"]["level"] == "recommended"
+          PY
       - name: Verify Custom GPT Actions are packaged
         shell: bash
         run: |
