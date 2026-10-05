@@ -87,6 +87,9 @@ completed_steps:
 - id: step-25d
   title: Extern källfallback
   result: passed
+- id: step-26
+  title: OpenAI Plugin-distribution
+  result: passed
 validation:
   last_result: passed
   checks:
@@ -112,4 +115,4 @@ blocking_issues: []
 next_step:
   recommended: usage-driven-maintenance
   title: Fortsätt utifrån verkliga användningsbehov
-  reason: Utvecklingsomgången med source registry, adaptiv källplanering och extern källfallback är komplett och validerad. Nya förändringar bör prioriteras utifrån faktisk användning, återkommande catalog-only-behov eller identifierade kvalitetsbrister.
+  reason: OpenAI Plugin-distributionen är aktiverad och validerad tillsammans med Chat, Custom GPT och OpenCode. Nya förändringar bör prioriteras utifrån faktisk användning, runtime-behov, återkommande catalog-only-behov eller identifierade kvalitetsbrister.

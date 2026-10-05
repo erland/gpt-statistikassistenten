@@ -29,10 +29,9 @@ analysis:
       reason: Byggd OpenCode-workspace med AGENTS.md, canonical Knowledge och genererade
         custom tools för de deterministiska statistikskripten.
     - runtime_id: openai_plugin
-      suitability: reduced
-      activate_by_default: false
-      reason: Skills är relevanta men full HTTP- och dataanalysparitet antas inte
-        i version 1.
+      suitability: equivalent_runtime_dependent
+      activate_by_default: true
+      reason: Skills-first runtime kan bevara canonical statistikflöde när hosten erbjuder web/HTTP och structured data; lokala scripts är rekommenderade guardrails med degrade-fallback.
 instructions:
   canonical: assistant/instructions.md
   core_contract:
@@ -173,19 +172,30 @@ runtime:
     templates:
       readme: templates/README.opencode.md.tpl
   plugin:
-    enabled: false
+    enabled: true
+    role: peer_distribution
+    mode: skills_first
+    layout:
+      manifest_file: plugin.json
+      skills: skills
+    templates:
+      readme: templates/README.plugin.md.tpl
+    validation:
+      require_skill: true
+      require_skill_frontmatter: true
 build:
   build_chat_zip: true
   build_custom_gpt_zip: true
   build_claude_zip: false
   build_opencode_zip: true
-  build_plugin_zip: false
+  build_plugin_zip: true
 build_system:
   targets:
   - project
   - chat
   - custom-gpt
   - opencode
+  - plugin
   runtime_targets:
     chat:
       runtime_id: chatgpt_chat
@@ -205,6 +215,12 @@ build_system:
       builder: opencode
       artifact_type: opencode_zip
       filename_pattern: <project-id>-opencode-<version>.zip
+    plugin:
+      runtime_id: openai_plugin
+      runtime_key: plugin
+      builder: plugin
+      artifact_type: plugin_zip
+      filename_pattern: <project-id>-plugin-<version>.zip
 runtime_parity:
   registered_runtimes:
   - chatgpt_chat
@@ -212,6 +228,15 @@ runtime_parity:
   - claude_projects
   - opencode
   - openai_plugin
+skills:
+  contract_version: 1
+  schema: schemas/skill-contract.schema.json
+  mode: explicit
+  definitions:
+  - id: statistikassistenten
+    name: statistikassistenten
+    description: Verifiera officiell statistik genom metadata-gate, datauttag, metodkontroll, deterministiska beräkningar och provenance; använd hostens web/API-stöd och paketerade script-resurser när de är tillgängliga.
+
 knowledge_architecture:
   canonical_root: knowledge
   principle: domain_reference_only

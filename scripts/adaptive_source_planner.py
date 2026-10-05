@@ -18,7 +18,9 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REGISTRY_PATH = ROOT / "knowledge" / "source-registry.yaml"
+_PROJECT_REGISTRY_PATH = ROOT / "knowledge" / "source-registry.yaml"
+_PLUGIN_REGISTRY_PATH = ROOT / "references" / "source-registry.yaml"
+REGISTRY_PATH = _PROJECT_REGISTRY_PATH if _PROJECT_REGISTRY_PATH.exists() else _PLUGIN_REGISTRY_PATH
 
 
 class SourcePlannerV2Error(ValueError):
