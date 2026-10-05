@@ -229,6 +229,9 @@ runtime_parity:
   - opencode
   - openai_plugin
 skills:
+  contract_version: 1
+  schema: schemas/skill-contract.schema.json
+  mode: explicit
   definitions:
   - id: statistikassistenten
     name: statistikassistenten
