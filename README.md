@@ -48,7 +48,9 @@ Assistenten verifierar metadata före datauttag och skiljer alltid på hämtade 
 
 ## Distributioner
 
-Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från samma canonical kontrakt via den vendorerade GPT Byggaren 1.5.0-toolchainen.
+Aktiva mål är ChatGPT Chat, ChatGPT Custom, OpenCode och OpenAI Plugin. Alla fyra byggs från samma canonical kontrakt via den vendorerade GPT Byggaren 1.5.0-toolchainen.
+
+OpenAI Plugin är skills-first med `equivalent_runtime_dependent` parity. Web/HTTP och structured data krävs för kärnflödet. Paketerade Python-scripts används som deterministiska guardrails när hostens code execution är tillgänglig; annars används deras deklarerade `degrade`-fallback utan simulerade scriptresultat.
 ## Implementerade kärnfunktioner
 
 - SCB PxWebApi v2: tabellsökning, metadata-gate och verifierad uttagsplan, inklusive svensk handel, e-handel och hushållskonsumtion.
@@ -81,8 +83,9 @@ Aktiva mål är ChatGPT Chat, ChatGPT Custom och OpenCode. Alla tre byggs från 
 
 ## CI och release
 
-- `.github/workflows/ci.yml` kör lint, robusthetskontroll, regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode och validerar distributionerna.
+- `.github/workflows/ci.yml` kör lint, robusthetskontroll, regressionstester, final hygiene, bygger projekt + Chat + Custom GPT + OpenCode + OpenAI Plugin och validerar distributionerna.
 - `.github/workflows/release.yml` triggas när en GitHub Release publiceras. Taggar som `v1.0.0` eller `v1.0.0-rc1` styr versionsnumret i artefakterna.
 - Release-workflow bifogar alla ZIP-filer, `SHA256SUMS.txt` och `DELIVERY-MANIFEST.json` till releasen.
 - Custom GPT:s OpenAPI Actions ligger canonical i `runtime-assets/custom-gpt/actions/` och följer därför med deterministiskt i varje releasebygge.
+- OpenAI Plugin använder hostens web/API-capabilities och paketerar canonical Knowledge som references, templates som assets och deklarerade runtime-scripts som skill-resurser.
 - Build-toolchainen från GPT Byggaren 1.5.0 är vendorerad under `tools/gpt_builder/` så CI inte är beroende av en separat lokal GPT Byggaren-installation.
