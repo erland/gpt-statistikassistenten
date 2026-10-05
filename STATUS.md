@@ -15,6 +15,7 @@ Den aktuella utvecklingsomgången är avslutad och projektet är i maintenance-l
 - Provenance och disclosure för externa källor.
 - Quality gates som blockerar otillräckligt verifierade externa källor.
 - Befintliga källadaptrar, distributioner, CI och releaseautomation kvarstår validerade.
+- OpenAI Plugin är tillagd som skills-first peer distribution med `equivalent_runtime_dependent` parity; web/structured data är kärnkrav och code execution är rekommenderad med degrade-fallback.
 
 ## Validering
 
