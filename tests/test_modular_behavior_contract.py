@@ -20,7 +20,7 @@ MAP = {
 }
 
 def sections(text):
-    matches = list(re.finditer(r"(?m)^## (.+?)\\s*$", text))
+    matches = list(re.finditer(r"(?m)^## (.+?)\s*$", text))
     result = {}
     for i, match in enumerate(matches):
         end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
