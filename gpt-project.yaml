@@ -38,7 +38,9 @@ analysis:
       reason: Skills-first runtime kan bevara canonical statistikflöde när hosten erbjuder web/HTTP och structured
         data; lokala scripts är rekommenderade guardrails med degrade-fallback.
 instructions:
-  canonical: assistant/instructions.md
+  mode: modular_skills
+  canonical: canonical/core.md
+  core: canonical/core.md
   core_contract:
     enabled: true
     required_markers:
@@ -260,10 +262,18 @@ skills:
   schema: schemas/skill-contract.schema.json
   mode: explicit
   definitions:
-  - id: statistikassistenten
-    name: statistikassistenten
-    description: Verifiera officiell statistik genom metadata-gate, datauttag, metodkontroll, deterministiska beräkningar
-      och provenance; använd hostens web/API-stöd och paketerade script-resurser när de är tillgängliga.
+  - id: statistikkallor
+    name: Statistikkällor
+    description: Välj och verifiera officiella statistikkällor, metadata, koder och datauttag, inklusive extern källgranskning.
+    source: canonical/skills/statistikkallor/behavior.md
+  - id: statistikkvalitet
+    name: Statistikkvalitet
+    description: Kör DATA-, METHOD-, PROVENANCE- och QUALITY-GATE, normalisering och verifierbara beräkningar.
+    source: canonical/skills/statistikkvalitet/behavior.md
+  - id: statistikpresentation
+    name: Statistikpresentation
+    description: Presentera verifierade statistiksvar och exportera observationer med tydliga metodnoter och källor.
+    source: canonical/skills/statistikpresentation/behavior.md
 knowledge_architecture:
   canonical_root: knowledge
   principle: domain_reference_only
