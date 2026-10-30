@@ -9,7 +9,7 @@ import sys
 import tempfile
 import zipfile
 
-PREFIX = 'skills/statistikassistenten/'
+SKILL_PREFIXES = tuple(f'skills/{skill}/' for skill in ('statistikkallor', 'statistikkvalitet', 'statistikpresentation'))
 
 def verify(plugin_path: Path, engine_path: Path, run_selftest: bool = True) -> dict:
     with zipfile.ZipFile(engine_path) as e, zipfile.ZipFile(plugin_path) as p:
@@ -30,12 +30,13 @@ def verify(plugin_path: Path, engine_path: Path, run_selftest: bool = True) -> d
             digest = hashlib.sha256(e.read(name)).hexdigest()
             if digest != expected:
                 raise ValueError('Engine checksum mismatch: ' + name)
-            plugin_name = PREFIX + ('references/' + name[len('knowledge/'):] if name.startswith('knowledge/') else name)
-            if name == 'scripts/engine_selftest.py' or name == 'scripts/__init__.py':
+            resource = 'references/' + name[len('knowledge/'):] if name.startswith('knowledge/') else name
+            if name in ('scripts/engine_selftest.py', 'scripts/__init__.py'):
                 continue  # Only carried by the separately packaged Engine.
-            if plugin_name not in p.namelist():
-                raise ValueError('Missing Plugin resource: ' + plugin_name)
-            if e.read(name) != p.read(plugin_name):
+            candidates = [prefix + resource for prefix in SKILL_PREFIXES if prefix + resource in p.namelist()]
+            if not candidates:
+                raise ValueError('Missing Plugin resource: ' + resource)
+            if any(e.read(name) != p.read(candidate) for candidate in candidates):
                 raise ValueError('Plugin and Engine resource diverged: ' + name)
         if run_selftest:
             with tempfile.TemporaryDirectory() as tmp:
