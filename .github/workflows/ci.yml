@@ -62,13 +62,16 @@ jobs:
           python - <<'PYCHK'
           import zipfile, os
           version = os.environ['VERSION']
+          skills = ('statistikkallor', 'statistikkvalitet', 'statistikpresentation')
           with zipfile.ZipFile(f'dist/statistikassistenten-plugin-{version}.zip') as z:
               names = set(z.namelist())
-              for path in ('plugin.json', 'skills/statistikassistenten/SKILL.md',
-                           'skills/statistikassistenten/references/source-registry.yaml',
-                           'skills/statistikassistenten/scripts/calculation_engine.py',
-                           'skills/statistikassistenten/scripts/quality_gate.py'):
-                  assert path in names, path
+              assert 'plugin.json' in names
+              for skill in skills:
+                  assert f'skills/{skill}/SKILL.md' in names, skill
+              for resource in ('references/source-registry.yaml',
+                               'scripts/calculation_engine.py',
+                               'scripts/quality_gate.py'):
+                  assert any(f'skills/{skill}/{resource}' in names for skill in skills), resource
           PYCHK
 
       - name: Verify Plugin and Engine handoff contract
