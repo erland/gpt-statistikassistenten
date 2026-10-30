@@ -1,8 +1,7 @@
 project:
   id: statistikassistenten
   name: Statistikassistenten
-  description: Assistent för verifierbara frågor mot officiell svensk, europeisk
-    och global statistik.
+  description: Assistent för verifierbara frågor mot officiell svensk, europeisk och global statistik.
   language: sv
   profile: workflow_research_heavy
   lifecycle: development
@@ -16,22 +15,28 @@ analysis:
       activate_by_default: true
       reason: Webbsökning, dataanalys och filhantering stödjer kärnflödet.
     - runtime_id: chatgpt_custom
-      suitability: equivalent
-      activate_by_default: true
-      reason: Byggd och validerad Custom GPT-distribution med nyckelfria Actions och verifierade officiella fallback-vägar för stödda källor.
+      suitability: reduced
+      activate_by_default: false
+      reason: Byggd och validerad Custom GPT-distribution med nyckelfria Actions och verifierade officiella fallback-vägar
+        för stödda källor.
     - runtime_id: claude_projects
       suitability: reduced
       activate_by_default: false
       reason: Instruktioner kan porteras men extern verktygsparitet kan inte förutsättas.
+    - runtime_id: claude_skills
+      suitability: reduced
+      activate_by_default: false
+      reason: Skill-paket går att bygga men exekveringsparitet med statistikskript är inte verifierad.
     - runtime_id: opencode
       suitability: equivalent
       activate_by_default: true
-      reason: Byggd OpenCode-workspace med AGENTS.md, canonical Knowledge och genererade
-        custom tools för de deterministiska statistikskripten.
+      reason: Byggd OpenCode-workspace med AGENTS.md, canonical Knowledge och genererade custom tools för de deterministiska
+        statistikskripten.
     - runtime_id: openai_plugin
       suitability: equivalent_runtime_dependent
       activate_by_default: true
-      reason: Skills-first runtime kan bevara canonical statistikflöde när hosten erbjuder web/HTTP och structured data; lokala scripts är rekommenderade guardrails med degrade-fallback.
+      reason: Skills-first runtime kan bevara canonical statistikflöde när hosten erbjuder web/HTTP och structured
+        data; lokala scripts är rekommenderade guardrails med degrade-fallback.
 instructions:
   canonical: assistant/instructions.md
   core_contract:
@@ -52,8 +57,7 @@ capabilities:
   requirements:
     web:
       level: required
-      reason: Aktuell metadata och officiell statistik måste kunna verifieras vid
-        frågetillfället.
+      reason: Aktuell metadata och officiell statistik måste kunna verifieras vid frågetillfället.
     filesystem:
       read: recommended
       write: recommended
@@ -133,7 +137,7 @@ runtime:
     enabled: true
     start_here_template: templates/START-HERE.chat.md.tpl
   custom_gpt:
-    enabled: true
+    enabled: false
     instruction:
       mode: compiled
       max_characters: 8000
@@ -150,7 +154,21 @@ runtime:
       directory: runtime-assets/custom-gpt/actions
       authentication: none
   claude:
-    enabled: false
+    enabled: true
+    role: peer_distribution
+    mode: claude_project
+    schema: schemas/claude-portable-runtime.schema.json
+    policy: assistant/policies/runtime-tools.md
+    model: docs/presentation-and-export.md
+    project:
+      instructions: project/instructions.md
+      knowledge: project/knowledge
+      runtime_contract: project/runtime-contract.json
+    templates:
+      readme: templates/README.claude.md.tpl
+    validation:
+      require_instructions: true
+      require_runtime_contract: true
   opencode:
     enabled: true
     role: peer_distribution
@@ -185,17 +203,20 @@ runtime:
       require_skill_frontmatter: true
 build:
   build_chat_zip: true
-  build_custom_gpt_zip: true
-  build_claude_zip: false
+  build_custom_gpt_zip: false
+  build_claude_zip: true
+  build_claude_project_zip: true
+  build_claude_skills_zip: true
   build_opencode_zip: true
   build_plugin_zip: true
 build_system:
   targets:
   - project
   - chat
-  - custom-gpt
-  - opencode
   - plugin
+  - claude_project
+  - claude_skills
+  - opencode
   runtime_targets:
     chat:
       runtime_id: chatgpt_chat
@@ -203,12 +224,6 @@ build_system:
       builder: chat
       artifact_type: chat_zip
       filename_pattern: <project-id>-chat-<version>.zip
-    custom-gpt:
-      runtime_id: chatgpt_custom
-      runtime_key: custom_gpt
-      builder: custom_gpt
-      artifact_type: custom_gpt_zip
-      filename_pattern: <project-id>-custom-gpt-<version>.zip
     opencode:
       runtime_id: opencode
       runtime_key: opencode
@@ -221,13 +236,25 @@ build_system:
       builder: plugin
       artifact_type: plugin_zip
       filename_pattern: <project-id>-plugin-<version>.zip
+    claude_project:
+      runtime_id: claude_project
+      runtime_key: claude
+      builder: claude
+      artifact_type: claude_project_zip
+      filename_pattern: <project-id>-claude-project-<version>.zip
+    claude_skills:
+      runtime_id: claude_skills
+      runtime_key: claude
+      builder: claude_skills
+      artifact_type: claude_skills_zip
+      filename_pattern: <project-id>-claude-skills-<version>.zip
 runtime_parity:
   registered_runtimes:
   - chatgpt_chat
-  - chatgpt_custom
   - claude_projects
   - opencode
   - openai_plugin
+  - claude_skills
 skills:
   contract_version: 1
   schema: schemas/skill-contract.schema.json
@@ -235,8 +262,8 @@ skills:
   definitions:
   - id: statistikassistenten
     name: statistikassistenten
-    description: Verifiera officiell statistik genom metadata-gate, datauttag, metodkontroll, deterministiska beräkningar och provenance; använd hostens web/API-stöd och paketerade script-resurser när de är tillgängliga.
-
+    description: Verifiera officiell statistik genom metadata-gate, datauttag, metodkontroll, deterministiska beräkningar
+      och provenance; använd hostens web/API-stöd och paketerade script-resurser när de är tillgängliga.
 knowledge_architecture:
   canonical_root: knowledge
   principle: domain_reference_only
@@ -589,3 +616,47 @@ model_robustness:
   separate_model_instructions: false
   prefer_deterministic_validation: true
   max_core_policy_hops: 1
+engine:
+  enabled: true
+  resources:
+  - scripts/__init__.py
+  - scripts/adaptive_source_planner.py
+  - scripts/arbetsformedlingen_adapter.py
+  - scripts/bis_adapter.py
+  - scripts/bra_adapter.py
+  - scripts/calculation_engine.py
+  - scripts/comext_adapter.py
+  - scripts/ecb_adapter.py
+  - scripts/energimyndigheten_adapter.py
+  - scripts/engine_selftest.py
+  - scripts/euda_adapter.py
+  - scripts/eurostat_adapter.py
+  - scripts/external_source_validator.py
+  - scripts/folkhalsodata_adapter.py
+  - scripts/forsakringskassan_adapter.py
+  - scripts/jordbruksverket_adapter.py
+  - scripts/kolada_adapter.py
+  - scripts/oecd_adapter.py
+  - scripts/presentation_export.py
+  - scripts/quality_gate.py
+  - scripts/riksbank_adapter.py
+  - scripts/scb_adapter.py
+  - scripts/skolverket_adapter.py
+  - scripts/smhi_adapter.py
+  - scripts/socialstyrelsen_adapter.py
+  - scripts/source_planner.py
+  - scripts/statskontoret_adapter.py
+  - scripts/svk_adapter.py
+  - scripts/tullverket_adapter.py
+  - scripts/who_adapter.py
+  - scripts/worldbank_adapter.py
+  - knowledge/source-registry.yaml
+  selftest: scripts/engine_selftest.py
+  required_files:
+  - scripts/calculation_engine.py
+  - scripts/quality_gate.py
+  - scripts/source_planner.py
+  - knowledge/source-registry.yaml
+  python_dependencies:
+  - PyYAML>=6.0
+  release_repository: erland/gpt-statistikassistenten

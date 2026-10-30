@@ -173,3 +173,15 @@ Aktiverade distributionsmål i första versionen: **ChatGPT Chat, ChatGPT Custom
 ## Nästa rekommenderade steg
 
 Alla 15 planerade utvecklingssteg är genomförda. Skapa en första GitHub Release Candidate, exempelvis `v1.0.0-rc1`, verifiera GitHub Actions-körningen och gå därefter vidare till stabil `v1.0.0` om RC:n är grön.
+
+## Migration mot GPT Byggaren 1.6.33 (2026-10-30)
+
+- Projektets källfiler och statistikbeteende har bevarats i en säker migrationskopia.
+- Kanonisk motor 1.6.33: integritet/självtest PASS; installation PASS.
+- Distributioner: Chat, Plugin, Claude Projects, Claude Skills och OpenCode byggda; distributionsvalidering PASS.
+- Projektets `unittest`-svit: 99 tester PASS i denna körning (tidigare uppgift om 147 regressionstester avser en annan körning).
+- Migreringen omfattar inte funktionell kontroll i verkliga runtimevärdar, live-API-anrop eller CI/release.
+- Projektspecifika Python-skript har bevarats. Eventuell separat statistik-Engine till Plugin kräver resursinventering och ett faktiskt självtest före aktivering.
+- Gamla byggverktyg har inte raderats innan CI- och beteendeparitet fastställts.
+
+Se `docs/migration-1.6.33.md` för öppna frågor och verifieringsomfattning.
