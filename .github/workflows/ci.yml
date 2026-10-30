@@ -76,3 +76,14 @@ jobs:
           python scripts/verify_plugin_engine_handoff.py \
             --plugin "dist/statistikassistenten-plugin-${VERSION}.zip" \
             --engine "dist/statistikassistenten-engine-${VERSION}.zip"
+
+      - name: Upload verified CI distribution archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: statistikassistenten-validated-ci-distributions
+          path: |
+            dist/statistikassistenten-*.zip
+            dist/SHA256SUMS.txt
+            dist/DELIVERY-MANIFEST.json
+          if-no-files-found: error
+          retention-days: 14
