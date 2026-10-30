@@ -1,0 +1,21 @@
+# Generated runtime and release output
+dist/
+build/
+release-assets/
+*.zip
+
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage/
+
+# OS and local files
+.DS_Store
+.env
+.env.*
+*.tmp
+*.swp

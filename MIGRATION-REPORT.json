@@ -1,0 +1,2292 @@
+{
+  "migration": {
+    "source_class": "L2",
+    "target_contract_version": 1,
+    "status": "no_changes"
+  },
+  "decisions": [
+    {
+      "area": "capabilities",
+      "action": "preserve",
+      "confidence": "not_applicable"
+    },
+    {
+      "area": "artifacts",
+      "action": "preserve",
+      "confidence": "not_applicable"
+    },
+    {
+      "area": "workspace_state",
+      "action": "preserve",
+      "confidence": "not_applicable"
+    },
+    {
+      "area": "tools",
+      "action": "preserve",
+      "confidence": "not_applicable"
+    }
+  ],
+  "warnings": [],
+  "changes": {},
+  "opencode": {
+    "status": "ready",
+    "reasons": [],
+    "can_enable_automatically": true,
+    "required_actions": []
+  },
+  "plugin": {
+    "status": "reduced",
+    "reasons": [
+      "Required persistent state depends on the host runtime in Plugin v1."
+    ],
+    "can_enable_automatically": false,
+    "required_actions": [
+      "Verify that the intended plugin host provides the required persistent state."
+    ]
+  },
+  "safe_copy": {
+    "source_type": "directory",
+    "source_unchanged": true,
+    "project_root": ".",
+    "destination": "/mnt/data/work_stat/upgraded"
+  },
+  "custom_gpt_retirement": {
+    "result": "changed",
+    "previously_enabled": true,
+    "legacy_configuration_preserved": true,
+    "automatic_plugin_conversion": false
+  },
+  "existing_project_assessment": {
+    "status": "review_required",
+    "project_contract_present": true,
+    "issues": [
+      "Previously enabled runtimes require independent parity review",
+      "Canonical instructions missing from expected modern source path"
+    ],
+    "dependency_inventory": {
+      "knowledge_files": [
+        "knowledge/KNOWLEDGE.md",
+        "knowledge/custom-gpt-actions.md",
+        "knowledge/source-and-method-reference.md",
+        "knowledge/source-registry.yaml"
+      ],
+      "candidate_scripts": [
+        "scripts/__init__.py",
+        "scripts/adaptive_source_planner.py",
+        "scripts/arbetsformedlingen_adapter.py",
+        "scripts/bis_adapter.py",
+        "scripts/bra_adapter.py",
+        "scripts/calculation_engine.py",
+        "scripts/comext_adapter.py",
+        "scripts/ecb_adapter.py",
+        "scripts/energimyndigheten_adapter.py",
+        "scripts/euda_adapter.py",
+        "scripts/eurostat_adapter.py",
+        "scripts/external_source_validator.py",
+        "scripts/folkhalsodata_adapter.py",
+        "scripts/forsakringskassan_adapter.py",
+        "scripts/jordbruksverket_adapter.py",
+        "scripts/kolada_adapter.py",
+        "scripts/oecd_adapter.py",
+        "scripts/opencode_dispatch.py",
+        "scripts/postprocess_opencode.py",
+        "scripts/presentation_export.py",
+        "scripts/quality_gate.py",
+        "scripts/riksbank_adapter.py",
+        "scripts/scb_adapter.py",
+        "scripts/skolverket_adapter.py",
+        "scripts/smhi_adapter.py",
+        "scripts/socialstyrelsen_adapter.py",
+        "scripts/source_planner.py",
+        "scripts/statskontoret_adapter.py",
+        "scripts/svk_adapter.py",
+        "scripts/tullverket_adapter.py",
+        "scripts/who_adapter.py",
+        "scripts/worldbank_adapter.py",
+        "tools/gpt_builder/build_distributions.py",
+        "tools/gpt_builder/lib/__init__.py",
+        "tools/gpt_builder/lib/project_model.py",
+        "tools/gpt_builder/lint_gpt_project.py",
+        "tools/gpt_builder/project_hygiene.py",
+        "tools/gpt_builder/validate_distributions.py",
+        "tools/gpt_builder/validate_model_robustness.py"
+      ],
+      "integration_manifests": [],
+      "tools_verified": false,
+      "knowledge_completeness_verified": false,
+      "review_required": true,
+      "limitations": [
+        "Packaged files do not prove tool availability or permissions.",
+        "A distribution may omit original Knowledge and source dependencies."
+      ]
+    },
+    "ready_for_modern_distribution_build": false,
+    "release_ready": false
+  },
+  "legacy_plugin_plan": {
+    "result": "not_applicable"
+  },
+  "apply": {
+    "result": "changed"
+  },
+  "engine_migration": {
+    "engine_required": "needs_review",
+    "engine_status": "review_required",
+    "engine_candidates": [
+      "scripts/__init__.py",
+      "scripts/adaptive_source_planner.py",
+      "scripts/arbetsformedlingen_adapter.py",
+      "scripts/bis_adapter.py",
+      "scripts/bra_adapter.py",
+      "scripts/calculation_engine.py",
+      "scripts/comext_adapter.py",
+      "scripts/ecb_adapter.py",
+      "scripts/energimyndigheten_adapter.py",
+      "scripts/euda_adapter.py",
+      "scripts/eurostat_adapter.py",
+      "scripts/external_source_validator.py",
+      "scripts/folkhalsodata_adapter.py",
+      "scripts/forsakringskassan_adapter.py",
+      "scripts/jordbruksverket_adapter.py",
+      "scripts/kolada_adapter.py",
+      "scripts/oecd_adapter.py",
+      "scripts/opencode_dispatch.py",
+      "scripts/postprocess_opencode.py",
+      "scripts/presentation_export.py",
+      "scripts/quality_gate.py",
+      "scripts/riksbank_adapter.py",
+      "scripts/scb_adapter.py",
+      "scripts/skolverket_adapter.py",
+      "scripts/smhi_adapter.py",
+      "scripts/socialstyrelsen_adapter.py",
+      "scripts/source_planner.py",
+      "scripts/statskontoret_adapter.py",
+      "scripts/svk_adapter.py",
+      "scripts/tullverket_adapter.py",
+      "scripts/who_adapter.py",
+      "scripts/worldbank_adapter.py",
+      "tests/test_adaptive_source_planner_runtime.py",
+      "tests/test_adaptive_source_query_plan.py",
+      "tests/test_bra_adapter.py",
+      "tests/test_bra_broad_routing.py",
+      "tests/test_calculation_engine.py",
+      "tests/test_chat_e2e.py",
+      "tests/test_comext_adapter.py",
+      "tests/test_drug_sources.py",
+      "tests/test_electricity_data.py",
+      "tests/test_eurostat_adapter.py",
+      "tests/test_extended_sources.py",
+      "tests/test_external_source_quality_gate.py",
+      "tests/test_external_source_validator.py",
+      "tests/test_international_sources.py",
+      "tests/test_more_open_sources.py",
+      "tests/test_opencode_dispatch.py",
+      "tests/test_presentation_export.py",
+      "tests/test_quality_gate.py",
+      "tests/test_scb_adapter.py",
+      "tests/test_scb_trade_routing.py",
+      "tests/test_source_planner.py",
+      "tests/test_source_registry.py",
+      "tests/test_statskontoret_adapter.py",
+      "tools/gpt_builder/lib/__init__.py",
+      "tools/gpt_builder/lib/project_model.py",
+      "tools/gpt_builder/project_hygiene.py",
+      "tools/gpt_builder/validate_model_robustness.py"
+    ],
+    "engine_configuration_present": false,
+    "engine_selftest_verified": false,
+    "plugin_repair_status": "needs_rebuild_and_host_verification",
+    "runtime_parity_status": "unverified",
+    "automatic_plugin_repair": false,
+    "automatic_engine_activation": false,
+    "release_ready": false,
+    "required_actions": [
+      "Classify candidate Python scripts as Plugin runtime requirements, tests, or build-only tools.",
+      "If executable Plugin scripts are required, declare engine.resources and a real engine.selftest.",
+      "Rebuild Plugin using the current canonical distribution builder; inspect Skills and resources.",
+      "Validate all five distributions and test the Plugin in its actual host.",
+      "Install/verify the current canonical builder only after reviewing the copied project schema and preserving project-specific files."
+    ]
+  },
+  "canonical_build_upgrade": {
+    "status": "blocked",
+    "stage": "canonical_engine_install",
+    "detail": "Traceback (most recent call last):\n  File \"/mnt/data/work_stat/engine/scripts/install_distribution_engine.py\", line 144, in <module>\n    main()\n    ~~~~^^\n  File \"/mnt/data/work_stat/engine/scripts/install_distribution_engine.py\", line 139, in main\n    for name in install(args.source, args.project_root):\n                ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/work_stat/engine/scripts/install_distribution_engine.py\", line 48, in install\n    raise ValueError(\"Missing platform-specific runtime targets: \" + \", \".join(sorted(missing)))\nValueError: Missing platform-specific runtime targets: claude_project, claude_skills",
+    "runtime_parity_status": "unverified",
+    "release_ready": false
+  },
+  "generic_discovery": {
+    "schema_version": 1,
+    "status": "analysis_required",
+    "source_files": [
+      {
+        "path": ".github/workflows/ci.yml",
+        "sha256": "a6e918754730f4a35fc0e5dc9c091c2c27f88d18df7243dd0ac291c75fd0ad8c",
+        "size": 4168,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": ".github/workflows/release.yml",
+        "sha256": "25c01086861a0dae390891dcf9adb2eeb7fe4f1bda32cbbea1d413f6125c80d1",
+        "size": 3719,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "PROJECT.md",
+        "sha256": "742f6dabb69c37c4516d289b24576141727d1918a21d9ec993b9152e2acbfa34",
+        "size": 959,
+        "candidate_roles": []
+      },
+      {
+        "path": "README.md",
+        "sha256": "040c154fe4f8a3f490c84e693df5e71452b4f9a4d9e9082cfdf335d1ff71da1a",
+        "size": 5637,
+        "candidate_roles": []
+      },
+      {
+        "path": "STATUS.md",
+        "sha256": "c2ed031ed8bf73b7822ed4432a2a04f963dfc604c7499e79f2cd4688ab8d0ef0",
+        "size": 1604,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/arbetsformedlingen/README.md",
+        "sha256": "6d11621f0d32e47039b3b48bb0688282702bebef1b89dae5067c5db2dac9da8d",
+        "size": 214,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/bis/README.md",
+        "sha256": "5299ec025ac2ec9f8e2e23b86a762827ca13f1b55dc16aa1b43038d8a6d38638",
+        "size": 297,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/bra/README.md",
+        "sha256": "92996fd5df6db57d88ce2314e87d4174c8e0df451dec5276729c5b99682e8d5e",
+        "size": 1376,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/comext/README.md",
+        "sha256": "df775df1fca1272aa6bcbe1547907ba05ad7ea881731d00115fd3c45255797d8",
+        "size": 1694,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/ecb/README.md",
+        "sha256": "0d5988f51f87806053c30600fb0ed079d9a28c44e36fb1f28b55e826f403660c",
+        "size": 256,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/energimyndigheten/README.md",
+        "sha256": "b548141cd5732fadf4e8f88cb6fb5964c1772095d9e26c260f8a6c7a871fd660",
+        "size": 352,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/euda/README.md",
+        "sha256": "2b4f270417f9e5f01737965330c85e70dd6cfb8ded4ddc0d62c8c84e76fb484b",
+        "size": 921,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/eurostat/README.md",
+        "sha256": "8f4ea720638b394db216771eb1392457472c1429ec077d776668b571fa9a1e5a",
+        "size": 1116,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/folkhalsodata/README.md",
+        "sha256": "7de5f59f5d9b56ba406fcbd238b2ec1d0cbf81136e9134cc79b72b231e133b5c",
+        "size": 209,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/forsakringskassan/README.md",
+        "sha256": "38029f87794f3c4c36ddbd24c4a48715b23cbe8db8535d9dcb7cf63d669442db",
+        "size": 353,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/jordbruksverket/README.md",
+        "sha256": "c18cea21bd4271dce0ec7777459168272107d10b35c77088b7b216645f7a60b4",
+        "size": 266,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/kolada/README.md",
+        "sha256": "850187115b1320b1bd2954143460c1c7d10d7cf38e39ab60287dcea5e7b5d0ad",
+        "size": 202,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/oecd/README.md",
+        "sha256": "e3f613361c1674c677449aa390eafeefe0d1b055b98236a58c2422a1c9de0971",
+        "size": 310,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/riksbank/README.md",
+        "sha256": "4fe59078a844f3bce66e98929753d6b11b7a1fff31967a6eaebc1c552f52d940",
+        "size": 204,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/scb/README.md",
+        "sha256": "a7f7e00a53b3388ae33dec866a3a5ac9f2a1daefb0d44665ac0f7d3b403c66dd",
+        "size": 1516,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/skolverket/README.md",
+        "sha256": "e01343fdc13f67c11502fba0fe03ff1ff65b485aff2726ecd35104a72654258c",
+        "size": 286,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/smhi/README.md",
+        "sha256": "135c41155f92060ef73286b2aea228c64ac718afa1fcb82df30f0c0ae58511de",
+        "size": 286,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/socialstyrelsen/README.md",
+        "sha256": "0e520a520f92436c0449e2672b0fe7908196d6e4780625685ca44bd0e007db52",
+        "size": 211,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/tullverket/README.md",
+        "sha256": "6b43bbaa06593c013dfd1a76ace0278da4d757704eb21670a0a4e3f957883126",
+        "size": 1283,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/who/README.md",
+        "sha256": "a971a36d6d12f122514e11005e129ff1f90dea56891dc046a93c7c7faa034436",
+        "size": 367,
+        "candidate_roles": []
+      },
+      {
+        "path": "adapters/worldbank/README.md",
+        "sha256": "ea4bd00e8d37f34c2e7a7a3260f141e19a5fddf528c5b8ecd01df31693b7617e",
+        "size": 353,
+        "candidate_roles": []
+      },
+      {
+        "path": "assistant/conversation-starters/01-statistik.md",
+        "sha256": "6eb6cce311db800fa1d7c5548dc71056b46e57bb2c25302a47b681d542a65e50",
+        "size": 269,
+        "candidate_roles": []
+      },
+      {
+        "path": "assistant/instructions.md",
+        "sha256": "dff864f11e2547d9e02d5aadc2b144d3d795ced1b41bc5b0aa3601058b1e3cbe",
+        "size": 7811,
+        "candidate_roles": [
+          "instruction_candidate"
+        ]
+      },
+      {
+        "path": "assistant/policies/development-workflow.md",
+        "sha256": "99d3b16f53723f48444cb3fd407d42566425a90ee2211c19f1b8434eeaff4ff8",
+        "size": 524,
+        "candidate_roles": []
+      },
+      {
+        "path": "assistant/policies/runtime-tools.md",
+        "sha256": "001566c8d2d1408ded9960fe220dd0f3a0acffd34ad2ee5e54b0a3dd4884fbc8",
+        "size": 414,
+        "candidate_roles": []
+      },
+      {
+        "path": "docs/adaptive-source-query-plan-design.md",
+        "sha256": "cf58167ed96878c0ca7cedd3f3d7eead0d1a5e95c344ee40cadb9d9e1e455610",
+        "size": 5307,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/adaptive-source-query-plan-examples.md",
+        "sha256": "a8ccecda9cb1332d57e06c467b83666126414bb74e21761287a2e1ec6793fef0",
+        "size": 5863,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/answer-contract.md",
+        "sha256": "8a0518c5d16e29992ae2532eca2ccd022abcf5f430aa19478308d56be5637a92",
+        "size": 1128,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/calculations-and-combined-measures.md",
+        "sha256": "6c709519b2e0c763512baac5b733c9632a44e7e05e29abf89c73b09124c99253",
+        "size": 1871,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/development-plan.md",
+        "sha256": "776b9b2d0c4ac083b57f571b23919b645eaa8acf170f1687e39f5fb976ef1668",
+        "size": 8128,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/drug-source-followup-analysis.md",
+        "sha256": "056c36dfc43c881b21b026505b49e486319eba269f2282df9c292f7ace42c245",
+        "size": 4121,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/presentation-and-export.md",
+        "sha256": "3f9d898ee6f441c8841497d831d3caf1950805ae1a4b3fc565315c2e34ebd8f0",
+        "size": 1977,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/quality-and-method-gates.md",
+        "sha256": "b333ffc81e3430424310b7b2a86f6b98276c3bb8f3a86dea2abd5502db4b6e39",
+        "size": 1792,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/release-and-ci.md",
+        "sha256": "e1c3a393983103d2b32710524d58797e4295e0fcf7f2f80fd372b0fbb9281d36",
+        "size": 1399,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/source-capability-analysis.md",
+        "sha256": "3042349297b215d9c2d7cfd3c7e047d3c4e90dfb79de22c6129467f82c052d8b",
+        "size": 14064,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/source-selection-and-planning.md",
+        "sha256": "745fc607ac3705c22d809cd04294c181d522a269c16bbc09c2a0ae15e4052ca5",
+        "size": 8655,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "docs/statistical-model.md",
+        "sha256": "017e5e23cac8f35d6b4775aede215b9b063dab8ef75f54c76c7094ce75d4937a",
+        "size": 3184,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "evals/model-compatibility/01-multi-turn-retention.yaml",
+        "sha256": "f3efa13f84958f2367d0ea6737d5dfade43415c7351fb22c292a9a3269faeae5",
+        "size": 342,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/model-compatibility/02-error-recovery.yaml",
+        "sha256": "36b16c3aa57834cfe3f5088446d1b387ed25158b2be6bc9f5729bedfaa9cd282",
+        "size": 255,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/model-compatibility/03-terminal-behavior.yaml",
+        "sha256": "ccc5e9e521b820b646cd29c043c8064975f57b4cb0e7aecb5c3768e39130a79d",
+        "size": 263,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "evals/model-compatibility/04-resume-development.yaml",
+        "sha256": "72623c0c4fbb0c4e6b0fe340b58e8530c78292be992bac3748f3e60f36937d05",
+        "size": 304,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/bra-query-plan.json",
+        "sha256": "2d97f673b3e59970154139a28d69bc65b9358102417a9f16184050a258570930",
+        "size": 716,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/calculation-per-capita.json",
+        "sha256": "324ef5606fdda65e58835c9686979e13bd9bf74b0c971df9495970780d5c7e8d",
+        "size": 642,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/comext-query-plan.json",
+        "sha256": "50975e32b2a3be9c08eae0d695b8e81ebaae4a81ac2ca20da4bb3f422cdb54dd",
+        "size": 208,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/eurostat-query-plan.json",
+        "sha256": "6f2f984751159da4e6931a3ed0b64cc2d3b50acaf7096ad4d05523fb7b8e7f01",
+        "size": 485,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/normalized-bra.json",
+        "sha256": "0007fbd313988c37784dcf6e2d69cfba33aa9a8c0b80892c47bbaa21d147329d",
+        "size": 1474,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/normalized-eurostat.json",
+        "sha256": "30d9e6f1341da1f06a426d75e717d74c310c8058346d09f21909114f3cdafea0",
+        "size": 1541,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/normalized-scb.json",
+        "sha256": "7282100786c83aedc0d8404b0d8e5acaca522434f0059e3b7eebc829e0b0b034",
+        "size": 1175,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/presentation-scb.json",
+        "sha256": "09bb1ba1f80fc86d67b1868a54f02574f10bff7f6d9abdf502dcfed7a364e916",
+        "size": 466,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/quality-gate-pass.json",
+        "sha256": "3b31f55f9c065997ffbe94b6ba61de8c84f36d7f3595f39cb2443be852023649",
+        "size": 221,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/scb-query-plan.json",
+        "sha256": "b0b92fd40c0e9ecbe58765d329929375f78949bbc4643e4df18fbe3b3200bead",
+        "size": 1611,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "examples/source-plan-bra-scb.json",
+        "sha256": "3d55c6e620f0e8c76cde80447a853657331bf252a08649010bdc9237e64bde2a",
+        "size": 1106,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "gpt-project.yaml",
+        "sha256": "e88edfb8f114f2e7ec7cd4ca4619a7a206e4bc92522b232e30c1f1dd3e750038",
+        "size": 18080,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/KNOWLEDGE.md",
+        "sha256": "9beb98a043db95a8ab16908690023405acd80dff9e697359b7740116f3968335",
+        "size": 182,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/custom-gpt-actions.md",
+        "sha256": "3f5cce34d8a03754b3648d1e4dfab3f1666ca663d05e23b0fe347b902bd8fabc",
+        "size": 2655,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/source-and-method-reference.md",
+        "sha256": "665dcbc984d26f7809b8ff74a6a4b1940f3da3d6fb34a7c1be65787d9e147940",
+        "size": 12058,
+        "candidate_roles": [
+          "knowledge_candidate"
+        ]
+      },
+      {
+        "path": "knowledge/source-registry.yaml",
+        "sha256": "ac4f2f650c9b5685f7a00c0e1b2af16ecbf5feb818f26adf4e4de0d975f7d253",
+        "size": 29094,
+        "candidate_roles": [
+          "knowledge_candidate",
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "project-status.yaml",
+        "sha256": "ad9a6a7d1a7d6bb32a9914d470b0955b1b2f9360c1dfa8178a36060eb7aba81c",
+        "size": 3284,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-1-hygiene-final.json",
+        "sha256": "f9683db0c2610d613f30270ae156372f5cfb75e93dfc96d5ec2ace1a5e73045a",
+        "size": 82,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-1-hygiene.json",
+        "sha256": "f9683db0c2610d613f30270ae156372f5cfb75e93dfc96d5ec2ace1a5e73045a",
+        "size": 82,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-1-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-1-lint.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-10-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-10-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-10-quality-gate-validation.json",
+        "sha256": "96e137ae64118ef5b3a59ef069cfa721c957475fa434aeee25bd6d446b42673b",
+        "size": 296,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-11-chat-package-validation-final.json",
+        "sha256": "3fa9058f44c422e191bdba3049b78cb42896c7b632f7b717bd7378038f3f7b72",
+        "size": 702,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-11-chat-package-validation.json",
+        "sha256": "f68aafd6639e281294bad3ca6deece45dd6adb3e7186c69f76c7d1a2d9ece429",
+        "size": 702,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-11-distribution-validation-final.txt",
+        "sha256": "a8adc8a5a215695aa757b27236f29495558fc38bf7eba9675c7b26af6d63315f",
+        "size": 17,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-11-distribution-validation.txt",
+        "sha256": "a8adc8a5a215695aa757b27236f29495558fc38bf7eba9675c7b26af6d63315f",
+        "size": 17,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-11-hygiene-final.json",
+        "sha256": "f9683db0c2610d613f30270ae156372f5cfb75e93dfc96d5ec2ace1a5e73045a",
+        "size": 82,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-11-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-11-lint-prebuild.json",
+        "sha256": "42fc1f92596255c2f57995fa698c0ca6d6294f882f633f854efd6c284c010a28",
+        "size": 784,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-11-model-robustness-final.txt",
+        "sha256": "ecb2267fdb199d18376ad4caf479f8e218b6bfe618655e97c6565d30189dcf70",
+        "size": 29,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-11-model-robustness.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-11-tests.txt",
+        "sha256": "d064a10e3dd21784ed34e437c9523b1b683ed28c0178fd3f058879a565d6ebed",
+        "size": 99,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-12-custom-gpt-validation.json",
+        "sha256": "a4d146965fe191580f69a08abba37b78def4ed10a1c36b8a2b67600fc2243ac3",
+        "size": 434,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-12-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-12-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-12-tests.txt",
+        "sha256": "1a1f4c0606542f2764cffd50cc95c080b15c207a119c0a2b1b710db8367f45d7",
+        "size": 162,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-13-distribution-validation.txt",
+        "sha256": "a8adc8a5a215695aa757b27236f29495558fc38bf7eba9675c7b26af6d63315f",
+        "size": 17,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-13-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-13-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-13-tests.txt",
+        "sha256": "b27181346f95e0f9062379374e681f3932f29693892c722c51f68bd8e77815a3",
+        "size": 99,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-14-hygiene-final.json",
+        "sha256": "f044279a948fe0caac387955386dc90848df2ab08cd04bb9a58bb6348185cd2f",
+        "size": 49,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-14-release-readiness.json",
+        "sha256": "c1233345b0835066dfa31ea24f4c7bc5e0b21c8baaad1d9d25f491fc91f34b16",
+        "size": 607,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-14-runtime-parity.md",
+        "sha256": "d65b544d3749658bd1fbcfb64d9c5690ec0012e11a43d3f9f97e9f670f9d5b16",
+        "size": 946,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-14-tests.txt",
+        "sha256": "906b207ec4a3bbf98f8eb50e2776c8ed684995fd8f62df4817f759895adf1766",
+        "size": 99,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-15-distribution-validation.txt",
+        "sha256": "a8adc8a5a215695aa757b27236f29495558fc38bf7eba9675c7b26af6d63315f",
+        "size": 17,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-15-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-15-hygiene-prebuild.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-15-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-15-lint.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-15-model-robustness-final.txt",
+        "sha256": "ecb2267fdb199d18376ad4caf479f8e218b6bfe618655e97c6565d30189dcf70",
+        "size": 29,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-15-model-robustness.txt",
+        "sha256": "ecb2267fdb199d18376ad4caf479f8e218b6bfe618655e97c6565d30189dcf70",
+        "size": 29,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-15-release-automation.json",
+        "sha256": "7de0f169b94591e2d5ed9fcafcd3f54631065ab172ad56ef4e7ad67364a6e822",
+        "size": 689,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-15-tests.txt",
+        "sha256": "96b40c17b4c42023ef0074e4f06bd96e35abff7c6536a827e6db0af0382ed32f",
+        "size": 99,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-2-hygiene-final.json",
+        "sha256": "f9683db0c2610d613f30270ae156372f5cfb75e93dfc96d5ec2ace1a5e73045a",
+        "size": 82,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-2-hygiene.json",
+        "sha256": "f9683db0c2610d613f30270ae156372f5cfb75e93dfc96d5ec2ace1a5e73045a",
+        "size": 82,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-2-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-2-lint.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-2-model-validation.json",
+        "sha256": "904b9eec04bb5739ed561d180461709330897c0288ec9a41ec6a16b701050776",
+        "size": 603,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-3-hygiene-final.json",
+        "sha256": "f9683db0c2610d613f30270ae156372f5cfb75e93dfc96d5ec2ace1a5e73045a",
+        "size": 82,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-3-hygiene.json",
+        "sha256": "f9683db0c2610d613f30270ae156372f5cfb75e93dfc96d5ec2ace1a5e73045a",
+        "size": 82,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-3-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-3-lint.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-3-scb-adapter-validation.json",
+        "sha256": "04781f44b45a94d39a0694be125dffc65a1b31df1f899bd2464582bab01e1837",
+        "size": 694,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-3-scb-sources.md",
+        "sha256": "f139ab0ace3c8ee0fce90bb6aca2fa4e19646488e5f7587c27750ce7f4bea9fd",
+        "size": 1110,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-4-eurostat-adapter-validation.json",
+        "sha256": "7fa8613096e6b29868b808b02ac4f90d06ec4413372a5d76c1c9a6de92a73283",
+        "size": 122,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-4-eurostat-sources.md",
+        "sha256": "49fd6f2defe101e4f94e493bcb5f8f53fd4c01e590680a2e075ad46d9dfebaae",
+        "size": 1121,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-4-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-4-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-4-lint.json",
+        "sha256": "e095f6ac3ad46304bf27bb7169b1b7bc8ebbd7cd674b5656df687ca08ec1856f",
+        "size": 427,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-5-comext-adapter-validation.json",
+        "sha256": "df482fd525856c0fa6012683e06bc5e0dab6112a5fcc4eb1e89b738572dfa2ec",
+        "size": 548,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-5-comext-sources.md",
+        "sha256": "87f6726a824be822d2f5890c6a26df1f44df12e9c531eee2cba51104bdd31005",
+        "size": 785,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-5-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-5-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-6-bra-adapter-validation.json",
+        "sha256": "f6cb6fa1ec6890f9e5fcbd4681ed6d3f71ac3f1f175f510e75fbae6fa4f61ac3",
+        "size": 2195,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-6-bra-sources.md",
+        "sha256": "17d0fc4459ec49b8e48b7c8c44506cf05d455ded46cad3a04707dedd01d9d890",
+        "size": 978,
+        "candidate_roles": []
+      },
+      {
+        "path": "reports/step-6-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-6-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-7-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-7-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-7-source-planner-validation.json",
+        "sha256": "b1ee49759b4e795349b027438e07213c1a698fee703bc3b3af5cb94284251493",
+        "size": 126,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-8-calculation-validation.json",
+        "sha256": "ef0ff468061390db1e80f1013ba5cbd781b757744da998d617fde824060e7f07",
+        "size": 491,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-8-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-8-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-9-hygiene-final.json",
+        "sha256": "15685ea22362fa0b5e98e324a54540f8098cdbcc0870ecf24894c6ce8e240261",
+        "size": 77,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-9-lint-final.json",
+        "sha256": "83da785f976af69b80bea736f7d09e026b0f540e90d31537c477709ef73fcb45",
+        "size": 115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "reports/step-9-presentation-export-validation.json",
+        "sha256": "71bb27ed1fe185fe78f4dce50730756d0952d1493c7f11a7725a801e3b9b334c",
+        "size": 438,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/README.md",
+        "sha256": "475e56398862e01beb2b039e1b189f60f1c79b75056b765e0d4a3d048f74c286",
+        "size": 332,
+        "candidate_roles": []
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/arbetsformedlingen-openapi.yaml",
+        "sha256": "648cff062b3687bcf3de460c3f42c6cde0895f66a0b87f2c5fb096ee6fa521cb",
+        "size": 802,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/bis-openapi.yaml",
+        "sha256": "a4ec88efe02cc5e6baa281efe8ea26f81c977482ec22ccf30abd90bbd7e147e9",
+        "size": 1194,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/comext-openapi.yaml",
+        "sha256": "b558faa32acbd6e031fe77439aeda1909ad2be754eb4aa2441a7bb4bfd8739f3",
+        "size": 2087,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/ecb-openapi.yaml",
+        "sha256": "9f24ba96ef7096cadbb8e53efebf8f3818e08c085dea814ea26f36c21f747ccb",
+        "size": 811,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/euda-openapi.yaml",
+        "sha256": "3b212c33383ecfa957936acdaa23f075cadd96999babd32ac63bbca0977c6bb9",
+        "size": 892,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/eurostat-openapi.yaml",
+        "sha256": "dec0e41f56fce3385d98386730136e5335fe4149eb185239a446174c2eebc4fa",
+        "size": 2271,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/forsakringskassan-openapi.yaml",
+        "sha256": "0baf0c153c796740646949ed1a895be81df5a0b7b151b40140e7a3315cf36c1e",
+        "size": 834,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/kolada-openapi.yaml",
+        "sha256": "7f61897c9211098349e15e16559978227fe044b15378ccaa70415c466ec53774",
+        "size": 968,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/oecd-openapi.yaml",
+        "sha256": "f082bb74ed5df129b942ac9b61904e6b8cdb98ea02251f70ebdfad5908fe3666",
+        "size": 1081,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/riksbank-openapi.yaml",
+        "sha256": "7246e9b699e200d1600f5233c772f71ecd64c3374a312d1b08ea248d2ac493fa",
+        "size": 1202,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/scb-openapi.yaml",
+        "sha256": "0d66e52bc316603b476f03aa8852a57bb032de3e780ca4a972dacb4e1c33b08c",
+        "size": 2870,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/smhi-openapi.yaml",
+        "sha256": "9e9052c10c0bde8ba8348ac921cb0559290c576786ad98e39b633844d69842a6",
+        "size": 1830,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/socialstyrelsen-openapi.yaml",
+        "sha256": "ac1fefee5a08f1dd8ee798f1d419b516532a1c8bb5e97cf099a7188b835af589",
+        "size": 686,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "runtime-assets/custom-gpt/actions/worldbank-openapi.yaml",
+        "sha256": "fd324805f22a34d3c6a3532e77ac31cff4fd2b426a641c6b63111406245c27c2",
+        "size": 1312,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/adaptive-source-query-plan.schema.json",
+        "sha256": "0697564334b52588556c8df6f41b1ac250f8f88a1ed3736302ede7e2f7a45052",
+        "size": 4952,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/artifact-contract.schema.json",
+        "sha256": "a6a43ab42dad9e8f6ca7a2d3837ff0223515e76165b0eefdd4ebb9dd7a0dc23a",
+        "size": 1354,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/bra-adapter.schema.json",
+        "sha256": "a907ca6e24eb4ff40fcb17014f0605d410c5efa5797d50ca433e034fff4c0a00",
+        "size": 1414,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/calculation-result.schema.json",
+        "sha256": "38eeac4f4ad9781a68836ae9edcb67bc55ae155ee780af881637abcc1c789a6c",
+        "size": 1582,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/capability-contract.schema.json",
+        "sha256": "c922623d738c2026bf4dddcacfeb3cf9fb6c3e0865b701873566b37dbdea6b8f",
+        "size": 2483,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/comext-adapter.schema.json",
+        "sha256": "e577a40b89ed8f6563b4c8e089742e73242630acc2127b022f81de990b963cd0",
+        "size": 1085,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/eurostat-adapter.schema.json",
+        "sha256": "0549ade152d7b536fb99e1380b4cacea7ca7338cc02903b409d03e92cd71ea36",
+        "size": 917,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/external-source-assessment.schema.json",
+        "sha256": "d7e64e9b1def1a9ecd345f0b12162bc16d94fbedef94421dec395b858bad32d6",
+        "size": 2049,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/presentation-result.schema.json",
+        "sha256": "698818f88010b74eed15b2d70fbe7b530ea632c0208587ec2fee9e437bf951f9",
+        "size": 1582,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/provenance.schema.json",
+        "sha256": "14ba9db40d55ca112e74f3682cc25e8975bf58dd830b8e703df3e0fb5825f9a9",
+        "size": 2446,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/quality-gate-report.schema.json",
+        "sha256": "bbc0b4a2aa05d507c1dfd8dd0f9875b7cb33c7af528db9f691dd3d82dcf24229",
+        "size": 958,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/scb-adapter.schema.json",
+        "sha256": "3b9e5fee57789fcf6519e040e0c7b7b046a8373f0a235972728646052f99d639",
+        "size": 2816,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/skill-contract.schema.json",
+        "sha256": "e7881ab5fb193c40938f401d5b18412bfc9611fddf1e1b57cd60eb3263f9d655",
+        "size": 1191,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/source-query-plan.schema.json",
+        "sha256": "1652f1a59cdbaac9c7302450af0f80c531bd7f85185ef027e7e65c2bca165037",
+        "size": 3656,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/source-registry.schema.json",
+        "sha256": "859027634f9b2564f53327773728ee914bad4627bab35c2aaa47716e180674db",
+        "size": 2656,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/statistical-answer.schema.json",
+        "sha256": "c92e4ba7c2b5213b422d6ca28c27d012f9ab47aca7b80e5f466ae673c4243641",
+        "size": 1341,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/statistical-query.schema.json",
+        "sha256": "7e7d2f86ee2b8b943bfd2a260fa047bd99aa939b0e6e9560ac48df6e11ab43f4",
+        "size": 2230,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/statistical-result.schema.json",
+        "sha256": "962dc143f00a34f27cf78156f3872865e3621402ea067b2df06bc48da740888d",
+        "size": 3808,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/tool-contract.schema.json",
+        "sha256": "e646dd38600d82640811be3778c41bd355d4a5dee3e3723ba18765e3c14215ed",
+        "size": 2115,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "schemas/workspace-state-contract.schema.json",
+        "sha256": "3474310e87da743687ad367e9b1b70c7bf9d8bed2aca80afa9d2a5208136454d",
+        "size": 2141,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "scripts/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/adaptive_source_planner.py",
+        "sha256": "e214a3b4b03a4f2af2439e8ca324c08bec7efcce1f7ce4edf51be078c77e4ac1",
+        "size": 13859,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/arbetsformedlingen_adapter.py",
+        "sha256": "a85846ed56a8089e31ef839a2a053be612be5e4004ddc3490eb431b42c7eefd9",
+        "size": 1265,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/bis_adapter.py",
+        "sha256": "f81bf8b153dddb7635e824fc8bc5d7aace5e19ef87913702455cbf8eed83d64a",
+        "size": 1128,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/bra_adapter.py",
+        "sha256": "098981b4471ee060b6782ee4d66f1f9fb8564347eb76dca4380486fd97abee39",
+        "size": 12446,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/calculation_engine.py",
+        "sha256": "4f03484fc049e68909fd4a11d1e44fa5babcf4ec1ac870a0bb469d2927170699",
+        "size": 11739,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/comext_adapter.py",
+        "sha256": "c445174a7ae265e82813a731034707a72e45769670b84b27c748720e67176bc3",
+        "size": 6987,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/ecb_adapter.py",
+        "sha256": "f55645ad353d35ecbefa95fdb4a00be117dd5b31f440279c609791fa3700317b",
+        "size": 959,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/energimyndigheten_adapter.py",
+        "sha256": "ef1f922d5dc3319d24edf539e823026400bb03622dd2221ad7c044665297a507",
+        "size": 1565,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/euda_adapter.py",
+        "sha256": "3430449f0bceacb34408c444dc77e2296a9a572d00d56a9ff4ef74be30331008",
+        "size": 2609,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/eurostat_adapter.py",
+        "sha256": "8b4384d86c6818206f4c53f63973f20d4728effeb281a50fcef7feb04624a145",
+        "size": 5580,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/external_source_validator.py",
+        "sha256": "d565a54447f4473cf2b6f730c3f253372a71660e0abbab352e56c492a4345831",
+        "size": 5793,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/folkhalsodata_adapter.py",
+        "sha256": "63ac58fc4ad44a8f4aa5872ee923145b020ae3c00f854a8b133699019a41b320",
+        "size": 1508,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/forsakringskassan_adapter.py",
+        "sha256": "4d06df7869668a0f28aef7cdaea8018b1392b4c4c08a1e6eb316028f4af2caf9",
+        "size": 1071,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/jordbruksverket_adapter.py",
+        "sha256": "32283e9cb4eac9c253fbcca4d23fbbfd0caa0f55dfef36c55edce0a9cc33a363",
+        "size": 1556,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/kolada_adapter.py",
+        "sha256": "94428f2f9af446df588ccd3d80737975c6a8af54a0b20fcc7d7b38600d66a4a3",
+        "size": 2557,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/oecd_adapter.py",
+        "sha256": "7580a244f518e08de107804789e230d5341d6c014d17172b1d04865a248dd098",
+        "size": 1296,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/opencode_dispatch.py",
+        "sha256": "d559ef2470f9d701c043abbb918b3fd436853b7cc5f0312ebb8d279fd3742856",
+        "size": 3872,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/postprocess_opencode.py",
+        "sha256": "97f96f35c22d5973486a5044b149a5dcae6ed92ff451f993347250806f532a0a",
+        "size": 5153,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/presentation_export.py",
+        "sha256": "1ed611c3380c3edbe15f6cc6b2070ae4be67ec09987b3c1d564ba5fcd4e255ef",
+        "size": 6307,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/quality_gate.py",
+        "sha256": "c49c88aa1de8b12da979d287b8ff33fab2f3d362403e531934fa37663b0b0152",
+        "size": 8202,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/riksbank_adapter.py",
+        "sha256": "99a92dea10ecdce280c06423abd81a03626230253b0693d8c3f2f6f2612be18f",
+        "size": 1114,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/scb_adapter.py",
+        "sha256": "edcb792c93bf690b767dde92d40207da7e466612eccb957ec96e30c06a7f2eb4",
+        "size": 5487,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/skolverket_adapter.py",
+        "sha256": "7d57bcab5919f90b6071a9e7d6a66f2709d1e5a9e158b57b300eb7de40dd7617",
+        "size": 876,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/smhi_adapter.py",
+        "sha256": "3e206b658965ff5b3004433fa3881f12aa02720bdd4ff89fc42ef4f15f5e7c17",
+        "size": 1196,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/socialstyrelsen_adapter.py",
+        "sha256": "6479f2ea13b73c2fb1bbfaa12bdebecc266f5849d467d5813b07ac46fa1fe838",
+        "size": 1912,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/source_planner.py",
+        "sha256": "65e9645d740a0aa5731f1424fc3f6bf39ab7236af0d06b285521bcc09ba00873",
+        "size": 23726,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/statskontoret_adapter.py",
+        "sha256": "9eb5a2a8cce6f2f2c4df68a20c2705935c7037d6d2a7150fbe0e6aa08c9295bf",
+        "size": 4447,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/svk_adapter.py",
+        "sha256": "13f64be5c1b6a1f6ed2303e680fbe1cecc48a2b3358557371c658ce584200cb6",
+        "size": 2312,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/tullverket_adapter.py",
+        "sha256": "7bdefc224cb9d1c44973f05b44bb1dc246e5215036fc3384d06f1f7a798a06e0",
+        "size": 2076,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/who_adapter.py",
+        "sha256": "884f7fbd143d5401e00c44db01a04952736b4b843fcdc4550cf5b2b3b91581da",
+        "size": 802,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "scripts/worldbank_adapter.py",
+        "sha256": "07c412b5d1a99667bf721986845f3aaa88c2a0e3f5d6e450f8e0554682c518f0",
+        "size": 1930,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "templates/CAPABILITIES.custom-gpt.md.tpl",
+        "sha256": "f6aa29e736414b4bb4f318aebf3be3f0108aa6c258a5e385a1e58cb5e10a5775",
+        "size": 173,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/COMPATIBILITY.custom-gpt.md.tpl",
+        "sha256": "e335703f132da96ca225ac4e3011a53eb79a25ba61861bbef2ba76a96159b701",
+        "size": 661,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/README.custom-gpt.md.tpl",
+        "sha256": "1014633c7a6b3c5682818ffa98cf2b597507108eb03fef5b24d4edff5aea2af2",
+        "size": 925,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/README.opencode.md.tpl",
+        "sha256": "0d835d788d40239d37f8db39e55729fbdda77362c13a383dc4d2992c9b492bb1",
+        "size": 1808,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/README.plugin.md.tpl",
+        "sha256": "07e6bc464cafee8d6421c7c2fbe86be541180c79bea6a48c0ae6a669908f8f0f",
+        "size": 697,
+        "candidate_roles": []
+      },
+      {
+        "path": "templates/START-HERE.chat.md.tpl",
+        "sha256": "ebbf1721f466beb1977f0c79817d2630d5a3fd8a5750b70c272bfce228c162b5",
+        "size": 772,
+        "candidate_roles": []
+      },
+      {
+        "path": "tests/fixtures/scb/tab638-metadata-minimal.json",
+        "sha256": "6ed6ba0b6c945177f45d83d4ed4c8b07a512d0c003882b9c0852898821762944",
+        "size": 895,
+        "candidate_roles": [
+          "configuration_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_adaptive_source_planner_runtime.py",
+        "sha256": "e39c694ad6f626cd08322cd40bc867d489369a214ac3ee15422ebd2711e6e49f",
+        "size": 6583,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_adaptive_source_query_plan.py",
+        "sha256": "0ef9764420a8a9f3d97497e0b37dfd121fc742d1e8fd6c69ea7888fa6cd73e8b",
+        "size": 6531,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_bra_adapter.py",
+        "sha256": "3ac2f5cd2fdc88dfe62c20cfd2169cb5dc8f873670cce067e6833be93efcaead",
+        "size": 5630,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_bra_broad_routing.py",
+        "sha256": "43cb0795aba58b7c01093730619767fb4694b0c964c98f612fa69a6f88e33185",
+        "size": 1188,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_calculation_engine.py",
+        "sha256": "44520286544302b244b6b878bbbdbd5903a96a370418b072794e5550626ce639",
+        "size": 5278,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_chat_e2e.py",
+        "sha256": "e86cb3bc06c19f6867c76da96c7dd0c8e4d5d84774ac8d3a159882f0e351b59a",
+        "size": 2351,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_comext_adapter.py",
+        "sha256": "1ed143bbac6937827f63f0366276c22baacdd4123cfbecfaccac2e6e2c8bb474",
+        "size": 2819,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_drug_sources.py",
+        "sha256": "01304f24670df131e6f8cad1fd8f54bed541c1f76d461a4151f48d714516441c",
+        "size": 2598,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_electricity_data.py",
+        "sha256": "c568482fa7a12399c05e5a211a1ef6dd04d5ffe07103224c76eae0fb0b449344",
+        "size": 1832,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_eurostat_adapter.py",
+        "sha256": "2f63b4dbb4256622d14577e7f35c307c1684b57642c1640083854b4f092d5c63",
+        "size": 2208,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_extended_sources.py",
+        "sha256": "26dc2228cb145764dc5eb54770e5b1b030f3dbbf0d6ee344de4fdc6ce60d5ae1",
+        "size": 2371,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_external_source_quality_gate.py",
+        "sha256": "3aaa73741d29c897030b2c10bf3b08b59e844547100dad5794758ded938403b2",
+        "size": 2354,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_external_source_validator.py",
+        "sha256": "7ccfe8fa4bece22ddbc023d24939b9bdce90354e2f9a77664b0089aa1720be3a",
+        "size": 2900,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_international_sources.py",
+        "sha256": "da5686512de0cfca5b3898014d6563026c630861dc3f70ed31b8afceaf4d09e8",
+        "size": 2616,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_more_open_sources.py",
+        "sha256": "886e80a65dd126c449b7013b95321bc06bade96e2738f8fee777a61bc21725f8",
+        "size": 3029,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_opencode_dispatch.py",
+        "sha256": "2f50f1579b5ac36c52fcf603c83033fcc7e93fc71f04f63be961b4bf1d121de6",
+        "size": 1065,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_presentation_export.py",
+        "sha256": "06bbbd850f0a2212f1fe6b12bd1fa044be64bcd915c66b148836558a982cdd02",
+        "size": 2314,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_quality_gate.py",
+        "sha256": "fd7ebbef7a59007eacac2886636c7c0713b919a8c481d1eddd4071a6df1f501b",
+        "size": 2915,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_scb_adapter.py",
+        "sha256": "54430bdb381eb9bf68fa9ca232ff9a8449ec81244038d89e7fb2cd776313cf8a",
+        "size": 1970,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_scb_trade_routing.py",
+        "sha256": "bedbb904b60d7fff96a488f7ec8a4fa365f74c25e9342b7b1f5161120cec4a70",
+        "size": 1605,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_source_planner.py",
+        "sha256": "ad4682da8a5fa5db8419f14c91b9aa9f846a18e00eb0311185fed32cf424a396",
+        "size": 2376,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_source_registry.py",
+        "sha256": "693a015924238954ba23885b60bcf12c8308fcf171e6edaf3c3c23f7fdd2e801",
+        "size": 1714,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tests/test_statskontoret_adapter.py",
+        "sha256": "0564d08ca4c0dddad16eadf0b467612af65c5768896f8e5c3be25295e1033c16",
+        "size": 2975,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tools/gpt_builder/build_distributions.py",
+        "sha256": "7f379f443c9a2363cc6b9f41a005c751b4608d96aaa7e69c26384546f83c893b",
+        "size": 48120,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tools/gpt_builder/lib/__init__.py",
+        "sha256": "2e2bd04e3cf069e693764105d346c9343ae0fb7965553b8de37c0d04b073af5e",
+        "size": 49,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tools/gpt_builder/lib/project_model.py",
+        "sha256": "1e089aa576856ae0008af3c52b83add02c8a575c43e595cb482669312db8087a",
+        "size": 12411,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tools/gpt_builder/lint_gpt_project.py",
+        "sha256": "7e54d5d663210fb1c642aaed76812aae5bf159f5ceda625277c99d9680ad604b",
+        "size": 19713,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tools/gpt_builder/project_hygiene.py",
+        "sha256": "576d6a308d91c6a5c1aada9d69b68fb076b3eca13a9761c1865be9d04962f75e",
+        "size": 4347,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tools/gpt_builder/validate_distributions.py",
+        "sha256": "29617f0086a04ba62e77bc84a6cd4f5e6fbabed81fb1a3e2b242f071215ff189",
+        "size": 11350,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      },
+      {
+        "path": "tools/gpt_builder/validate_model_robustness.py",
+        "sha256": "c35ac41b5cc33c2a9504a92fed2322742863044524f2e0d7768a15a1f0a6348b",
+        "size": 4259,
+        "candidate_roles": [
+          "script_candidate"
+        ]
+      }
+    ],
+    "candidates": {
+      "instruction_candidate": [
+        "assistant/instructions.md"
+      ],
+      "knowledge_candidate": [
+        "docs/adaptive-source-query-plan-design.md",
+        "docs/adaptive-source-query-plan-examples.md",
+        "docs/answer-contract.md",
+        "docs/calculations-and-combined-measures.md",
+        "docs/development-plan.md",
+        "docs/drug-source-followup-analysis.md",
+        "docs/presentation-and-export.md",
+        "docs/quality-and-method-gates.md",
+        "docs/release-and-ci.md",
+        "docs/source-capability-analysis.md",
+        "docs/source-selection-and-planning.md",
+        "docs/statistical-model.md",
+        "knowledge/KNOWLEDGE.md",
+        "knowledge/custom-gpt-actions.md",
+        "knowledge/source-and-method-reference.md",
+        "knowledge/source-registry.yaml"
+      ],
+      "script_candidate": [
+        "scripts/__init__.py",
+        "scripts/adaptive_source_planner.py",
+        "scripts/arbetsformedlingen_adapter.py",
+        "scripts/bis_adapter.py",
+        "scripts/bra_adapter.py",
+        "scripts/calculation_engine.py",
+        "scripts/comext_adapter.py",
+        "scripts/ecb_adapter.py",
+        "scripts/energimyndigheten_adapter.py",
+        "scripts/euda_adapter.py",
+        "scripts/eurostat_adapter.py",
+        "scripts/external_source_validator.py",
+        "scripts/folkhalsodata_adapter.py",
+        "scripts/forsakringskassan_adapter.py",
+        "scripts/jordbruksverket_adapter.py",
+        "scripts/kolada_adapter.py",
+        "scripts/oecd_adapter.py",
+        "scripts/opencode_dispatch.py",
+        "scripts/postprocess_opencode.py",
+        "scripts/presentation_export.py",
+        "scripts/quality_gate.py",
+        "scripts/riksbank_adapter.py",
+        "scripts/scb_adapter.py",
+        "scripts/skolverket_adapter.py",
+        "scripts/smhi_adapter.py",
+        "scripts/socialstyrelsen_adapter.py",
+        "scripts/source_planner.py",
+        "scripts/statskontoret_adapter.py",
+        "scripts/svk_adapter.py",
+        "scripts/tullverket_adapter.py",
+        "scripts/who_adapter.py",
+        "scripts/worldbank_adapter.py",
+        "tests/test_adaptive_source_planner_runtime.py",
+        "tests/test_adaptive_source_query_plan.py",
+        "tests/test_bra_adapter.py",
+        "tests/test_bra_broad_routing.py",
+        "tests/test_calculation_engine.py",
+        "tests/test_chat_e2e.py",
+        "tests/test_comext_adapter.py",
+        "tests/test_drug_sources.py",
+        "tests/test_electricity_data.py",
+        "tests/test_eurostat_adapter.py",
+        "tests/test_extended_sources.py",
+        "tests/test_external_source_quality_gate.py",
+        "tests/test_external_source_validator.py",
+        "tests/test_international_sources.py",
+        "tests/test_more_open_sources.py",
+        "tests/test_opencode_dispatch.py",
+        "tests/test_presentation_export.py",
+        "tests/test_quality_gate.py",
+        "tests/test_scb_adapter.py",
+        "tests/test_scb_trade_routing.py",
+        "tests/test_source_planner.py",
+        "tests/test_source_registry.py",
+        "tests/test_statskontoret_adapter.py",
+        "tools/gpt_builder/build_distributions.py",
+        "tools/gpt_builder/lib/__init__.py",
+        "tools/gpt_builder/lib/project_model.py",
+        "tools/gpt_builder/lint_gpt_project.py",
+        "tools/gpt_builder/project_hygiene.py",
+        "tools/gpt_builder/validate_distributions.py",
+        "tools/gpt_builder/validate_model_robustness.py"
+      ],
+      "configuration_candidate": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml",
+        "evals/model-compatibility/01-multi-turn-retention.yaml",
+        "evals/model-compatibility/02-error-recovery.yaml",
+        "evals/model-compatibility/03-terminal-behavior.yaml",
+        "evals/model-compatibility/04-resume-development.yaml",
+        "examples/bra-query-plan.json",
+        "examples/calculation-per-capita.json",
+        "examples/comext-query-plan.json",
+        "examples/eurostat-query-plan.json",
+        "examples/normalized-bra.json",
+        "examples/normalized-eurostat.json",
+        "examples/normalized-scb.json",
+        "examples/presentation-scb.json",
+        "examples/quality-gate-pass.json",
+        "examples/scb-query-plan.json",
+        "examples/source-plan-bra-scb.json",
+        "gpt-project.yaml",
+        "knowledge/source-registry.yaml",
+        "project-status.yaml",
+        "reports/step-1-hygiene-final.json",
+        "reports/step-1-hygiene.json",
+        "reports/step-1-lint-final.json",
+        "reports/step-1-lint.json",
+        "reports/step-10-hygiene-final.json",
+        "reports/step-10-lint-final.json",
+        "reports/step-10-quality-gate-validation.json",
+        "reports/step-11-chat-package-validation-final.json",
+        "reports/step-11-chat-package-validation.json",
+        "reports/step-11-hygiene-final.json",
+        "reports/step-11-lint-final.json",
+        "reports/step-11-lint-prebuild.json",
+        "reports/step-12-custom-gpt-validation.json",
+        "reports/step-12-hygiene-final.json",
+        "reports/step-12-lint-final.json",
+        "reports/step-13-hygiene-final.json",
+        "reports/step-13-lint-final.json",
+        "reports/step-14-hygiene-final.json",
+        "reports/step-14-release-readiness.json",
+        "reports/step-15-hygiene-final.json",
+        "reports/step-15-hygiene-prebuild.json",
+        "reports/step-15-lint-final.json",
+        "reports/step-15-lint.json",
+        "reports/step-15-release-automation.json",
+        "reports/step-2-hygiene-final.json",
+        "reports/step-2-hygiene.json",
+        "reports/step-2-lint-final.json",
+        "reports/step-2-lint.json",
+        "reports/step-2-model-validation.json",
+        "reports/step-3-hygiene-final.json",
+        "reports/step-3-hygiene.json",
+        "reports/step-3-lint-final.json",
+        "reports/step-3-lint.json",
+        "reports/step-3-scb-adapter-validation.json",
+        "reports/step-4-eurostat-adapter-validation.json",
+        "reports/step-4-hygiene-final.json",
+        "reports/step-4-lint-final.json",
+        "reports/step-4-lint.json",
+        "reports/step-5-comext-adapter-validation.json",
+        "reports/step-5-hygiene-final.json",
+        "reports/step-5-lint-final.json",
+        "reports/step-6-bra-adapter-validation.json",
+        "reports/step-6-hygiene-final.json",
+        "reports/step-6-lint-final.json",
+        "reports/step-7-hygiene-final.json",
+        "reports/step-7-lint-final.json",
+        "reports/step-7-source-planner-validation.json",
+        "reports/step-8-calculation-validation.json",
+        "reports/step-8-hygiene-final.json",
+        "reports/step-8-lint-final.json",
+        "reports/step-9-hygiene-final.json",
+        "reports/step-9-lint-final.json",
+        "reports/step-9-presentation-export-validation.json",
+        "runtime-assets/custom-gpt/actions/arbetsformedlingen-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/bis-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/comext-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/ecb-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/euda-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/eurostat-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/forsakringskassan-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/kolada-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/oecd-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/riksbank-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/scb-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/smhi-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/socialstyrelsen-openapi.yaml",
+        "runtime-assets/custom-gpt/actions/worldbank-openapi.yaml",
+        "schemas/adaptive-source-query-plan.schema.json",
+        "schemas/artifact-contract.schema.json",
+        "schemas/bra-adapter.schema.json",
+        "schemas/calculation-result.schema.json",
+        "schemas/capability-contract.schema.json",
+        "schemas/comext-adapter.schema.json",
+        "schemas/eurostat-adapter.schema.json",
+        "schemas/external-source-assessment.schema.json",
+        "schemas/presentation-result.schema.json",
+        "schemas/provenance.schema.json",
+        "schemas/quality-gate-report.schema.json",
+        "schemas/scb-adapter.schema.json",
+        "schemas/skill-contract.schema.json",
+        "schemas/source-query-plan.schema.json",
+        "schemas/source-registry.schema.json",
+        "schemas/statistical-answer.schema.json",
+        "schemas/statistical-query.schema.json",
+        "schemas/statistical-result.schema.json",
+        "schemas/tool-contract.schema.json",
+        "schemas/workspace-state-contract.schema.json",
+        "tests/fixtures/scb/tab638-metadata-minimal.json"
+      ]
+    },
+    "analysis_contract": {
+      "purpose": "Classify project behavior, knowledge, dependencies and workflows based on evidence",
+      "evidence_rule": "Every proposed fact must cite a source_files.path and SHA-256",
+      "uncertainty_rule": "Mark unresolved source ambiguity for review; do not invent behavior",
+      "output": "platform-neutral reviewed project model before runtime configuration"
+    },
+    "release_ready": false,
+    "runtime_activated": false
+  },
+  "project_hygiene": {
+    "status": "review_required",
+    "missing_documents": [],
+    "possible_stale_versions": [
+      {
+        "file": "README.md",
+        "mentioned_versions": [
+          "1.5.0"
+        ]
+      }
+    ],
+    "ci_references_to_reconcile": [],
+    "legacy_validator_candidates": [],
+    "broken_document_links": [],
+    "open_development_checklist_items": [],
+    "open_migration_checklists": [],
+    "unresolved_status_claims": [],
+    "files_deleted": [],
+    "documentation_modified": false,
+    "required_actions": [
+      "Update README, PROJECT, STATUS, development plan and migration checklist together.",
+      "Compare legacy validator behavior with canonical checks before deleting any file.",
+      "Reconcile CI identifiers and actual validation evidence; do not claim host parity from ZIP builds.",
+      "Verify no documentation points at removed paths before release."
+    ]
+  },
+  "migration_steps": [
+    {
+      "id": "inventory",
+      "title": "Inventera källprojekt",
+      "status": "completed"
+    },
+    {
+      "id": "model",
+      "title": "Granska projektmodell och runtime-mappning",
+      "status": "completed"
+    },
+    {
+      "id": "engine",
+      "title": "Bedöm och installera kanonisk byggmotor",
+      "status": "pending_or_blocked"
+    },
+    {
+      "id": "distributions",
+      "title": "Bygg och kontrollera fem distributioner",
+      "status": "pending_or_blocked"
+    },
+    {
+      "id": "hygiene",
+      "title": "Uppdatera dokumentation och granska äldre filer",
+      "status": "review_required"
+    },
+    {
+      "id": "release",
+      "title": "Slutverifiera runtime och release",
+      "status": "pending"
+    }
+  ],
+  "next_step": {
+    "id": "engine",
+    "title": "Bedöm och installera kanonisk byggmotor"
+  }
+}

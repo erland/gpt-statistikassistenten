@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Claude Portable Runtime Configuration",
+  "type": "object",
+  "required": ["enabled", "role", "mode", "project", "validation"],
+  "properties": {
+    "enabled": {"type": "boolean"},
+    "role": {"enum": ["primary", "secondary", "peer_distribution"]},
+    "mode": {"const": "claude_project"},
+    "project": {
+      "type": "object",
+      "required": ["instructions", "knowledge", "runtime_contract"],
+      "properties": {
+        "instructions": {"type": "string", "minLength": 1},
+        "knowledge": {"type": "string", "minLength": 1},
+        "runtime_contract": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "validation": {
+      "type": "object",
+      "required": ["require_instructions", "require_runtime_contract"],
+      "properties": {
+        "require_instructions": {"type": "boolean"},
+        "require_runtime_contract": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

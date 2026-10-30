@@ -48,7 +48,7 @@ Assistenten verifierar metadata före datauttag och skiljer alltid på hämtade 
 
 ## Distributioner
 
-Aktiva mål är ChatGPT Chat, ChatGPT Custom, OpenCode och OpenAI Plugin. Alla fyra byggs från samma canonical kontrakt via den vendorerade GPT Byggaren 1.5.0-toolchainen.
+Migrerade distributionsmål med GPT Byggaren 1.6.33 är ChatGPT Chat, Claude Projects, Claude Skills, OpenCode och OpenAI Plugin. Historisk ChatGPT Custom-konfiguration finns kvar som källmaterial men genereras inte som aktiv distribution. Paketbygge och strukturell validering är verifierade, men värdmiljötest av runtime är ännu inte utfört.
 
 OpenAI Plugin är skills-first med `equivalent_runtime_dependent` parity. Web/HTTP och structured data krävs för kärnflödet. Paketerade Python-scripts används som deterministiska guardrails när hostens code execution är tillgänglig; annars används deras deklarerade `degrade`-fallback utan simulerade scriptresultat.
 ## Implementerade kärnfunktioner
@@ -88,4 +88,7 @@ OpenAI Plugin är skills-first med `equivalent_runtime_dependent` parity. Web/HT
 - Release-workflow bifogar alla ZIP-filer, `SHA256SUMS.txt` och `DELIVERY-MANIFEST.json` till releasen.
 - Custom GPT:s OpenAPI Actions ligger canonical i `runtime-assets/custom-gpt/actions/` och följer därför med deterministiskt i varje releasebygge.
 - OpenAI Plugin använder hostens web/API-capabilities och paketerar canonical Knowledge som references, templates som assets och deklarerade runtime-scripts som skill-resurser.
-- Build-toolchainen från GPT Byggaren 1.5.0 är vendorerad under `tools/gpt_builder/` så CI inte är beroende av en separat lokal GPT Byggaren-installation.
+- Historiska byggverktyg från GPT Byggaren 1.5.0 finns bevarade under `tools/gpt_builder/` i väntan på CI-genomgång. GPT Byggaren 1.6.33:s kanoniska distributionsmotor är installerad under `scripts/`; CI har ännu inte verifierats mot den nya motorn.
+
+### Plugin/Engine efter migreringssteg 4
+Den separata statistik-Engine och Plugin-resurserna jämförs i CI/release; se `docs/plugin-engine-handoff.md`. Verklig Plugin-värdparitet är ännu inte testad.
